@@ -1,0 +1,145 @@
+.modalArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  margin-top: 4rem;
+  width: 50rem;
+  height: 35rem;
+  background-color: var(--white);
+  border: 1px solid #000;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  z-index:300;
+}
+
+.modalTop{
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalTop label:first-child input{
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.modalTop label:first-child{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 15rem;
+  border: 2px solid var(--brown-first);
+  padding: .3rem;
+  font-weight: bold;
+  color: var(--brown-fourth);
+}
+
+.modalTop label:nth-child(2){
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 13rem;
+  padding: .3rem;
+  font-weight: bold;
+  color: var(--blue-first);
+}
+
+.modalTop label:last-child input{
+  width: 1rem;
+  height: 1rem;
+}
+.modalBottom{
+  height: 70%;
+}
+
+.btnUpload{
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--blue-first);
+}
+
+.modalImages{
+  height: 85%;
+  width: 100%;
+  display: flex;
+  background-color: var(--brown-second);
+}
+
+.modalImagesArea{
+  width: 75%;
+  height: 100%;
+  /* border-right: 1px solid var(--brown-fourth); */
+  padding: 1rem;
+  display: inline-block;
+  white-space: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  overflow:auto;
+}
+
+.modalChangeArea{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnRemove{
+  color: #fff;
+  padding: 0.5rem .5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: none;
+  background-color: var(--red);
+}
+
+.modalCard{
+  display: inline-block;
+  width: 15rem;
+  height: 10rem;
+  margin:0 1rem;
+  margin-top: 2rem;
+}
+
+.modalCard input{
+  width: 10%;
+}
+
+.modalImg{
+  width: 90%;
+  height: 90%;
+}
+
+.doneArea{
+  height: 15%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.btnDone{
+  color: #fff;
+  padding: 0.5rem .5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--green);
+}

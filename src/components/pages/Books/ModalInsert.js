@@ -1,35 +1,42 @@
-import React from 'react';
-import useClickOutside from '../../ClickOutside/ClickOutside';
-import { POST_BOOK } from '../../../api';
-import styles from './ModalInsert.module.css';
+import React from "react";
+import { useDispatch } from "react-redux";
+import useClickOutside from "../../ClickOutside/ClickOutside";
+import { POST_BOOK } from "../../../api";
+import styles from "./ModalInsert.module.css";
+import { updateState } from "../../../redux";
 
-const ModalInsert = ({ setShowModalInsert }) => {
-  const [books, setBooks] = React.useState(null);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [isbn, setIsbn] = React.useState('');
-  const [stars, setStars] = React.useState('');
-  const [category, setCategory] = React.useState('');
-  const [available, setAvailable] = React.useState('');
-  const [amount, setAmount] = React.useState('');
-  const [price, setPrice] = React.useState('');
-  const [author, setAuthor] = React.useState('');
-  const [publishCompany, setPublishCompany] = React.useState('');
-  const [publishDate, setPublishDate] = React.useState('');
+const ModalInsert = ({
+  setShowModalInsert,
+  setShowInsertImages,
+  setLastBook,
+  showInsertImages,
+}) => {
+  const dispatch = useDispatch();
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [isbn, setIsbn] = React.useState("");
+  const [stars, setStars] = React.useState("");
+  const [category, setCategory] = React.useState("");
+  const [available, setAvailable] = React.useState("");
+  const [amount, setAmount] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const [author, setAuthor] = React.useState("");
+  const [publishCompany, setPublishCompany] = React.useState("");
+  const [publishDate, setPublishDate] = React.useState("");
 
   function clear() {
-    setAmount('');
-    setAuthor('');
-    setCategory('');
-    setName('');
-    setPublishDate('');
-    setStars('');
-    setPublishCompany('');
-    setPrice('');
-    setIsbn('');
-    setAvailable('');
-    setCategory('');
-    setDescription('');
+    setAmount("");
+    setAuthor("");
+    setCategory("");
+    setName("");
+    setPublishDate("");
+    setStars("");
+    setPublishCompany("");
+    setPrice("");
+    setIsbn("");
+    setAvailable("");
+    setCategory("");
+    setDescription("");
   }
 
   async function handleSubmit(e) {
@@ -58,19 +65,30 @@ const ModalInsert = ({ setShowModalInsert }) => {
 
       if (json.error) {
         console.log(json);
-        alert('error');
+        alert("houve um erro verifique o console");
         return;
       }
 
+      if (json[0] && json[0].error) {
+        console.log(json);
+        alert("houve um erro verifique o console");
+        return;
+      }
+
+      dispatch(updateState());
+      setShowInsertImages(true);
+      setLastBook(json.object);
+
       console.log(json);
     } catch (error) {
+      console.log(error);
     } finally {
       clear();
     }
   }
 
   const domNode = useClickOutside(() => {
-    setShowModalInsert(false);
+    !showInsertImages && setShowModalInsert(false);
   });
   return (
     <div className={styles.modalArea}>
@@ -148,6 +166,7 @@ const ModalInsert = ({ setShowModalInsert }) => {
                 <label htmlFor="price">
                   Preço:
                   <input
+                    min="0"
                     type="number"
                     id="price"
                     name="price"
@@ -159,6 +178,7 @@ const ModalInsert = ({ setShowModalInsert }) => {
                 <label htmlFor="amount">
                   Total:
                   <input
+                    min="0"
                     type="number"
                     id="amount"
                     name="amount"
@@ -170,6 +190,8 @@ const ModalInsert = ({ setShowModalInsert }) => {
                 <label htmlFor="available">
                   Disponibilidade:
                   <input
+                    min="0"
+                    max="1"
                     type="number"
                     id="available"
                     name="available"
@@ -202,9 +224,18 @@ const ModalInsert = ({ setShowModalInsert }) => {
               </div>
             </div>
 
-            <button type="submit" className={styles.sendForm}>
-              Enviar
-            </button>
+            <article className={styles.sendForm}>
+              <button
+                type="submit"
+                className={styles.cancelBtn}
+                onClick={() => (clear(), setShowModalInsert(false))}
+              >
+                Cancelar
+              </button>
+              <button type="submit" className={styles.sendBtn}>
+                Cadastrar - Ir Imagens
+              </button>
+            </article>
           </form>
         </section>
         {/**<section className={styles.imageArea}></section> */}

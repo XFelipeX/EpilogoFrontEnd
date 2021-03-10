@@ -33,7 +33,7 @@
   height: 100%;
   text-align: center;
   border: 1px solid var(--white);
-
+  border-spacing: 0;
   background-color: var(--brown-fourth);
 }
 
@@ -41,6 +41,10 @@
 .booksCardTable thead tr th {
   padding: 10px;
   color: #fff;
+}
+
+.booksCardTable th, .booksCardTable td{
+  border-bottom: 1px solid #fff;
 }
 
 .booksCardTable thead,
@@ -56,6 +60,7 @@
   padding: 0.4rem 1rem;
   border: none;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .btnInsert {
@@ -71,5 +76,14 @@
 }
 
 .btnActive {
-  background-color: var(--orange);
+  background-color: var(--red);
+}
+
+.booksCardSearch{
+  font-size: 1.2rem;
+}
+
+.booksCardSearch input{
+  margin-left: 1rem;
+  padding: 0.3rem;
 }

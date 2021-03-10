@@ -50,3 +50,41 @@ export const DELETE_BOOK = (body) => {
     },
   };
 };
+
+export const POST_BOOK_IMAGE = (body) => {
+  return {
+    url: `${baseUrl}/image`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+
+export const GET_AUTHORS = () => {
+  return {
+    url: `${baseUrl}/author`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+}
+
+export const GET_PUBLISH_COMPANIES = () => {
+  return {
+    url: `${baseUrl}/ `,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+}
