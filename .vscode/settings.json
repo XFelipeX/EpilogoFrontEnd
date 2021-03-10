@@ -4,7 +4,7 @@
       "node_modules": true,
       ".vscode": false,
       ".gitignore": true,
-      "package.json": false,
+      "package.json": true,
       "package-lock.json": true,
       "public": true,
       "README.md":true

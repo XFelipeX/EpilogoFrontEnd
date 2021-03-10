@@ -9,6 +9,7 @@
 }
 
 body {
+  padding-top: 4rem;
   background-color: var(--white);
   --brown-first: #d6d176;
   --brown-second: #f0ea83;
@@ -16,6 +17,15 @@ body {
   --brown-fourth: #706e3e;
   --white: #f8f8ff;
   --black: #2b2b2b;
+  --green: #19cf45;
+  --blue-first: #2ab6e6;
+  --blue-second: #40dce7;
+  --orange: #f3c73e;
+  overflow: none;
+}
+
+html {
+  overflow: hidden;
 }
 
 h1,
@@ -37,6 +47,7 @@ nav a {
 
 .container {
   max-width: 50rem;
+
   padding: 0 1rem;
   margin: 0 auto;
 }

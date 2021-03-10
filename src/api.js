@@ -24,3 +24,29 @@ export const POST_BOOK = (body) => {
     },
   };
 };
+
+export const PUT_BOOK = (body) => {
+  return {
+    url: `${baseUrl}/book`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const DELETE_BOOK = (body) => {
+  return {
+    url: `${baseUrl}/book`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+      body: JSON.stringify(body),
+    },
+  };
+};

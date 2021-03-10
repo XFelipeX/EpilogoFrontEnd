@@ -4,7 +4,7 @@
   width: 100%;
   z-index: 100;
   background: var(--brown-second);
-  top: 0px;
+  top: 0;
 }
 
 .nav {
