@@ -61,6 +61,13 @@
   font-size: 1.5rem;
 }
 
+.infoArea p{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .infoArea textarea {
   margin-top: 2rem;
   width: 100%;

@@ -1,4 +1,5 @@
 import React from 'react';
+import {AiFillStar} from 'react-icons/ai';
 import { GET_IMAGES_BOOK } from '../../../api';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import Carousel from './Carousel';
@@ -6,10 +7,17 @@ import styles from './ModalView.module.css';
 
 const ModalView = ({ setBookView, bookView }) => {
   const [images, setImages] = React.useState([]);
+  const [stars,setStars] = React.useState([]);
 
   const domNode = useClickOutside(() => {
     setBookView(null);
   });
+
+  React.useEffect(() => {
+    for(let i = 0; i<bookView.stars; i++){
+      setStars(oldArray => [...oldArray,i])
+    }
+  },[])
 
   React.useEffect(() => {
     async function getImagesBook() {
@@ -45,7 +53,10 @@ const ModalView = ({ setBookView, bookView }) => {
           </div>
           <div className={styles.infoArea}>
             <h1>{bookView.nameBook}</h1>
+            <p>{stars.map((star,index) => (<AiFillStar key={index} size={15}/>))}</p>
             <textarea readOnly defaultValue={bookView.description}></textarea>
+
+            
           </div>
         </section>
 
