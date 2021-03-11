@@ -1,94 +1,172 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import useClickOutside from '../../ClickOutside/ClickOutside';
-import { POST_BOOK } from '../../../api';
-import styles from './ModalInsert.module.css';
-import { updateState } from '../../../redux';
+import React from "react";
+import { useDispatch } from "react-redux";
+import useClickOutside from "../../ClickOutside/ClickOutside";
+import { POST_BOOK, PUT_BOOK } from "../../../api";
+import styles from "./ModalInsert.module.css";
+import { updateState } from "../../../redux";
 
 const ModalInsert = ({
   setShowModalInsert,
   setShowInsertImages,
   setLastBook,
   showInsertImages,
+  editBook,
+  setEditBook,
 }) => {
   const dispatch = useDispatch();
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [isbn, setIsbn] = React.useState('');
-  const [stars, setStars] = React.useState('');
-  const [category, setCategory] = React.useState('');
-  const [available, setAvailable] = React.useState('');
-  const [amount, setAmount] = React.useState('');
-  const [price, setPrice] = React.useState('');
-  const [author, setAuthor] = React.useState('');
-  const [publishCompany, setPublishCompany] = React.useState('');
-  const [publishDate, setPublishDate] = React.useState('');
+  const [name, setName] = React.useState(editBook.id ? editBook.nameBook : "");
+  const [description, setDescription] = React.useState(
+    editBook.id ? editBook.description : ""
+  );
+  const [isbn, setIsbn] = React.useState(editBook.id ? editBook.isbn : "");
+  const [stars, setStars] = React.useState(editBook.id ? editBook.stars : "");
+  const [category, setCategory] = React.useState(
+    editBook.id ? editBook.category : ""
+  );
+  const [available, setAvailable] = React.useState(
+    editBook.id ? editBook.available : ""
+  );
+  const [amount, setAmount] = React.useState(
+    editBook.id ? editBook.amount : ""
+  );
+  const [price, setPrice] = React.useState(editBook.id ? editBook.price : "");
+  const [author, setAuthor] = React.useState(
+    editBook.id ? editBook.authorId : ""
+  );
+  const [publishCompany, setPublishCompany] = React.useState(
+    editBook.id ? editBook.publishCompanyId : ""
+  );
+  const [publishDate, setPublishDate] = React.useState(
+    editBook.id ? editBook.publishDate : ""
+  );
 
   function clear() {
-    setAmount('');
-    setAuthor('');
-    setCategory('');
-    setName('');
-    setPublishDate('');
-    setStars('');
-    setPublishCompany('');
-    setPrice('');
-    setIsbn('');
-    setAvailable('');
-    setCategory('');
-    setDescription('');
+    setAmount("");
+    setAuthor("");
+    setCategory("");
+    setName("");
+    setPublishDate("");
+    setStars("");
+    setPublishCompany("");
+    setPrice("");
+    setIsbn("");
+    setAvailable("");
+    setCategory("");
+    setDescription("");
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      const { url, options } = POST_BOOK({
-        nameBook: name,
-        description: description,
-        isbn: isbn,
-        stars: stars,
-        publishDate: publishDate,
-        category: category,
-        price: price,
-        amount: amount,
-        available: available,
-        publishCompanyId: publishCompany,
-        authorId: author,
-      });
+    if (
+      name === "" ||
+      description === "" ||
+      isbn === "" ||
+      stars === "" ||
+      publishDate === "" ||
+      category === "" ||
+      price === "" ||
+      amount === "" ||
+      available === "" ||
+      publishCompany === "" ||
+      author === ""
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
+    if (editBook.id) {
+      try {
+        const { url, options } = PUT_BOOK({
+          id: editBook.id,
+          nameBook: name,
+          description: description,
+          isbn: isbn,
+          stars: stars,
+          publishDate: publishDate,
+          category: category,
+          price: price,
+          amount: amount,
+          available: available,
+          publishCompanyId: publishCompany,
+          authorId: author,
+        });
 
-      const data = await fetch(url, options);
+        const data = await fetch(url, options);
 
-      console.log(url, options);
+        const json = await data.json();
 
-      const json = await data.json();
+        if (json.error) {
+          console.log(json);
+          alert("houve um erro verifique o console");
+          return;
+        }
 
-      if (json.error) {
+        if (json[0] && json[0].error) {
+          console.log(json);
+          alert("houve um erro verifique o console");
+          return;
+        }
+
+        dispatch(updateState());
+        setShowInsertImages(true);
+        setLastBook(json.object);
+
         console.log(json);
-        alert('houve um erro verifique o console');
-        return;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        clear();
       }
+    } else {
+      try {
+        const { url, options } = POST_BOOK({
+          nameBook: name,
+          description: description,
+          isbn: isbn,
+          stars: stars,
+          publishDate: publishDate,
+          category: category,
+          price: price,
+          amount: amount,
+          available: available,
+          publishCompanyId: publishCompany,
+          authorId: author,
+        });
 
-      if (json[0] && json[0].error) {
+        const data = await fetch(url, options);
+
+        const json = await data.json();
+
+        if (json.error) {
+          console.log(json);
+          alert("houve um erro verifique o console");
+          return;
+        }
+
+        if (json[0] && json[0].error) {
+          console.log(json);
+          alert("houve um erro verifique o console");
+          return;
+        }
+
+        dispatch(updateState());
+        setShowInsertImages(true);
+        setLastBook(json.object);
+
         console.log(json);
-        alert('houve um erro verifique o console');
-        return;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        clear();
       }
-
-      dispatch(updateState());
-      setShowInsertImages(true);
-      setLastBook(json.object);
-
-      console.log(json);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      clear();
     }
   }
 
   const domNode = useClickOutside(() => {
-    !showInsertImages && setShowModalInsert(false);
+    if (!showInsertImages) {
+      setShowModalInsert(false);
+      setEditBook({});
+    }
   });
   return (
     <div className={styles.modalArea}>
@@ -236,7 +314,7 @@ const ModalInsert = ({
                 Cancelar
               </button>
               <button type="submit" className={styles.sendBtn}>
-                Cadastrar - Ir Imagens
+                {editBook.id ? "Salvar" : "Cadastrar"} - Ir Imagens
               </button>
             </article>
           </form>

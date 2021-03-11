@@ -76,6 +76,18 @@ export const GET_IMAGES_BOOK = (id) => {
   };
 };
 
+export const DELETE_IMAGE_BOOK = (id) => {
+  return {
+    url: `${baseUrl}/imageBook/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+    },
+  };
+};
+
 export const GET_AUTHORS = () => {
   return {
     url: `${baseUrl}/author`,

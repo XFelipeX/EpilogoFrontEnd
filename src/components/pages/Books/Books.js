@@ -15,6 +15,7 @@ const Books = () => {
   const [showInsertImages, setShowInsertImages] = React.useState(false);
   const [bookView, setBookView] = React.useState(false);
   const [lastBook, setLastBook] = React.useState({});
+  const [editBook, setEditBook] = React.useState({});
 
   React.useEffect(() => {
     async function takeBooks() {
@@ -39,7 +40,7 @@ const Books = () => {
     }
 
     takeBooks().then((response) => dispatch(getBooks(response)));
-  }, [stateUpdate]);
+  }, [stateUpdate,dispatch]);
 
   return (
     <div className={`container ${styles.booksArea}`}>
@@ -49,6 +50,8 @@ const Books = () => {
           setShowModalInsert={setShowModalInsert}
           setShowInsertImages={setShowInsertImages}
           showInsertImages={showInsertImages}
+          editBook={editBook}
+          setEditBook={setEditBook}
         />
       )}
 
@@ -57,6 +60,7 @@ const Books = () => {
           lastBook={lastBook}
           setShowModalInsert={setShowModalInsert}
           setShowInsertImages={setShowInsertImages}
+          editBook={editBook}
         />
       )}
 
@@ -102,7 +106,10 @@ const Books = () => {
                     <td>{book.amount}</td>
                     <td>{+book.available === 1 ? 'Ativo' : 'Inativo'}</td>
                     <td>
-                      <button type="button" className={styles.btnEdit}>
+                      <button type="button" className={styles.btnEdit} onClick={() => {
+                        setEditBook(book);
+                        setShowModalInsert(true);
+                      }}>
                         Editar
                       </button>
                     </td>

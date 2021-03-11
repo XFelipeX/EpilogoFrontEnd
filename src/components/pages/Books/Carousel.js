@@ -1,16 +1,16 @@
-import img from '../../../assets/testimg.jpeg';
-import React from 'react';
-import { AiFillCaretLeft } from 'react-icons/ai';
-import { AiFillCaretRight } from 'react-icons/ai';
-import styles from './ModalView.module.css';
+import img from "../../../assets/testimg.jpeg";
+import React from "react";
+import { AiFillCaretLeft } from "react-icons/ai";
+import { AiFillCaretRight } from "react-icons/ai";
+import styles from "./ModalView.module.css";
 import {
   CarouselProvider,
   Slider,
   Slide,
   ButtonBack,
   ButtonNext,
-} from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const Carousel = ({ images }) => {
   return (
@@ -19,11 +19,11 @@ const Carousel = ({ images }) => {
       isPlaying={true}
       naturalSlideWidth={100}
       naturalSlideHeight={125}
-      totalSlides={3}
+      totalSlides={images.length}
     >
-      <Slider style={{ height: '300px' }}>
+      <Slider style={{ height: "300px" }}>
         {images.map((image, index) => (
-          <Slide index={index * image.id} key={image.id}>
+          <Slide index={index} key={image.id}>
             <img
               src={`data:image/jpg;base64,${image.img}`}
               alt=""

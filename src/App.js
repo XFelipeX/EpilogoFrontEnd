@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
-import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Books from './components/pages/Books/Books';
 import Main from './components/pages/Main/Main';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { GET_IMAGES_BOOK } from '../../../api';
-import { getBooks } from '../../../redux';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import Carousel from './Carousel';
 import styles from './ModalView.module.css';
@@ -35,9 +34,8 @@ const ModalView = ({ setBookView, bookView }) => {
     }
 
     getImagesBook().then((response) => setImages(response));
-  }, []);
+  }, [bookView.id]);
 
-  //console.log(images);
   return (
     <div className={styles.modalArea}>
       <div ref={domNode} className={styles.modal}>
@@ -47,12 +45,12 @@ const ModalView = ({ setBookView, bookView }) => {
           </div>
           <div className={styles.infoArea}>
             <h1>{bookView.nameBook}</h1>
-            <textarea readOnly>{bookView.description}</textarea>
+            <textarea readOnly defaultValue={bookView.description}></textarea>
           </div>
         </section>
 
         <section className={styles.modalRight}>
-          <h2>${bookView.price}</h2>
+          <h2 style={{color:"red"}}>$ {bookView.price}</h2>
           <button type="button" className={styles.btnPurchase}>
             Comprar
           </button>
