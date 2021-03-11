@@ -53,7 +53,7 @@ export const DELETE_BOOK = (body) => {
 
 export const POST_BOOK_IMAGE = (body) => {
   return {
-    url: `${baseUrl}/image`,
+    url: `${baseUrl}/imageBook`,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -64,6 +64,17 @@ export const POST_BOOK_IMAGE = (body) => {
   };
 };
 
+export const GET_IMAGES_BOOK = (id) => {
+  return {
+    url: `${baseUrl}/imageBook/book/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+};
 
 export const GET_AUTHORS = () => {
   return {
@@ -75,7 +86,7 @@ export const GET_AUTHORS = () => {
       method: 'GET',
     },
   };
-}
+};
 
 export const GET_PUBLISH_COMPANIES = () => {
   return {
@@ -87,4 +98,4 @@ export const GET_PUBLISH_COMPANIES = () => {
       method: 'GET',
     },
   };
-}
+};

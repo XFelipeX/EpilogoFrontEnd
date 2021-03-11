@@ -1,10 +1,9 @@
-import React from "react";
-import styles from "./ModalInsertImages.module.css";
-import useClickOutside from "../../ClickOutside/ClickOutside";
-import { MdAttachment } from "react-icons/md";
-import { convertBase64 } from "../../../utils/base64";
-import img from "../../../assets/testimg.jpeg";
-import { POST_BOOK_IMAGE } from "../../../api";
+import React from 'react';
+import styles from './ModalInsertImages.module.css';
+import useClickOutside from '../../ClickOutside/ClickOutside';
+import { MdAttachment } from 'react-icons/md';
+import { convertBase64 } from '../../../utils/base64';
+import { POST_BOOK_IMAGE } from '../../../api';
 
 const ModalInsertImages = ({
   setShowInsertImages,
@@ -30,7 +29,7 @@ const ModalInsertImages = ({
         convertBase64(file)
           .then(
             (response) =>
-              (file = { base: response, main: mainImage, bookId: lastBook.id })
+              (file = { base: response, main: mainImage, bookId: lastBook.id }),
           )
           .then(() => setImages((oldarray) => [...oldarray, file]));
       });
@@ -39,58 +38,57 @@ const ModalInsertImages = ({
 
   async function handleSubmit() {
     if (images.length < 4) {
-      alert("insira pelo menos 4 imagens");
+      alert('insira pelo menos 4 imagens');
       return;
     }
 
     const filter = images.filter((image) => image.main === 1);
 
     if (filter === undefined || filter.length === 0) {
-      alert("Pelo menos uma imagem precisa ser principal");
+      alert('Pelo menos uma imagem precisa ser principal');
       return;
     }
 
     images.map((image) => {
-        sendImageBook(image);
+      sendImageBook(image);
     });
 
-    // alert("As imagens foram inseridas");
+    alert('As imagens foram inseridas');
 
-    // setShowInsertImages(false);
+    setShowInsertImages(false);
   }
 
-  async function sendImageBook (image){
-    try {   
+  async function sendImageBook(image) {
+    try {
+      let onlyBase = image.base.split(',');
 
-        let onlyBase = image.base.split(",");
+      const { url, options } = POST_BOOK_IMAGE({
+        base: onlyBase[1],
+        main: image.main,
+        bookId: image.bookId,
+        img: '',
+      });
 
-        const { url, options } = POST_BOOK_IMAGE({
-          base: onlyBase[1],
-          main: image.main,
-          bookId: image.bookId,
-          img: "",
-        });
+      const data = await fetch(url, options);
 
-        const data = await fetch(url,options);
+      const json = await data.json();
 
-        const json = await data.json();
-
-        if (json.error) {
-            console.log(json);
-            alert("houve um erro verifique o console");
-            return;
-          }
-    
-          if (json[0] && json[0].error) {
-            console.log(json);
-            alert("houve um erro verifique o console");
-            return;
-          }
-
+      if (json.error) {
         console.log(json);
-      } catch (error) {
-        console.log(error);
+        alert('houve um erro verifique o console');
+        return;
       }
+
+      if (json[0] && json[0].error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function removeIndex(index) {
@@ -173,7 +171,7 @@ const ModalInsertImages = ({
               <button
                 type="button"
                 className={styles.btnRemove}
-                style={removeItem !== -1 ? { display: "block" } : {}}
+                style={removeItem !== -1 ? { display: 'block' } : {}}
                 onClick={() => removeIndex(removeItem)}
               >
                 Remover Selecionado

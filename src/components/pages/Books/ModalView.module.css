@@ -1,0 +1,101 @@
+.modalArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  margin-top: 4rem;
+  width: 50rem;
+  height: 35rem;
+  background-color: var(--white);
+  border: 1px solid #000;
+  padding: 2rem;
+  display: flex;
+  z-index: 300;
+}
+
+.modalLeft,
+.modalRight {
+  background-color: var(--brown-first);
+}
+
+.modalLeft {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  padding: 1rem;
+}
+
+.modalRight {
+  height: 100%;
+  width: 30%;
+  padding: 1rem;
+  background-color: var(--white);
+}
+
+.modalRight h2 {
+  font-size: 1.2rem;
+}
+
+.carouselArea {
+  width: 50%;
+  height: 100%;
+}
+
+.infoArea {
+  width: 50%;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.infoArea h1 {
+  font-size: 1.5rem;
+}
+
+.infoArea textarea {
+  margin-top: 2rem;
+  width: 100%;
+  resize: none;
+  height: 15rem;
+  overflow: auto;
+  color: #fff;
+  font-size: 1rem;
+  background-color: var(--brown-fourth);
+  padding: 1rem;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+.btnArea {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.btnBack,
+.btnNext {
+  font-size: 1.5rem;
+  background-color: var(--brown-third);
+  border: none;
+}
+
+.btnPurchase {
+  margin: 1.5rem auto;
+  font-size: 1rem;
+  background-color: var(--green);
+  border: none;
+  padding: 0.3rem 1rem;
+  color: #fff;
+}

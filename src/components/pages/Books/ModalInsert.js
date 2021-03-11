@@ -1,9 +1,9 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import useClickOutside from "../../ClickOutside/ClickOutside";
-import { POST_BOOK } from "../../../api";
-import styles from "./ModalInsert.module.css";
-import { updateState } from "../../../redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import useClickOutside from '../../ClickOutside/ClickOutside';
+import { POST_BOOK } from '../../../api';
+import styles from './ModalInsert.module.css';
+import { updateState } from '../../../redux';
 
 const ModalInsert = ({
   setShowModalInsert,
@@ -12,31 +12,31 @@ const ModalInsert = ({
   showInsertImages,
 }) => {
   const dispatch = useDispatch();
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [isbn, setIsbn] = React.useState("");
-  const [stars, setStars] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [available, setAvailable] = React.useState("");
-  const [amount, setAmount] = React.useState("");
-  const [price, setPrice] = React.useState("");
-  const [author, setAuthor] = React.useState("");
-  const [publishCompany, setPublishCompany] = React.useState("");
-  const [publishDate, setPublishDate] = React.useState("");
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [isbn, setIsbn] = React.useState('');
+  const [stars, setStars] = React.useState('');
+  const [category, setCategory] = React.useState('');
+  const [available, setAvailable] = React.useState('');
+  const [amount, setAmount] = React.useState('');
+  const [price, setPrice] = React.useState('');
+  const [author, setAuthor] = React.useState('');
+  const [publishCompany, setPublishCompany] = React.useState('');
+  const [publishDate, setPublishDate] = React.useState('');
 
   function clear() {
-    setAmount("");
-    setAuthor("");
-    setCategory("");
-    setName("");
-    setPublishDate("");
-    setStars("");
-    setPublishCompany("");
-    setPrice("");
-    setIsbn("");
-    setAvailable("");
-    setCategory("");
-    setDescription("");
+    setAmount('');
+    setAuthor('');
+    setCategory('');
+    setName('');
+    setPublishDate('');
+    setStars('');
+    setPublishCompany('');
+    setPrice('');
+    setIsbn('');
+    setAvailable('');
+    setCategory('');
+    setDescription('');
   }
 
   async function handleSubmit(e) {
@@ -65,13 +65,13 @@ const ModalInsert = ({
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -228,7 +228,10 @@ const ModalInsert = ({
               <button
                 type="submit"
                 className={styles.cancelBtn}
-                onClick={() => (clear(), setShowModalInsert(false))}
+                onClick={() => {
+                  clear();
+                  setShowModalInsert(false);
+                }}
               >
                 Cancelar
               </button>
