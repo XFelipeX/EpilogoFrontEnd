@@ -1,13 +1,13 @@
-import React from "react";
-import styles from "./ModalInsertImages.module.css";
-import useClickOutside from "../../ClickOutside/ClickOutside";
-import { MdAttachment } from "react-icons/md";
-import { convertBase64 } from "../../../utils/base64";
+import React from 'react';
+import styles from './ModalInsertImages.module.css';
+import useClickOutside from '../../ClickOutside/ClickOutside';
+import { MdAttachment } from 'react-icons/md';
+import { convertBase64 } from '../../../utils/base64';
 import {
   GET_IMAGES_BOOK,
   POST_BOOK_IMAGE,
   DELETE_IMAGE_BOOK,
-} from "../../../api";
+} from '../../../api';
 
 const ModalInsertImages = ({
   setShowInsertImages,
@@ -36,15 +36,13 @@ const ModalInsertImages = ({
         convertBase64(file)
           .then(
             (response) =>
-              (file = { base: response, main: mainImage, bookId: lastBook.id })
+              (file = { base: response, main: mainImage, bookId: lastBook.id }),
           )
-          .then(() => setImages((oldarray) => [...oldarray, file]))
+          .then(() => setImages((oldarray) => [...oldarray, file])),
       );
-
-      
     }
-    document.getElementById('attachment').value = "";
-  }, [files, lastBook.id, mainImage]);
+    document.getElementById('attachment').value = '';
+  }, [files, lastBook.id]);
 
   React.useEffect(() => {
     if (editBook.id) {
@@ -57,7 +55,7 @@ const ModalInsertImages = ({
           const json = await response.json();
 
           if (json.error) {
-            alert("houve um erro verifique o console");
+            alert('houve um erro verifique o console');
             console.log(json);
             return [];
           }
@@ -75,7 +73,7 @@ const ModalInsertImages = ({
 
   function handleSubmit() {
     if (images.length + loadImages.length < 4) {
-      alert("insira pelo menos 4 imagens");
+      alert('insira pelo menos 4 imagens');
       return;
     }
 
@@ -86,26 +84,26 @@ const ModalInsertImages = ({
       (filter === undefined || filter.length === 0) &&
       (filterLoad === undefined || filterLoad.length === 0)
     ) {
-      alert("Pelo menos uma imagem precisa ser principal");
+      alert('Pelo menos uma imagem precisa ser principal');
       return;
     }
 
     images.map((image) => sendImageBook(image));
 
-    alert("As imagens foram inseridas");
+    alert('As imagens foram inseridas');
 
     setShowInsertImages(false);
   }
 
   async function sendImageBook(image) {
     try {
-      let onlyBase = image.base.split(",");
+      let onlyBase = image.base.split(',');
 
       const { url, options } = POST_BOOK_IMAGE({
         base: onlyBase[1],
         main: image.main,
         bookId: image.bookId,
-        img: "",
+        img: '',
       });
 
       const data = await fetch(url, options);
@@ -114,13 +112,13 @@ const ModalInsertImages = ({
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -170,13 +168,13 @@ const ModalInsertImages = ({
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -272,7 +270,7 @@ const ModalInsertImages = ({
               <button
                 type="button"
                 className={styles.btnRemove}
-                style={removeItem.index !== -1 ? { display: "block" } : {}}
+                style={removeItem.index !== -1 ? { display: 'block' } : {}}
                 onClick={() => removeIndex(removeItem)}
               >
                 Remover Selecionado

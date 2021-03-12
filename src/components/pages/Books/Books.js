@@ -1,12 +1,12 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getBooks, updateState } from "../../../redux/index";
-import styles from "./Books.module.css";
-import { GET_BOOKS, PUT_BOOK } from "../../../api";
-import ModalInsert from "./ModalInsert";
-import ModalInsertImages from "./ModalInsertImages";
-import ModalView from "./ModalView";
-import BookControl from "./BookControl";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBooks, updateState } from '../../../redux/index';
+import styles from './Books.module.css';
+import { GET_BOOKS, PUT_BOOK } from '../../../api';
+import ModalInsert from './ModalInsert';
+import ModalInsertImages from './ModalInsertImages';
+import ModalView from './ModalView';
+import BookControl from './BookControl';
 
 const Books = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Books = () => {
         const json = await response.json();
 
         if (json.error) {
-          alert("houve um erro verifique o console");
+          alert('houve um erro verifique o console');
           console.log(json);
           return [];
         }
@@ -69,13 +69,13 @@ const Books = () => {
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -159,7 +159,7 @@ const Books = () => {
                     <td>{book.id}</td>
                     <td>{book.nameBook}</td>
                     <td>{book.amount}</td>
-                    <td>{+book.available === 1 ? "Ativo" : "Inativo"}</td>
+                    <td>{+book.available === 1 ? 'Ativo' : 'Inativo'}</td>
                     <td>
                       <button
                         type="button"
