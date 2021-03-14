@@ -5,8 +5,9 @@
 
 }
 
-.card01 {
+.card {
     padding-top: 100px;
+    grid-column: span 4;
 }
 
 .descriptionCard01 {
@@ -65,5 +66,11 @@
 	}
 }
 
+.generalCards {
+    display: grid;
+    grid-template-columns: repeat(12, 120px);
+    grid-template-rows: auto;
+
+}
 
 
