@@ -14,9 +14,56 @@
 }
 
 .priceBook {
-    font-size: large;
+    font-size: 35px;
+}
+
+.priceBook:hover {
+    text-decoration: cadetblue;
 }
 
 .generalCards {
 
 }
+
+.titleBook {
+    font-size: 15px;
+}
+
+.imgAddCart {
+    width: 150px;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.imgAddCart:hover {
+    -webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+.image1:hover {
+    opacity: 1;
+	-webkit-animation: flash 1.5s;
+	animation: flash 1.5s;    
+}
+
+@-webkit-keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+
