@@ -22,16 +22,12 @@
     text-decoration: cadetblue;
 }
 
-.generalCards {
-
-}
-
 .titleBook {
     font-size: 15px;
 }
 
 .imgAddCart {
-    width: 150px;
+    font-color:red;
     -webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
@@ -70,7 +66,6 @@
     display: grid;
     grid-template-columns: repeat(12, 120px);
     grid-template-rows: auto;
-
 }
 
 
