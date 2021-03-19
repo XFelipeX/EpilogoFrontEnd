@@ -1,9 +1,9 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import useClickOutside from '../../ClickOutside/ClickOutside';
-import { POST_BOOK, PUT_BOOK } from '../../../api';
-import styles from './ModalInsert.module.css';
-import { updateState } from '../../../redux';
+import React from "react";
+import { useDispatch } from "react-redux";
+import useClickOutside from "../../ClickOutside/ClickOutside";
+import { POST_BOOK, PUT_BOOK } from "../../../api";
+import styles from "./ModalInsert.module.css";
+import { updateState } from "../../../redux";
 
 const ModalInsert = ({
   setShowModalInsert,
@@ -14,45 +14,45 @@ const ModalInsert = ({
   setEditBook,
 }) => {
   const dispatch = useDispatch();
-  const [name, setName] = React.useState(editBook.id ? editBook.nameBook : '');
+  const [name, setName] = React.useState(editBook.id ? editBook.nameBook : "");
   const [description, setDescription] = React.useState(
-    editBook.id ? editBook.description : '',
+    editBook.id ? editBook.description : ""
   );
-  const [isbn, setIsbn] = React.useState(editBook.id ? editBook.isbn : '');
-  const [stars, setStars] = React.useState(editBook.id ? editBook.stars : '');
+  const [isbn, setIsbn] = React.useState(editBook.id ? editBook.isbn : "");
+  const [stars, setStars] = React.useState(editBook.id ? editBook.stars : "");
   const [category, setCategory] = React.useState(
-    editBook.id ? editBook.category : '',
+    editBook.id ? editBook.category : ""
   );
   const [available, setAvailable] = React.useState(
-    editBook.id ? editBook.available : '',
+    editBook.id ? editBook.available : ""
   );
   const [amount, setAmount] = React.useState(
-    editBook.id ? editBook.amount : '',
+    editBook.id ? editBook.amount : ""
   );
-  const [price, setPrice] = React.useState(editBook.id ? editBook.price : '');
+  const [price, setPrice] = React.useState(editBook.id ? editBook.price : "");
   const [author, setAuthor] = React.useState(
-    editBook.id ? editBook.authorId : '',
+    editBook.id ? editBook.authorId : ""
   );
   const [publishCompany, setPublishCompany] = React.useState(
-    editBook.id ? editBook.publishCompanyId : '',
+    editBook.id ? editBook.publishCompanyId : ""
   );
   const [publishDate, setPublishDate] = React.useState(
-    editBook.id ? editBook.publishDate : '',
+    editBook.id ? editBook.publishDate : ""
   );
 
   function clear() {
-    setAmount('');
-    setAuthor('');
-    setCategory('');
-    setName('');
-    setPublishDate('');
-    setStars('');
-    setPublishCompany('');
-    setPrice('');
-    setIsbn('');
-    setAvailable('');
-    setCategory('');
-    setDescription('');
+    setAmount("");
+    setAuthor("");
+    setCategory("");
+    setName("");
+    setPublishDate("");
+    setStars("");
+    setPublishCompany("");
+    setPrice("");
+    setIsbn("");
+    setAvailable("");
+    setCategory("");
+    setDescription("");
     //setEditBook({});
   }
 
@@ -60,19 +60,19 @@ const ModalInsert = ({
     e.preventDefault();
 
     if (
-      name === '' ||
-      description === '' ||
-      isbn === '' ||
-      stars === '' ||
-      publishDate === '' ||
-      category === '' ||
-      price === '' ||
-      amount === '' ||
-      available === '' ||
-      publishCompany === '' ||
-      author === ''
+      name === "" ||
+      description === "" ||
+      isbn === "" ||
+      stars === "" ||
+      publishDate === "" ||
+      category === "" ||
+      price === "" ||
+      amount === "" ||
+      available === "" ||
+      publishCompany === "" ||
+      author === ""
     ) {
-      alert('Preencha todos os campos');
+      alert("Preencha todos os campos");
       return;
     }
     if (editBook.id) {
@@ -98,13 +98,13 @@ const ModalInsert = ({
 
         if (json.error) {
           console.log(json);
-          alert('houve um erro verifique o console');
+          alert("houve um erro verifique o console");
           return;
         }
 
         if (json[0] && json[0].error) {
           console.log(json);
-          alert('houve um erro verifique o console');
+          alert("houve um erro verifique o console");
           return;
         }
 
@@ -140,13 +140,13 @@ const ModalInsert = ({
 
         if (json.error) {
           console.log(json);
-          alert('houve um erro verifique o console');
+          alert("houve um erro verifique o console");
           return;
         }
 
         if (json[0] && json[0].error) {
           console.log(json);
-          alert('houve um erro verifique o console');
+          alert("houve um erro verifique o console");
           return;
         }
 
@@ -169,6 +169,7 @@ const ModalInsert = ({
       setEditBook({});
     }
   });
+  
   return (
     <div className={styles.modalArea}>
       <div ref={domNode} className={styles.modal}>
@@ -212,7 +213,6 @@ const ModalInsert = ({
                 <label htmlFor="stars">
                   Avaliação:
                   <input
-                    defaultValue="1"
                     min="1"
                     max="6"
                     type="number"
@@ -318,7 +318,7 @@ const ModalInsert = ({
                 Cancelar
               </button>
               <button type="submit" className={styles.sendBtn}>
-                {editBook.id ? 'Salvar' : 'Cadastrar'} - Ir Imagens
+                {editBook.id ? "Salvar" : "Cadastrar"} - Ir Imagens
               </button>
             </article>
           </form>
