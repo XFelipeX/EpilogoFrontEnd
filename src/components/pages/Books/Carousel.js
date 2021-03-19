@@ -13,6 +13,16 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 
 const Carousel = ({ images }) => {
+  const [mainImage, setMainImage] = React.useState({});
+  const [othersImages, setOthersImages] = React.useState([]);
+
+  React.useEffect(() => {
+    setMainImage(images.filter((image) => image.main === 1));
+    setOthersImages(images.filter((image) => image.main !== 1));
+  }, [images]);
+
+
+  console.log(mainImage)
   return (
     <CarouselProvider
       infinite={true}
@@ -22,8 +32,18 @@ const Carousel = ({ images }) => {
       totalSlides={images.length}
     >
       <Slider style={{ height: "300px" }}>
-        {images.map((image, index) => (
-          <Slide index={index} key={image.id}>
+          {mainImage.length >0 && (
+          <Slide index={0}>
+            <img
+              src={`data:image/jpg;base64,${mainImage[0].img}`}
+              alt=""
+              className={styles.img}
+            />
+          </Slide>
+
+          )}
+        {othersImages.map((image, index) => (
+          <Slide index={index+1} key={image.id}>
             <img
               src={`data:image/jpg;base64,${image.img}`}
               alt=""
