@@ -6,21 +6,43 @@
 }
 
 .card {
-    padding-top: 100px;
+    padding-top: 50px;
     grid-column: span 4;
-		display: flex;
+	display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+	background-color: #F3F0EB;
 }
 
-.descriptionCard01 {
-    
+
+.backgroundCard {
+	padding-top: 100px;
+	display: grid;
+    grid-template-columns: repeat(12, 8.33%);
 }
 
 .priceBook {
     font-size: 35px;
+
 }
+
+.descriptionCard01 {
+	text-align: center;
+	padding-top: 3px;
+}
+
+.priceBook b {
+	color: var(--priceColor);
+}
+
+image1 img {
+	text-align: center;
+}
+
+
+
+
 
 .priceBook:hover {
     text-decoration: cadetblue;
@@ -28,6 +50,11 @@
 
 .titleBook {
     font-size: 15px;
+
+}
+
+.card > a {
+	text-decoration: none;
 }
 
 .imgAddCart {
@@ -66,10 +93,16 @@
 	}
 }
 
-.generalCards {
-    display: grid;
-    grid-template-columns: repeat(12, 8.33%);
-    grid-template-rows: auto;
+.buttonPurchase {
+	
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	text-align: center;
+	font-size: large;
+	width: 250px;
+	background-color: #f3c73e;
+	border-radius: 15px;
 }
-
 
