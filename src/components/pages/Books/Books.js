@@ -22,7 +22,7 @@ const Books = () => {
   React.useEffect(() => {
     async function takeBooks() {
       try {
-        const { options, url } = GET_BOOKS();
+        const { options, url } = GET_BOOKS(3);
 
         const response = await fetch(url, options);
 
@@ -34,7 +34,7 @@ const Books = () => {
           return [];
         }
 
-        return json.object;
+        return json.content;
       } catch (error) {
         console.log(error);
         return [];

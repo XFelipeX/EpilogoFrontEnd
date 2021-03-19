@@ -26,23 +26,30 @@ const ModalInsertImages = ({
     setShowModalInsert(true);
   });
 
-  React.useEffect(() => {
-    if (files.length > 0) {
-      setMainImage(0);
-      setImages([]);
-      const copyArray = [...files];
+  React.useEffect(
+    () => {
+      if (files.length > 0) {
+        setImages([]);
+        const copyArray = [...files];
 
-      copyArray.map((file) =>
-        convertBase64(file)
-          .then(
-            (response) =>
-              (file = { base: response, main: mainImage, bookId: lastBook.id }),
-          )
-          .then(() => setImages((oldarray) => [...oldarray, file])),
-      );
-    }
-    document.getElementById('attachment').value = '';
-  }, [files, lastBook.id]);
+        copyArray.map((file) =>
+          convertBase64(file)
+            .then(
+              (response) =>
+                (file = {
+                  base: response,
+                  main: mainImage,
+                  bookId: lastBook.id,
+                }),
+            )
+            .then(() => setImages((oldarray) => [...oldarray, file])),
+        );
+      }
+      document.getElementById('attachment').value = '';
+    },
+    [files, lastBook.id],
+    mainImage,
+  );
 
   React.useEffect(() => {
     if (editBook.id) {
@@ -72,8 +79,8 @@ const ModalInsertImages = ({
   }, [editBook.id]);
 
   function handleSubmit() {
-    if (images.length + loadImages.length < 4) {
-      alert('insira pelo menos 4 imagens');
+    if (images.length + loadImages.length < 2) {
+      alert('insira pelo menos 2 imagens');
       return;
     }
 
@@ -128,10 +135,15 @@ const ModalInsertImages = ({
     }
   }
 
+  console.log(editBook);
+
   function removeIndex(item) {
-    const filterItem = loadImages.filter((image) => image.id === item.image.id);
+    const filterItem = loadImages.filter(
+      (image) => +image.id === +item.image.id,
+    );
 
     if (editBook.id && filterItem.length > 0) {
+      alert('delete');
       deleteImage(item.image.id).then(() => {
         let newArray = [...loadImages];
 
@@ -209,7 +221,7 @@ const ModalInsertImages = ({
               id="mainImg"
               name="mainImg"
               checked={mainImage === 1}
-              onChange={() => {
+              onClick={() => {
                 if (mainImage === 1) {
                   setMainImage(0);
                 } else {

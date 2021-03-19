@@ -53,7 +53,7 @@ const ModalInsert = ({
     setAvailable('');
     setCategory('');
     setDescription('');
-    setEditBook({});
+    //setEditBook({});
   }
 
   async function handleSubmit(e) {
@@ -249,7 +249,6 @@ const ModalInsert = ({
                 <label htmlFor="price">
                   Preço:
                   <input
-                    min="0"
                     type="number"
                     id="price"
                     name="price"

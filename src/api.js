@@ -1,8 +1,8 @@
 const baseUrl = 'http://localhost:8080';
 
-export const GET_BOOKS = () => {
+export const GET_BOOKS = (page) => {
   return {
-    url: `${baseUrl}/book`,
+    url: `${baseUrl}/book?size=5&page=${page}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
