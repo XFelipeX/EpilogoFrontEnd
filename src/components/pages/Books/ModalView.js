@@ -17,7 +17,7 @@ const ModalView = ({ setBookView, bookView }) => {
     for(let i = 0; i<bookView.stars; i++){
       setStars(oldArray => [...oldArray,i])
     }
-  },[])
+  },[bookView])
 
   React.useEffect(() => {
     async function getImagesBook() {
