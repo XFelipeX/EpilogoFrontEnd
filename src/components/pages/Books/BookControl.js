@@ -86,12 +86,12 @@ const BookControl = ({ setShowBookControl, editBook, updateBook }) => {
           <button
             type="button"
             className={styles.btnAction}
-            onClick={() => (
-              updateBook(editBook),
-              setShowBookControl(false),
-              dispatch(updateState()),
-              alert("O status do produto foi alterado")
-            )}
+            onClick={() => {
+              updateBook(editBook);
+              setShowBookControl(false);
+              dispatch(updateState());
+              alert("O status do produto foi alterado");
+            }}
           >
             {editBook.available === 1 ? "Inativar" : "Ativar"}
           </button>
