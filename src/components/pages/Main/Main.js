@@ -1,21 +1,16 @@
-import React from 'react';
-import styles from './Main.module.css';
-import img from '../../../assets/hp_book_05.jpg';
-import img2 from '../../../assets/clipart4711592.png';
-import { MdShoppingCart } from 'react-icons/md';
+import React from "react";
+import styles from "./Main.module.css";
+import img from "../../../assets/hp_book_05.jpg";
 
 const Main = () => {
   return (
     <div className={` container ${styles.homeArea}`}>
       <div className={` ${styles.generalCards} `}>
-
         <div className={` ${styles.backgroundCard} `}>
-
-          
-            <div className={` ${styles.card} `}>
+          <div className={` ${styles.card} `}>
             <a href="localhost:3000/produtos">
               <a href="localhost:3000/produtos">
-                <img className={` ${styles.image1} `} src={img} />
+                <img className={` ${styles.image1} `} src={img} alt="" />
               </a>
               <div className={` ${styles.descriptionCard01} `}>
                 <a href="localhost:3000/produtos">
@@ -28,14 +23,13 @@ const Main = () => {
                   <b>R$ 49,90</b>
                 </h3>
               </div>
-              </a>
-            </div>
+            </a>
+          </div>
 
-
-            <div className={` ${styles.card} `}>
+          <div className={` ${styles.card} `}>
             <a href="localhost:3000/produtos">
               <a href="localhost:3000/produtos">
-                <img className={` ${styles.image1} `} src={img} />
+                <img className={` ${styles.image1} `} src={img} alt="" />
               </a>
               <div className={` ${styles.descriptionCard01} `}>
                 <a href="localhost:3000/produtos">
@@ -48,15 +42,13 @@ const Main = () => {
                   <b>R$ 49,90</b>
                 </h3>
               </div>
-              </a>
-            </div>
+            </a>
+          </div>
 
-
-
-            <div className={` ${styles.card} `}>
+          <div className={` ${styles.card} `}>
             <a href="localhost:3000/produtos">
               <a href="localhost:3000/produtos">
-                <img className={` ${styles.image1} `} src={img} />
+                <img className={` ${styles.image1} `} src={img} alt="" />
               </a>
               <div className={` ${styles.descriptionCard01} `}>
                 <a href="localhost:3000/produtos">
@@ -69,16 +61,8 @@ const Main = () => {
                   <b>R$ 49,90</b>
                 </h3>
               </div>
-              </a>
-            </div>
-          
-
-
-
-
-
-
-
+            </a>
+          </div>
         </div>
       </div>
     </div>

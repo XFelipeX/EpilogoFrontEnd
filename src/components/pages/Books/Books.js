@@ -1,12 +1,13 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getBooks, updateState } from '../../../redux/index';
-import styles from './Books.module.css';
-import { GET_BOOKS, PUT_BOOK } from '../../../api';
-import ModalInsert from './ModalInsert';
-import ModalInsertImages from './ModalInsertImages';
-import ModalView from './ModalView';
-import BookControl from './BookControl';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooks } from "../../../redux/index";
+import styles from "./Books.module.css";
+import { GET_BOOKS, PUT_BOOK } from "../../../api";
+import ModalInsert from "./ModalInsert";
+import ModalInsertImages from "./ModalInsertImages";
+import ModalView from "./ModalView";
+import BookControl from "./BookControl";
+import ReactPaginate from 'react-paginate';
 
 const Books = () => {
   const dispatch = useDispatch();
@@ -18,23 +19,26 @@ const Books = () => {
   const [bookView, setBookView] = React.useState(false);
   const [lastBook, setLastBook] = React.useState({});
   const [editBook, setEditBook] = React.useState({});
+  const [page,setPage] = React.useState(0);
 
   React.useEffect(() => {
     async function takeBooks() {
       try {
-        const { options, url } = GET_BOOKS(3);
+        const { options, url } = GET_BOOKS(page);
 
         const response = await fetch(url, options);
 
         const json = await response.json();
 
         if (json.error) {
-          alert('houve um erro verifique o console');
+          alert("houve um erro verifique o console");
           console.log(json);
           return [];
         }
 
-        return json.content;
+        console.log(json);
+
+        return json;
       } catch (error) {
         console.log(error);
         return [];
@@ -42,7 +46,7 @@ const Books = () => {
     }
 
     takeBooks().then((response) => dispatch(getBooks(response)));
-  }, [stateUpdate, dispatch]);
+  }, [stateUpdate, dispatch,page]);
 
   async function updateBook(book) {
     const available = book.available === 1 ? 0 : 1;
@@ -69,13 +73,13 @@ const Books = () => {
 
       if (json.error) {
         console.log(json);
-        alert('houve um erro verifique o console');
+        alert("houve um erro verifique o console");
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert('houve um erro verifique o console');
+        alert("houve um erro verifique o console");
         return;
       }
 
@@ -85,9 +89,9 @@ const Books = () => {
     }
   }
 
-  // React.useEffect(() => {
-  //   dispatch(updateState());
-  // }, [updateBook]);
+  function handlePageClick(e){
+    setPage(e.selected);
+  }
 
   return (
     <div className={`container ${styles.booksArea}`}>
@@ -153,13 +157,13 @@ const Books = () => {
               </tr>
             </thead>
             <tbody>
-              {books &&
-                books.map((book) => (
+              {books.content &&
+                books.content.map((book) => (
                   <tr key={book.id}>
                     <td>{book.id}</td>
                     <td>{book.nameBook}</td>
                     <td>{book.amount}</td>
-                    <td>{+book.available === 1 ? 'Ativo' : 'Inativo'}</td>
+                    <td>{+book.available === 1 ? "Ativo" : "Inativo"}</td>
                     <td>
                       <button
                         type="button"
@@ -176,9 +180,10 @@ const Books = () => {
                       <button
                         type="button"
                         className={styles.btnActive}
-                        onClick={() => (
-                          setShowBookControl(true), setEditBook(book)
-                        )}
+                        onClick={() => {
+                          setShowBookControl(true);
+                          setEditBook(book);
+                        }}
                       >
                         Ativar/Inativar
                       </button>
@@ -200,7 +205,21 @@ const Books = () => {
           </table>
         </section>
 
-        <section className={`${styles.booksCardBottom}`}></section>
+        <section className={`${styles.booksCardBottom}`}>
+        <ReactPaginate
+          previousLabel={'Anterior'}
+          nextLabel={'Próximo'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={books.totalPages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={styles.pagination}
+          subContainerClassName={'pages pagination'}
+          activeClassName={styles.active}
+        />
+        </section>
       </div>
     </div>
   );
