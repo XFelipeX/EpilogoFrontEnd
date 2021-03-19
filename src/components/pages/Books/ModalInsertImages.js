@@ -134,15 +134,13 @@ const ModalInsertImages = ({
     }
   }
 
-  console.log(editBook);
-
   function removeIndex(item) {
     const filterItem = loadImages.filter(
       (image) => +image.id === +item.image.id
     );
 
     if (editBook.id && filterItem.length > 0) {
-      alert("delete");
+      alert("deletando do banco");
       deleteImage(item.image.id).then(() => {
         let newArray = [...loadImages];
 
@@ -197,9 +195,27 @@ const ModalInsertImages = ({
     }
   }
 
-  console.log("load images", loadImages);
+  function verifyIfExistMainImage() {
+    let haveMainImage = false;
 
-  console.log("images", images);
+    loadImages.forEach((image) => {
+      if (image.main === 1) {
+        haveMainImage = true;
+      }
+    });
+
+    images.forEach((image) => {
+      if (image.main === 1) {
+        haveMainImage = true;
+      }
+    });
+
+    if (haveMainImage) {
+      alert("Já existe imagem principal, remova-a para inserir uma nova");
+    }
+
+    return haveMainImage;
+  }
 
   return (
     <div className={styles.modalArea}>
@@ -227,10 +243,11 @@ const ModalInsertImages = ({
               name="mainImg"
               checked={mainImage === 1}
               onChange={() => {
+                if (!verifyIfExistMainImage()) {
+                  setMainImage(1);
+                }
                 if (mainImage === 1) {
                   setMainImage(0);
-                } else {
-                  setMainImage(1);
                 }
               }}
             />
@@ -265,7 +282,11 @@ const ModalInsertImages = ({
                       src={`data:image/jpg;base64,${image.img}`}
                       alt=""
                       className={styles.modalImg}
-                      style={image.main === 1 ? { border: "3px solid var(--blue-first)" } : {}}
+                      style={
+                        image.main === 1
+                          ? { border: "3px solid var(--blue-first)" }
+                          : {}
+                      }
                     />
                   </div>
                 ))}
@@ -294,7 +315,11 @@ const ModalInsertImages = ({
                       src={image.base}
                       alt=""
                       className={styles.modalImg}
-                      style={image.main === 1 ? { border: "2px solid #000" } : {}}
+                      style={
+                        image.main === 1
+                          ? { border: "3px solid var(--blue-first)" }
+                          : {}
+                      }
                     />
                   </div>
                 ))}
