@@ -1,8 +1,8 @@
 const baseUrl = 'http://localhost:8080';
 
-export const GET_BOOKS = (page) => {
+export const GET_BOOKS = (page, size) => {
   return {
-    url: `${baseUrl}/book?size=5&page=${page}`,
+    url: `${baseUrl}/book?size=${size}&page=${page}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -67,6 +67,18 @@ export const POST_BOOK_IMAGE = (body) => {
 export const GET_IMAGES_BOOK = (id) => {
   return {
     url: `${baseUrl}/imageBook/book/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+};
+
+export const GET_MAIN_IMAGE_BOOK = (id) => {
+  return {
+    url: `${baseUrl}/imageBook/book/main/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
