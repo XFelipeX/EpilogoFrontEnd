@@ -1,12 +1,12 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getBooks } from "../../../redux/index";
-import styles from "./Books.module.css";
-import { GET_BOOKS, PUT_BOOK } from "../../../api";
-import ModalInsert from "./ModalInsert";
-import ModalInsertImages from "./ModalInsertImages";
-import ModalView from "./ModalView";
-import BookControl from "./BookControl";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBooks } from '../../../redux/index';
+import styles from './Books.module.css';
+import { GET_BOOKS, PUT_BOOK } from '../../../api';
+import ModalInsert from './ModalInsert';
+import ModalInsertImages from './ModalInsertImages';
+import ModalView from './ModalView';
+import BookControl from './BookControl';
 import ReactPaginate from 'react-paginate';
 
 const Books = () => {
@@ -19,19 +19,19 @@ const Books = () => {
   const [bookView, setBookView] = React.useState(false);
   const [lastBook, setLastBook] = React.useState({});
   const [editBook, setEditBook] = React.useState({});
-  const [page,setPage] = React.useState(0);
+  const [page, setPage] = React.useState(0);
 
   React.useEffect(() => {
     async function takeBooks() {
       try {
-        const { options, url } = GET_BOOKS(page);
+        const { options, url } = GET_BOOKS(page, 7);
 
         const response = await fetch(url, options);
 
         const json = await response.json();
 
         if (json.error) {
-          alert("houve um erro verifique o console");
+          alert('houve um erro verifique o console');
           console.log(json);
           return [];
         }
@@ -46,7 +46,7 @@ const Books = () => {
     }
 
     takeBooks().then((response) => dispatch(getBooks(response)));
-  }, [stateUpdate, dispatch,page]);
+  }, [stateUpdate, dispatch, page]);
 
   async function updateBook(book) {
     const available = book.available === 1 ? 0 : 1;
@@ -73,13 +73,13 @@ const Books = () => {
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -89,7 +89,7 @@ const Books = () => {
     }
   }
 
-  function handlePageClick(e){
+  function handlePageClick(e) {
     setPage(e.selected);
   }
 
@@ -163,7 +163,7 @@ const Books = () => {
                     <td>{book.id}</td>
                     <td>{book.nameBook}</td>
                     <td>{book.amount}</td>
-                    <td>{+book.available === 1 ? "Ativo" : "Inativo"}</td>
+                    <td>{+book.available === 1 ? 'Ativo' : 'Inativo'}</td>
                     <td>
                       <button
                         type="button"
@@ -206,19 +206,19 @@ const Books = () => {
         </section>
 
         <section className={`${styles.booksCardBottom}`}>
-        <ReactPaginate
-          previousLabel={'Anterior'}
-          nextLabel={'Próximo'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={books.totalPages}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageClick}
-          containerClassName={styles.pagination}
-          subContainerClassName={'pages pagination'}
-          activeClassName={styles.active}
-        />
+          <ReactPaginate
+            previousLabel={'Anterior'}
+            nextLabel={'Próximo'}
+            breakLabel={'...'}
+            breakClassName={'break-me'}
+            pageCount={books.totalPages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={styles.pagination}
+            subContainerClassName={'pages pagination'}
+            activeClassName={styles.active}
+          />
         </section>
       </div>
     </div>

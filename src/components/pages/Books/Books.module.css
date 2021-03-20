@@ -10,7 +10,7 @@
 
 .booksCard {
   background-color: var(--brown-first);
-  height: 30rem;
+  height: 70%;
   width: 100%;
   margin-bottom: 4rem;
   padding: 2rem;
@@ -30,7 +30,7 @@
 
 .booksCardTable {
   width: 100%;
-  max-height: 100%;
+  max-height: 95%;
   text-align: center;
   border: 1px solid var(--white);
   border-spacing: 0;
@@ -44,7 +44,8 @@
   max-width: 30px;
 }
 
-.booksCardTable th, .booksCardTable td{
+.booksCardTable th,
+.booksCardTable td {
   border-bottom: 1px solid #fff;
 }
 
@@ -80,16 +81,16 @@
   background-color: var(--red);
 }
 
-.booksCardSearch{
+.booksCardSearch {
   font-size: 1.2rem;
 }
 
-.booksCardSearch input{
+.booksCardSearch input {
   margin-left: 1rem;
   padding: 0.3rem;
 }
 
-.booksCardBottom{
+.booksCardBottom {
   display: flex;
   align-content: center;
   justify-content: center;
@@ -103,25 +104,34 @@
   list-style: none;
   outline: none;
 }
-.pagination > .active > a{
-  background-color: #47ccde ;
-  border-color: #47ccde ;
+.pagination > .active > a {
+  background-color: #47ccde;
+  border-color: #47ccde;
   color: #000;
 }
-.pagination > li > a{
-  border: 1px solid var(--brown-fourth) ;
+.pagination > li > a {
+  border: 1px solid var(--brown-fourth);
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
 }
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: var(--brown-third) ;
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: var(--brown-third);
   border-color: var(--brown-fourth);
-  outline: none ;
+  outline: none;
 }
-.pagination > li > a, .pagination > li > span{
-  color: #000
+.pagination > li > a,
+.pagination > li > span {
+  color: #000;
 }
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
-  border-radius: unset
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
 }

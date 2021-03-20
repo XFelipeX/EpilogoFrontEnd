@@ -1,108 +1,20 @@
 .homeArea {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
-.containerCards {
-
+.generalCards {
+  margin: 2rem 0;
+  padding: 2rem;
+  height: 45rem;
+  overflow: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1.33%);
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: var(--brown-second);
+  border-radius: 3px;
 }
-
-.card {
-    padding-top: 50px;
-    grid-column: span 4;
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-	background-color: #F3F0EB;
-}
-
-
-.backgroundCard {
-	padding-top: 100px;
-	display: grid;
-    grid-template-columns: repeat(12, 8.33%);
-}
-
-.priceBook {
-    font-size: 35px;
-
-}
-
-.descriptionCard01 {
-	text-align: center;
-	padding-top: 3px;
-}
-
-.priceBook b {
-	color: var(--priceColor);
-}
-
-image1 img {
-	text-align: center;
-}
-
-
-
-
-
-.priceBook:hover {
-    text-decoration: cadetblue;
-}
-
-.titleBook {
-    font-size: 15px;
-
-}
-
-.card > a {
-	text-decoration: none;
-}
-
-.imgAddCart {
-    
-    -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-}
-
-.imgAddCart:hover {
-    -webkit-transform: scale(1.3);
-	transform: scale(1.3);
-}
-
-.image1:hover {
-    opacity: 1;
-	-webkit-animation: flash 1.5s;
-	animation: flash 1.5s;    
-}
-
-@-webkit-keyframes flash {
-	0% {
-		opacity: .4;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-@keyframes flash {
-	0% {
-		opacity: .4;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-.buttonPurchase {
-	
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	text-align: center;
-	font-size: large;
-	width: 250px;
-	background-color: #f3c73e;
-	border-radius: 15px;
-}
-

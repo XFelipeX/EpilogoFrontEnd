@@ -5,7 +5,7 @@
   box-sizing: border-box;
   outline: 0;
   font-family: 'Roboto', sans-serif;
-  color: var(--black);
+  overflow: hidden;
 }
 
 body {
@@ -21,9 +21,8 @@ body {
   --blue-first: #2ab6e6;
   --blue-second: #40dce7;
   --orange: #f3c73e;
-  --red:#f48585;
-  --priceColor:#675DE6;
-  overflow: none;
+  --red: #f48585;
+  --priceColor: #675de6;
 }
 
 html {
@@ -41,6 +40,7 @@ a,
 ul {
   font-size: 1rem;
   font-weight: normal;
+  color: var(--black);
 }
 
 nav a {
