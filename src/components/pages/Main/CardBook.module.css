@@ -1,0 +1,111 @@
+.card {
+  border: 1px solid #000;
+  border-radius: 3px;
+  grid-column: span 4;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--orange);
+  padding: 1rem;
+}
+
+.card > a {
+  text-decoration: none;
+}
+
+.descriptionCard {
+  height: 40%;
+  text-align: center;
+  padding-top: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.descriptionCard h2 {
+  color: #000;
+  font-size: 0.8rem;
+}
+
+.addCartBtn {
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  bottom: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+  background-color: var(--blue-first);
+  width: 100px;
+  font-size: 1rem;
+}
+
+.addCartBtn span {
+  width: 80%;
+}
+
+.priceBook b {
+  color: var(--priceColor);
+  font-size: 1.1rem;
+}
+
+.priceBook:hover {
+  text-decoration: cadetblue;
+}
+
+.image {
+  margin-top: 0.5rem;
+  max-height: 50%;
+  width: 80%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.image:hover {
+  opacity: 1;
+  -webkit-animation: flash 1.5s;
+  animation: flash 1.5s;
+}
+
+.titleBook {
+  font-size: 1.1rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.titleBook:hover {
+  text-decoration: underline;
+}
+.buttonPurchase {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: large;
+  width: 250px;
+  background-color: #f3c73e;
+  border-radius: 15px;
+}
+
+/* Animation image */
+@-webkit-keyframes flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
