@@ -123,3 +123,15 @@ export const GET_PUBLISH_COMPANIES = () => {
     },
   };
 };
+
+export const GET_AUTHOR_BOOK = (id) => {
+  return {
+    url: `${baseUrl}/author/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  }
+}

@@ -3,10 +3,11 @@ import styles from './CardBook.module.css';
 import { ReactComponent as ImgEmpty } from '../../../assets/emptyImage.svg';
 import { IconContext } from 'react-icons';
 import { FaCartArrowDown } from 'react-icons/fa';
-import { GET_MAIN_IMAGE_BOOK } from '../../../api';
+import { GET_AUTHOR_BOOK, GET_MAIN_IMAGE_BOOK } from '../../../api';
 
 const CardBook = ({ book, setShowDetailsBook }) => {
   const [image, setImage] = React.useState();
+  const [author, setAuthor] = React.useState();
 
   React.useEffect(() => {
     async function loadMainImage() {
@@ -34,6 +35,28 @@ const CardBook = ({ book, setShowDetailsBook }) => {
     });
   }, [book]);
 
+  React.useEffect(() => {
+    async function loadAuthor(){
+      try {
+        const { url, options } = GET_AUTHOR_BOOK(book.authorId);
+
+        const response = await fetch(url, options);
+
+        const json = await response.json();
+
+        console.log(json);
+
+        return json.object;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    loadAuthor().then(response => {
+      setAuthor(response);
+    });
+  },[book])
+
   return (
     <article className={` ${styles.card} `}>
       {image === '' ? (
@@ -57,7 +80,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
         >
           <b>{book.nameBook}</b>
         </h1>
-        <h2>{book.authorId}</h2>
+        <h2>{author ? author.nameAuthor : ""}</h2>
         <h3 className={` ${styles.priceBook} `}>
           <b>R$ {book.price}</b>
         </h3>
