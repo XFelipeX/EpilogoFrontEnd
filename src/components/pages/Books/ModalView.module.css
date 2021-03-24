@@ -42,7 +42,7 @@
 }
 
 .modalRight h2 {
-  font-size: 1.2rem;
+  font-size: 1.7rem;
 }
 
 .carouselArea {
@@ -103,6 +103,8 @@
   font-size: 1rem;
   background-color: var(--green);
   border: none;
+  border-radius: 4px;
   padding: 0.3rem 1rem;
   color: #fff;
+  width: 7rem;
 }

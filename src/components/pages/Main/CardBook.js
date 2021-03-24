@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CardBook.module.css';
 import { ReactComponent as ImgEmpty } from '../../../assets/emptyImage.svg';
 import { IconContext } from 'react-icons';
-import { FaCartArrowDown } from 'react-icons/fa';
+import { FaAlignCenter, FaCartArrowDown } from 'react-icons/fa';
 import { GET_MAIN_IMAGE_BOOK } from '../../../api';
 
 const CardBook = ({ book, setShowDetailsBook }) => {
@@ -35,7 +35,10 @@ const CardBook = ({ book, setShowDetailsBook }) => {
   }, [book]);
 
   return (
-    <article className={` ${styles.card} `}>
+    <article className={` ${styles.card} `}
+      onClick={() => setShowDetailsBook(book)}
+    >
+
       {image === '' ? (
         <ImgEmpty
           onClick={() => setShowDetailsBook(book)}
@@ -57,7 +60,6 @@ const CardBook = ({ book, setShowDetailsBook }) => {
         >
           <b>{book.nameBook}</b>
         </h1>
-        <h2>{book.authorId}</h2>
         <h3 className={` ${styles.priceBook} `}>
           <b>R$ {book.price}</b>
         </h3>
@@ -65,7 +67,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
       <button type="button" className={styles.addCartBtn}>
         <span>Comprar</span>
         <IconContext.Provider
-          value={{ color: '#fff', size: '15px', width: '15%' }}
+          value={{ color: '#fff', size: '15px', width: '15%'}}
         >
           <FaCartArrowDown />
         </IconContext.Provider>

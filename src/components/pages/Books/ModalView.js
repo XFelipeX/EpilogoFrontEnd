@@ -63,7 +63,7 @@ const ModalView = ({ setBookView, bookView }) => {
         </section>
 
         <section className={styles.modalRight}>
-          <h2 style={{ color: 'red' }}>$ {bookView.price}</h2>
+          <h2 style={{ color: 'blue' }}>$ {bookView.price}</h2>
           <button type="button" className={styles.btnPurchase}>
             Comprar
           </button>

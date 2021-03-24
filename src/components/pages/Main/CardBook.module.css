@@ -1,5 +1,5 @@
 .card {
-  border: 1px solid #000;
+  border: 1px solid #9a9a9a;
   border-radius: 3px;
   grid-column: span 4;
   height: 400px;
@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--orange);
+  background-color: #EBE9B9;
   padding: 1rem;
 }
 
@@ -34,13 +34,14 @@
   display: flex;
   align-items: center;
   border: 1px solid transparent;
+  border-radius: 5px;
   cursor: pointer;
   position: relative;
   bottom: 0.5rem;
   color: #fff;
   font-weight: bold;
   background-color: var(--blue-first);
-  width: 100px;
+  width: 130px;
   font-size: 1rem;
 }
 
@@ -50,7 +51,7 @@
 
 .priceBook b {
   color: var(--priceColor);
-  font-size: 1.1rem;
+  font-size: 1.6rem;
 }
 
 .priceBook:hover {
