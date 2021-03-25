@@ -36,7 +36,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
   }, [book]);
 
   React.useEffect(() => {
-    async function loadAuthor(){
+    async function loadAuthor() {
       try {
         const { url, options } = GET_AUTHOR_BOOK(book.authorId);
 
@@ -52,10 +52,10 @@ const CardBook = ({ book, setShowDetailsBook }) => {
       }
     }
 
-    loadAuthor().then(response => {
+    loadAuthor().then((response) => {
       setAuthor(response);
     });
-  },[book])
+  }, [book]);
 
   return (
     <article className={` ${styles.card} `}>
@@ -80,7 +80,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
         >
           <b>{book.nameBook}</b>
         </h1>
-        <h2>{author ? author.nameAuthor : ""}</h2>
+        <h2>{author ? author.nameAuthor : ''}</h2>
         <h3 className={` ${styles.priceBook} `}>
           <b>R$ {book.price}</b>
         </h3>

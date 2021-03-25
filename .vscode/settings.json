@@ -1,5 +1,5 @@
 {
-    "git.enabled": false,
+    "git.enabled": true,
     "files.exclude": {
       "node_modules": true,
       ".vscode": false,
