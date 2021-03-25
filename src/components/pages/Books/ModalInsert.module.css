@@ -60,6 +60,15 @@
   width: 100%;
 }
 
+.formArea form label .descriptionInput {
+  width: 100%;
+  margin-top: 0.7em;
+  height: 5rem;
+  resize: none;
+  font-size: 1rem;
+  padding: 0.5em;
+}
+
 .formCenter {
   height: 90%;
   display: flex;

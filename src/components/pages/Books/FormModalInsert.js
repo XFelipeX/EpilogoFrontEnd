@@ -109,16 +109,6 @@ const FormModalInsert = ({
               onChange={({ target }) => setName(target.value)}
             ></input>
           </label>
-          <label htmlFor="description">
-            Descrição:
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={description}
-              onChange={({ target }) => setDescription(target.value)}
-            ></input>
-          </label>
 
           <label htmlFor="isbn">
             ISBN:
@@ -158,6 +148,25 @@ const FormModalInsert = ({
               value={publishDate}
               onChange={({ target }) => setPublishDate(target.value)}
             ></input>
+          </label>
+
+          <label htmlFor="description">
+            Descrição:
+            {/* <input
+              type="text"
+              id="description"
+              name="description"
+              value={description}
+              onChange={({ target }) => setDescription(target.value)}
+            ></input> */}
+            <textarea
+              type="text"
+              id="description"
+              name="description"
+              value={description}
+              onChange={({ target }) => setDescription(target.value)}
+              className={styles.descriptionInput}
+            ></textarea>
           </label>
         </div>
 

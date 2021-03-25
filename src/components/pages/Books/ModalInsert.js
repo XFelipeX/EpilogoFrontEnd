@@ -76,6 +76,12 @@ const ModalInsert = ({
       alert('Preencha todos os campos');
       return;
     }
+
+    if (name.length < 3) {
+      alert('O nome do livro precisa ter pelo menos três caracteres');
+      return;
+    }
+
     if (editBook.id) {
       try {
         const { url, options } = PUT_BOOK({
