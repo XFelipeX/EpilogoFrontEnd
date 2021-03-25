@@ -122,6 +122,7 @@ const Books = () => {
           setShowBookControl={setShowBookControl}
           editBook={editBook}
           updateBook={updateBook}
+          setEditBook={setEditBook}
         />
       )}
 

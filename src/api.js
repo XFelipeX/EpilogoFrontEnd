@@ -114,7 +114,7 @@ export const GET_AUTHORS = () => {
 
 export const GET_PUBLISH_COMPANIES = () => {
   return {
-    url: `${baseUrl}/ `,
+    url: `${baseUrl}/publishCompany `,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -133,5 +133,5 @@ export const GET_AUTHOR_BOOK = (id) => {
       },
       method: 'GET',
     },
-  }
-}
+  };
+};

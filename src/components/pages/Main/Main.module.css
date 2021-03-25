@@ -19,6 +19,7 @@
   gap: 2rem;
   background-color: var(--brown-second);
   border-radius: 3px;
+  box-shadow: 0px 0px 20px 0px #2b2b2b;
 }
 
 .pageCards {

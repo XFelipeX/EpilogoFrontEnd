@@ -1,13 +1,19 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { updateState } from "../../../redux";
-import useClickOutside from "../../ClickOutside/ClickOutside";
-import styles from "./BookControl.module.css";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateState } from '../../../redux';
+import useClickOutside from '../../ClickOutside/ClickOutside';
+import styles from './BookControl.module.css';
 
-const BookControl = ({ setShowBookControl, editBook, updateBook }) => {
+const BookControl = ({
+  setShowBookControl,
+  editBook,
+  updateBook,
+  setEditBook,
+}) => {
   const dispatch = useDispatch();
   const domNode = useClickOutside(() => {
     setShowBookControl(null);
+    setEditBook({});
   });
   return (
     <div className={styles.modalArea}>
@@ -50,7 +56,7 @@ const BookControl = ({ setShowBookControl, editBook, updateBook }) => {
               name="available"
               type="text"
               readOnly
-              defaultValue={editBook.available === 1 ? "Ativo" : "Inativo"}
+              defaultValue={editBook.available === 1 ? 'Ativo' : 'Inativo'}
             />
           </label>
           <label htmlFor="amount">
@@ -90,10 +96,10 @@ const BookControl = ({ setShowBookControl, editBook, updateBook }) => {
               updateBook(editBook);
               setShowBookControl(false);
               dispatch(updateState());
-              alert("O status do produto foi alterado");
+              alert('O status do produto foi alterado');
             }}
           >
-            {editBook.available === 1 ? "Inativar" : "Ativar"}
+            {editBook.available === 1 ? 'Inativar' : 'Ativar'}
           </button>
         </section>
       </div>
