@@ -31,13 +31,6 @@ const BookControl = ({
           </label>
           <label htmlFor="description">
             Descrição
-            {/* <input
-              id="description"
-              name="description"
-              type="text"
-              readOnly
-              defaultValue={editBook.description}
-            /> */}
             <textarea
               id="description"
               name="description"

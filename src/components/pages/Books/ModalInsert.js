@@ -32,10 +32,10 @@ const ModalInsert = ({
   );
   const [price, setPrice] = React.useState(editBook.id ? editBook.price : '');
   const [author, setAuthor] = React.useState(
-    editBook.id ? editBook.authorId : '',
+    editBook.id ? editBook.authorId : '1',
   );
   const [publishCompany, setPublishCompany] = React.useState(
-    editBook.id ? editBook.publishCompanyId : '',
+    editBook.id ? editBook.publishCompanyId : '1',
   );
   const [publishDate, setPublishDate] = React.useState(
     editBook.id ? editBook.publishDate : '',
@@ -54,11 +54,44 @@ const ModalInsert = ({
     setAvailable('');
     setCategory('');
     setDescription('');
-    //setEditBook({});
+  }
+
+  function validatePrice(price) {
+    const str = String(price).replace(',', '.');
+    const regex = /[0-9]{0,3}[.]+[0-9]{0,2}/gm;
+    let m;
+    let captured = '';
+
+    while ((m = regex.exec(str)) !== null) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+
+      // The result can be accessed through the `m`-variable.
+      m.forEach((match, groupIndex) => {
+        // console.log(`Found match, group ${groupIndex}: ${match}`);
+        captured = match;
+      });
+    }
+
+    if (captured === str) {
+      return true;
+    }
+
+    setPrice('00.00');
+    return false;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!validatePrice(price)) {
+      alert(
+        'Digite um preço válido,no máximo 3 números inteiros e no mínimo 1 casa decimal ',
+      );
+      return;
+    }
 
     if (
       name === '' ||
@@ -73,6 +106,7 @@ const ModalInsert = ({
       publishCompany === '' ||
       author === ''
     ) {
+      console.log(publishCompany, author);
       alert('Preencha todos os campos');
       return;
     }

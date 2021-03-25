@@ -61,7 +61,11 @@ const FormModalInsert = ({
       }
     }
 
-    getAuthors().then((response) => setAuthors(response.object));
+    getAuthors().then((response) => {
+      if (response.object) {
+        setAuthors(response.object);
+      }
+    });
   }, []);
 
   React.useEffect(() => {
@@ -92,7 +96,11 @@ const FormModalInsert = ({
       }
     }
 
-    getCompanies().then((response) => setPublishCompanies(response.object));
+    getCompanies().then((response) => {
+      if (response.object) {
+        setPublishCompanies(response.object);
+      }
+    });
   }, []);
 
   return (
@@ -152,13 +160,6 @@ const FormModalInsert = ({
 
           <label htmlFor="description">
             Descrição:
-            {/* <input
-              type="text"
-              id="description"
-              name="description"
-              value={description}
-              onChange={({ target }) => setDescription(target.value)}
-            ></input> */}
             <textarea
               type="text"
               id="description"
@@ -196,6 +197,7 @@ const FormModalInsert = ({
             Estoque:
             <input
               min="0"
+              max="10000"
               type="number"
               id="amount"
               name="amount"
