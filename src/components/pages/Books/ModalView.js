@@ -55,7 +55,7 @@ const ModalView = ({ setBookView, bookView }) => {
             <h1>{bookView.nameBook}</h1>
             <p>
               {stars.map((star, index) => (
-                <AiFillStar key={index} size={15} />
+                <AiFillStar key={index} size={18} color="yellow" />
               ))}
             </p>
             <textarea readOnly defaultValue={bookView.description}></textarea>

@@ -80,7 +80,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
         >
           <b>{book.nameBook}</b>
         </h1>
-        <h2>{author ? author.nameAuthor : ''}</h2>
+        <h2 className={styles.authorBook}>{author ? author.nameAuthor : ''}</h2>
         <h3 className={` ${styles.priceBook} `}>
           <b>R$ {book.price}</b>
         </h3>

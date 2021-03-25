@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #EBE9B9;
+  background-color: #ebe9b9;
   padding: 1rem;
 }
 
@@ -22,11 +22,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-}
-
-.descriptionCard h2 {
-  color: #000;
-  font-size: 0.8rem;
 }
 
 .addCartBtn {
@@ -73,7 +68,7 @@
 }
 
 .titleBook {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #000;
   cursor: pointer;
 }
@@ -81,6 +76,12 @@
 .titleBook:hover {
   text-decoration: underline;
 }
+
+.authorBook {
+  font-size: 1rem;
+  font-style: italic;
+}
+
 .buttonPurchase {
   padding-left: 40px;
   padding-right: 40px;
