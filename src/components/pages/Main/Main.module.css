@@ -1,6 +1,8 @@
 .homeArea {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -17,4 +19,13 @@
   gap: 2rem;
   background-color: var(--brown-second);
   border-radius: 3px;
+}
+
+.pageCards {
+  height: 5rem;
+  width: 100%;
+  background-color: var(--brown-second);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
