@@ -5,13 +5,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .generalCards {
   margin: 2rem 0;
   padding: 2rem;
-  height: 45rem;
-  overflow: auto;
+  /*height: 45rem;*/
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1.33%);

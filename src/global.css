@@ -5,7 +5,11 @@
   box-sizing: border-box;
   outline: 0;
   font-family: 'Roboto', sans-serif;
+<<<<<<< Updated upstream
   /* overflow: hidden; */
+=======
+  overflow: auto;
+>>>>>>> Stashed changes
 }
 
 body {
