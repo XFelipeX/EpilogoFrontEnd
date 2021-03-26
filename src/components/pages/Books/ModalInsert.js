@@ -43,15 +43,15 @@ const ModalInsert = ({
 
   function clear() {
     setAmount('');
-    setAuthor('');
+    setAuthor('1');
     setCategory('');
     setName('');
     setPublishDate('');
-    setStars('');
-    setPublishCompany('');
+    setStars('1');
+    setPublishCompany('1');
     setPrice('');
     setIsbn('');
-    setAvailable('');
+    setAvailable('2');
     setCategory('');
     setDescription('');
   }

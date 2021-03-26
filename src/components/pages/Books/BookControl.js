@@ -58,6 +58,7 @@ const BookControl = ({
               type="text"
               readOnly
               defaultValue={editBook.available === 1 ? 'Ativo' : 'Inativo'}
+              style={editBook.available === 1 ? {backgroundColor:"var(--green",color:"#fff"} : {backgroundColor:"var(--red",color:"#fff"}}
             />
           </label>
           <label htmlFor="amount">
