@@ -68,13 +68,12 @@ export const POST_BOOK_IMAGE = (body, token) => {
   };
 };
 
-export const GET_IMAGES_BOOK = (id, token) => {
+export const GET_IMAGES_BOOK = (id) => {
   return {
     url: `${baseUrl}/imageBook/book/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'GET',
     },

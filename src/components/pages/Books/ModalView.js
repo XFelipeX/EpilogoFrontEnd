@@ -23,10 +23,7 @@ const ModalView = ({ setBookView, bookView }) => {
   React.useEffect(() => {
     async function getImagesBook() {
       try {
-        const { options, url } = GET_IMAGES_BOOK(
-          bookView.id,
-          permissions.token,
-        );
+        const { options, url } = GET_IMAGES_BOOK(bookView.id);
 
         const response = await fetch(url, options);
 
