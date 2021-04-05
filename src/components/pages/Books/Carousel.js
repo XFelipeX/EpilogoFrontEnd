@@ -1,16 +1,15 @@
-import img from "../../../assets/testimg.jpeg";
-import React from "react";
-import { AiFillCaretLeft } from "react-icons/ai";
-import { AiFillCaretRight } from "react-icons/ai";
-import styles from "./ModalView.module.css";
+import React from 'react';
+import { AiFillCaretLeft } from 'react-icons/ai';
+import { AiFillCaretRight } from 'react-icons/ai';
+import styles from './ModalView.module.css';
 import {
   CarouselProvider,
   Slider,
   Slide,
   ButtonBack,
   ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+} from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const Carousel = ({ images }) => {
   const [mainImage, setMainImage] = React.useState({});
@@ -21,8 +20,7 @@ const Carousel = ({ images }) => {
     setOthersImages(images.filter((image) => image.main !== 1));
   }, [images]);
 
-
-  console.log(mainImage)
+  console.log(mainImage);
   return (
     <CarouselProvider
       infinite={true}
@@ -31,8 +29,8 @@ const Carousel = ({ images }) => {
       naturalSlideHeight={125}
       totalSlides={images.length}
     >
-      <Slider style={{ height: "300px" }}>
-          {mainImage.length >0 && (
+      <Slider style={{ height: '300px' }}>
+        {mainImage.length > 0 && (
           <Slide index={0}>
             <img
               src={`data:image/jpg;base64,${mainImage[0].img}`}
@@ -40,10 +38,9 @@ const Carousel = ({ images }) => {
               className={styles.img}
             />
           </Slide>
-
-          )}
+        )}
         {othersImages.map((image, index) => (
-          <Slide index={index+1} key={image.id}>
+          <Slide index={index + 1} key={image.id}>
             <img
               src={`data:image/jpg;base64,${image.img}`}
               alt=""

@@ -4,11 +4,12 @@ import { GET_IMAGES_BOOK } from '../../../api';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import Carousel from './Carousel';
 import styles from './ModalView.module.css';
+import { useSelector } from 'react-redux';
 
 const ModalView = ({ setBookView, bookView }) => {
   const [images, setImages] = React.useState([]);
   const [stars, setStars] = React.useState([]);
-
+  const { permissions } = useSelector((state) => state);
   const domNode = useClickOutside(() => {
     setBookView(null);
   });
@@ -22,7 +23,10 @@ const ModalView = ({ setBookView, bookView }) => {
   React.useEffect(() => {
     async function getImagesBook() {
       try {
-        const { options, url } = GET_IMAGES_BOOK(bookView.id);
+        const { options, url } = GET_IMAGES_BOOK(
+          bookView.id,
+          permissions.token,
+        );
 
         const response = await fetch(url, options);
 
@@ -42,7 +46,7 @@ const ModalView = ({ setBookView, bookView }) => {
     }
 
     getImagesBook().then((response) => setImages(response));
-  }, [bookView]);
+  }, [bookView, permissions.token]);
 
   return (
     <div className={styles.modalArea}>

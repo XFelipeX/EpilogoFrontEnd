@@ -12,12 +12,13 @@ export const GET_BOOKS = (page, size) => {
   };
 };
 
-export const POST_BOOK = (body) => {
+export const POST_BOOK = (body, token) => {
   return {
     url: `${baseUrl}/book`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'POST',
       body: JSON.stringify(body),
@@ -25,12 +26,13 @@ export const POST_BOOK = (body) => {
   };
 };
 
-export const PUT_BOOK = (body) => {
+export const PUT_BOOK = (body, token) => {
   return {
     url: `${baseUrl}/book`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'PUT',
       body: JSON.stringify(body),
@@ -38,12 +40,13 @@ export const PUT_BOOK = (body) => {
   };
 };
 
-export const DELETE_BOOK = (body) => {
+export const DELETE_BOOK = (body, token) => {
   return {
     url: `${baseUrl}/book`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'DELETE',
       body: JSON.stringify(body),
@@ -51,12 +54,13 @@ export const DELETE_BOOK = (body) => {
   };
 };
 
-export const POST_BOOK_IMAGE = (body) => {
+export const POST_BOOK_IMAGE = (body, token) => {
   return {
     url: `${baseUrl}/imageBook`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'POST',
       body: JSON.stringify(body),
@@ -64,12 +68,13 @@ export const POST_BOOK_IMAGE = (body) => {
   };
 };
 
-export const GET_IMAGES_BOOK = (id) => {
+export const GET_IMAGES_BOOK = (id, token) => {
   return {
     url: `${baseUrl}/imageBook/book/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'GET',
     },
@@ -88,12 +93,13 @@ export const GET_MAIN_IMAGE_BOOK = (id) => {
   };
 };
 
-export const DELETE_IMAGE_BOOK = (id) => {
+export const DELETE_IMAGE_BOOK = (id, token) => {
   return {
     url: `${baseUrl}/imageBook/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       method: 'DELETE',
     },
@@ -132,6 +138,20 @@ export const GET_AUTHOR_BOOK = (id) => {
         'Content-Type': 'application/json',
       },
       method: 'GET',
+    },
+  };
+};
+
+// Login
+export const LOGIN = (body) => {
+  return {
+    url: `${baseUrl}/authenticate`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
     },
   };
 };

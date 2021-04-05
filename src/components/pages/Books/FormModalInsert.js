@@ -97,7 +97,7 @@ const FormModalInsert = ({
     }
 
     getCompanies().then((response) => {
-      if (response.object) {
+      if (response && response.object) {
         setPublishCompanies(response.object);
       }
     });
