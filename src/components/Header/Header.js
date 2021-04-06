@@ -36,7 +36,10 @@ const Header = () => {
           {permissions.id !== -1 && (
             <Link
               to="/"
-              onClick={() => dispatch(logOff())}
+              onClick={() => {
+                dispatch(logOff());
+                localStorage.removeItem('token');
+              }}
               className={styles.logoff}
             >
               Sair

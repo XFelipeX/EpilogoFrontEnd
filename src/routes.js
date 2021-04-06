@@ -4,6 +4,7 @@ import Main from './components/pages/Main/Main';
 import Login from './components/pages/Login/Login';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Authenticated from './components/pages/Login/auth';
+import Users from './components/pages/Users/Users';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -21,6 +22,7 @@ const routes = () => {
         <Route path="/" exact component={Login} />
         <Route path="/principal" component={Main} />
         <PrivateRoute path="/produtos" component={Books} />
+        <PrivateRoute path="/usuarios" component={Users} />
       </Switch>
     </BrowserRouter>
   );

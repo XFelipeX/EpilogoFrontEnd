@@ -1,0 +1,70 @@
+.usersArea {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cardUsers {
+  background-color: var(--brown-first);
+  height: 70%;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0px 0px 8px #000;
+}
+
+.usersCardTop {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.usersCardSearch {
+  font-size: 1.2rem;
+}
+
+.usersCardSearch input {
+  margin-left: 1rem;
+  padding: 0.3rem;
+}
+
+/* Table */
+.usersCardMiddle {
+  height: 80%;
+  overflow: auto;
+}
+
+.usersCardTable {
+  width: 100%;
+  max-height: 95%;
+  text-align: center;
+  border: 1px solid var(--white);
+  border-spacing: 0;
+  background-color: var(--brown-fourth);
+}
+
+.usersCardTable tr td,
+.usersCardTable thead tr th {
+  padding: 10px;
+  color: #fff;
+  max-width: 30px;
+}
+
+.usersCardTable th,
+.usersCardTable td {
+  border-bottom: 1px solid #fff;
+}
+
+.usersCardTable thead,
+.usersCardTable tbody {
+  border: 1px solid var(--white);
+}
+
+.usersCardBottom {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}

@@ -154,3 +154,19 @@ export const LOGIN = (body) => {
     },
   };
 };
+
+// Account
+
+export const GET_ACCOUNTS = (token, page, size) => {
+  return {
+    url: `${baseUrl}/account?size=${size}&page=${page}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        // mode: 'no-cors',
+      },
+      method: 'GET',
+    },
+  };
+};
