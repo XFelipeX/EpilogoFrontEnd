@@ -15,6 +15,19 @@ const FormModalInsertAccount = ({
   setStreet,
   setNumber,
   setCep,
+  email,
+  setEmail,
+  userName,
+  setUserName,
+  password,
+  setPassword,
+  typeAccount,
+  setTypeAccount,
+  status,
+  setStatus,
+  lastUser,
+  setShowInsertModal,
+  clear,
 }) => {
   return (
     <form
@@ -60,6 +73,43 @@ const FormModalInsertAccount = ({
               onChange={({ target }) => setCpf(target.value)}
             />
           </label>
+          <label htmlFor="username">
+            Usuário
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              min="5"
+              value={userName}
+              onChange={({ target }) => setUserName(target.value)}
+            />
+          </label>
+          <label htmlFor="password">
+            Senha
+            <input
+              type="password"
+              id="password"
+              name="password"
+              min="3"
+              max="15"
+              required
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
+          <label htmlFor="email">
+            E-mail
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
+              disabled={lastUser.accountId}
+            />
+          </label>
         </div>
         <div className={styles.formRight}>
           <label htmlFor="street">
@@ -95,15 +145,44 @@ const FormModalInsertAccount = ({
               onChange={({ target }) => setCep(target.value)}
             />
           </label>
+          <label>
+            Tipo
+            <select
+              value={typeAccount}
+              onChange={({ target }) => setTypeAccount(target.value)}
+            >
+              <option value="0">Administrador</option>
+              <option value="1">Estoquista</option>
+            </select>
+          </label>
+          {lastUser.id === -1 && (
+            <label>
+              Status
+              <select
+                value={status}
+                onChange={({ target }) => setStatus(target.value)}
+              >
+                <option value="0">Inativo</option>
+                <option value="1">Ativo</option>
+              </select>
+            </label>
+          )}
         </div>
       </section>
 
       <section className={styles.sendForm}>
-        <button type="button" className={styles.btnCancel}>
+        <button
+          type="button"
+          className={styles.btnCancel}
+          onClick={() => {
+            setShowInsertModal(false);
+            clear();
+          }}
+        >
           Cancelar
         </button>
         <button type="submit" className={styles.btnDone}>
-          Cadastrar - Ir Usuário
+          {lastUser.accountId ? 'Salvar' : 'Cadastrar'}
         </button>
       </section>
     </form>
