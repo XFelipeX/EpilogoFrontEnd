@@ -170,3 +170,17 @@ export const GET_ACCOUNTS = (token, page, size) => {
     },
   };
 };
+
+export const POST_ACCOUNT = (token, body) => {
+  return {
+    url: `${baseUrl}/account`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};

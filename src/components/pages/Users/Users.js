@@ -12,6 +12,7 @@ const Users = () => {
   const { permissions } = useSelector((state) => state);
   const [page, setPage] = React.useState(0);
   const [showInsertModal, setShowInsertModal] = React.useState(false);
+  const [lastUser, setLastUser] = React.useState({});
 
   React.useEffect(() => {
     async function takeAccounts() {
@@ -50,7 +51,10 @@ const Users = () => {
     <section className={`container ${styles.usersArea}`}>
       <Header />
       {showInsertModal && (
-        <ModalInsertAccount setShowInsertModal={setShowInsertModal} />
+        <ModalInsertAccount
+          setShowInsertModal={setShowInsertModal}
+          setLastUser={setLastUser}
+        />
       )}
       <div className={styles.cardUsers}>
         <section className={`${styles.usersCardTop}`}>
