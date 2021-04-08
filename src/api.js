@@ -159,7 +159,7 @@ export const LOGIN = (body) => {
 
 export const GET_ACCOUNTS = (token, page, size) => {
   return {
-    url: `${baseUrl}/account?size=${size}&page=${page}`,
+    url: `${baseUrl}/account?size=${size}&page=${page}&sort=id,desc`,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -181,6 +181,102 @@ export const POST_ACCOUNT = (token, body) => {
       },
       method: 'POST',
       body: JSON.stringify(body),
+    },
+  };
+};
+
+export const PUT_ACCOUNT = (token, body) => {
+  return {
+    url: `${baseUrl}/account`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'PUT',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+// User
+export const POST_USER = (token, body) => {
+  return {
+    url: `${baseUrl}/user`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const PUT_USER = (token, body) => {
+  return {
+    url: `${baseUrl}/user`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'PUT',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const PUT_STATUS_USER = (token, id) => {
+  return {
+    url: `${baseUrl}/user/status/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'PUT',
+    },
+  };
+};
+
+export const GET_USER_BY_ACCOUNT = (token, id) => {
+  return {
+    url: `${baseUrl}/user/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
+export const GET_USER_BY_EMAIL = (token, email) => {
+  console.log(email);
+  return {
+    url: `${baseUrl}/user/email/${email}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
+export const GET_USERS = (token, page, size) => {
+  return {
+    url: `${baseUrl}/user?size=${size}&page=${page}&sort=id,desc`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
     },
   };
 };
