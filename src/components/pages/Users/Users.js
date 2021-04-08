@@ -40,7 +40,7 @@ const Users = () => {
             return [];
           }
 
-          console.log(json);
+          // console.log(json);
 
           return json;
         } catch (error) {
@@ -159,13 +159,14 @@ const Users = () => {
     }
   }
 
-  console.log(permissions);
+  // console.log(permissions);
 
   return (
     <section className={`container ${styles.usersArea}`}>
       <Header />
       {showConfirmModal && (
         <ConfirmModal
+          clear={() => setLastUser({ id: -1 })}
           setShowConfirmModal={setShowConfirmModal}
           question={question}
           confirm={() => {

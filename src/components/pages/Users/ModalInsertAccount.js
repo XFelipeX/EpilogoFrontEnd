@@ -12,6 +12,11 @@ import {
 } from '../../../api';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateStateUsers } from '../../../redux';
+import {
+  validateCep,
+  validateCpf,
+  validateEmail,
+} from '../../../utils/regexValidations';
 
 const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
   const { permissions } = useSelector((state) => state);
@@ -56,25 +61,55 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (lastUser.accountId) {
-      updateAccount().then((response) => {
-        if (response && response.id) {
-          updateUser(response).then(() => dispatch(updateStateUsers()));
-        } else {
-          alert('Erro ao atualizar conta!');
-          return;
-        }
-      });
-    } else {
-      saveAccount().then((response) => {
-        if (response && response.id) {
-          saveUser(response).then(() => dispatch(updateStateUsers()));
-        } else {
-          alert('Erro ao inserir conta!');
-          return;
-        }
-      });
+    if (verifyFields() === true) {
+      if (lastUser.accountId) {
+        updateAccount().then((response) => {
+          if (response && response.id) {
+            updateUser(response).then(() => dispatch(updateStateUsers()));
+          } else {
+            alert('Erro ao atualizar conta!');
+            return;
+          }
+        });
+      } else {
+        saveAccount().then((response) => {
+          if (response && response.id) {
+            saveUser(response).then(() => dispatch(updateStateUsers()));
+          } else {
+            alert('Erro ao inserir conta!');
+            return;
+          }
+        });
+      }
     }
+  }
+
+  function verifyFields() {
+    if (String(name).length < 5) {
+      alert('O nome precisa ter pelo menos 5 caracteres!');
+      return false;
+    }
+
+    if (String(password).length < 3) {
+      alert('A senha precisa ter pelo menos 3 caracteres!');
+      return false;
+    }
+
+    if (!validateCpf(cpf)) {
+      alert('Informe um cpf válido!');
+      return false;
+    }
+    if (!validateEmail(email)) {
+      alert('Insira um email válido!');
+      return false;
+    }
+
+    if (!validateCep(cep)) {
+      alert('Insira um cep válido!');
+      return false;
+    }
+
+    return true;
   }
 
   async function verifyIfEmailExist() {
