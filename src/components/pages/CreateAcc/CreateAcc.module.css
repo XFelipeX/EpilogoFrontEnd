@@ -1,0 +1,136 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/backone.jpg');
+  background-position: center top;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.contentArea {
+  max-width: 75rem;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.contentArea form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftCard {
+  width: 49%;
+  height: 90%;
+  background-color: rgba(235, 233, 185, 0.5);
+  border-right: 2px dashed black;
+  border-radius: 3px;
+  box-shadow: -8px 0 10px 0.1px black;
+  padding: 1.5rem;
+  overflow: auto;
+}
+
+.styleBook {
+  display: inline-block;
+  width: 1%;
+  margin: 0 auto;
+  height: 88%;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 1px #fff;
+}
+
+.rightCard {
+  width: 49%;
+  height: 90%;
+  background-color: rgba(235, 233, 185, 0.5);
+  border-left: 2px dashed black;
+  border-radius: 3px;
+  box-shadow: 8px 0 10px 0.1px black;
+  padding: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+}
+
+.inputGroup label input {
+  margin: 0.5rem 0;
+  width: 100%;
+  padding: 0.3rem;
+  border: 2px solid transparent;
+}
+
+.inputGroup label input:not([readonly]):focus {
+  border: 2px solid rgba(96, 142, 250, 0.5);
+}
+
+.inputGroup label input[readOnly] {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.address {
+  display: flex;
+  width: 100%;
+}
+
+.addressLeft {
+  width: 50%;
+}
+
+.addressRight {
+  width: 50%;
+}
+
+.address .addressLeft label,
+.address .addressRight label {
+  width: 85%;
+}
+
+.title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.typeAddress {
+  font-style: italic;
+  font-size: 1.2rem;
+  display: inline-block;
+  width: max-content;
+  padding: 0.5rem 0;
+}
+
+.typeAddress::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 5px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+.btnFindAddress {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.3rem 0.1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}

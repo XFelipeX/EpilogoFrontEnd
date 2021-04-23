@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logOff } from '../../redux';
 import { FiLogIn } from 'react-icons/fi';
 import { CgLogOff } from 'react-icons/cg';
+import { MdAssignmentInd } from 'react-icons/md';
 
 const Header = () => {
   const { permissions } = useSelector((state) => state);
@@ -15,10 +16,16 @@ const Header = () => {
       <nav className={`${styles.nav} container`}>
         <div className={styles.leftContent}>
           {permissions.id === -1 && (
-            <Link to="/" className={styles.login}>
-              Login
-              <FiLogIn size={20} />
-            </Link>
+            <>
+              <Link to="/" className={styles.login}>
+                Login
+                <FiLogIn size={20} />
+              </Link>
+              <Link to="/cadastro" className={styles.create}>
+                Criar conta
+                <MdAssignmentInd size={20} />
+              </Link>
+            </>
           )}
         </div>
         <div className={styles.mainNavigation}>

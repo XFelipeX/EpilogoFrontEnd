@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Authenticated from './components/pages/Login/auth';
 import Users from './components/pages/Users/Users';
 import { useSelector } from 'react-redux';
+import CreateAcc from './components/pages/CreateAcc/CreateAcc';
 
 const PrivateRoute = ({ component: Component, typeAccount, ...rest }) => (
   <Route
@@ -28,6 +29,7 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/principal" component={Main} />
+        <Route path="/cadastro" component={CreateAcc} />
         <PrivateRoute
           path="/produtos"
           component={Books}

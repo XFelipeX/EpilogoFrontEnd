@@ -85,7 +85,9 @@ const Users = () => {
       const copyArray = [...accounts.content];
       copyArray.map((account) => {
         getInfoUser(account.id).then((response) => {
-          setUsers((oldArray) => [...oldArray, response]);
+          if (response.id) {
+            setUsers((oldArray) => [...oldArray, response]);
+          }
         });
       });
     }
@@ -120,9 +122,9 @@ const Users = () => {
       const json = await response.json();
 
       if (json.error) {
-        alert('houve um erro verifique o console');
+        // alert('houve um erro verifique o console');
         console.log(json);
-        return [];
+        return {};
       }
 
       console.log(json);
@@ -130,7 +132,7 @@ const Users = () => {
       return json.object;
     } catch (error) {
       console.log(error);
-      return [];
+      return {};
     }
   }
 
@@ -170,7 +172,7 @@ const Users = () => {
     }
   }
 
-  // console.log(permissions);
+  console.log(users);
 
   return (
     <section className={`container ${styles.usersArea}`}>
