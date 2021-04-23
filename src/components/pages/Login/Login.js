@@ -22,7 +22,12 @@ const Login = () => {
         setEmail('');
         setPassword('');
         alert('Você efetuou login com sucesso!');
-        history.push('/produtos');
+        console.log(response);
+        if (response.object.accountId != 2) {
+          history.push('/produtos');
+        } else {
+          history.push('/principal');
+        }
       }
     });
   }
@@ -37,6 +42,13 @@ const Login = () => {
 
       if (json.error) {
         console.log(json);
+        if (json.message.includes('User not found or is inative')) {
+          alert('Usuário não existe ou está inativo!');
+          return;
+        } else if (json.message.includes('Email/Password incorrect')) {
+          alert('Email e/ou senha está incorreta!');
+          return;
+        }
         alert('houve um erro verifique o console');
         return;
       }

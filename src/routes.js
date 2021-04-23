@@ -5,27 +5,42 @@ import Login from './components/pages/Login/Login';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Authenticated from './components/pages/Login/auth';
 import Users from './components/pages/Users/Users';
+import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, typeAccount, ...rest }) => (
   <Route
     {...rest}
     render={() =>
-      Authenticated() ? <Component /> : <Redirect to={{ pathname: '/' }} />
+      Authenticated() && typeAccount !== 2 ? (
+        <Component />
+      ) : (
+        <Redirect to={{ pathname: '/principal' }} />
+      )
     }
   />
 );
 
-const routes = () => {
+const Routes = () => {
+  const { permissions } = useSelector((state) => state);
+  console.log(permissions);
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/principal" component={Main} />
-        <PrivateRoute path="/produtos" component={Books} />
-        <PrivateRoute path="/usuarios" component={Users} />
+        <PrivateRoute
+          path="/produtos"
+          component={Books}
+          typeAccount={permissions.typeAccount}
+        />
+        <PrivateRoute
+          path="/usuarios"
+          component={Users}
+          typeAccount={permissions.typeAccount}
+        />
       </Switch>
     </BrowserRouter>
   );
 };
 
-export default routes;
+export default Routes;
