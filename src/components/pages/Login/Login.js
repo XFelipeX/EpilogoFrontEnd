@@ -22,7 +22,12 @@ const Login = () => {
         setEmail('');
         setPassword('');
         alert('Você efetuou login com sucesso!');
-        history.push('/produtos');
+        console.log(response);
+        if (response.object.accountId != 2) {
+          history.push('/produtos');
+        } else {
+          history.push('/principal');
+        }
       }
     });
   }

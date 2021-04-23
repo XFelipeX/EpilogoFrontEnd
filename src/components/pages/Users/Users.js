@@ -23,6 +23,7 @@ const Users = () => {
   const [showConfirmModal, setShowConfirmModal] = React.useState(false);
   const [lastUser, setLastUser] = React.useState({ id: -1 });
   const [question, setQuestion] = React.useState('');
+  const [users, setUsers] = React.useState([]);
 
   React.useEffect(() => {
     if (permissions.typeAccount === 0) {
@@ -78,7 +79,17 @@ const Users = () => {
     }
   }, [page, permissions.token, permissions.typeAccount, stateUpdateUsers]);
 
-  // console.log(accounts);
+  React.useEffect(() => {
+    console.log(accounts);
+    if (accounts.content) {
+      const copyArray = [...accounts.content];
+      copyArray.map((account) => {
+        getInfoUser(account.id).then((response) => {
+          setUsers((oldArray) => [...oldArray, response]);
+        });
+      });
+    }
+  }, [accounts]);
 
   function handlePageClick(e) {
     setPage(e.selected);
@@ -218,47 +229,55 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {accounts &&
-                  accounts.content &&
-                  accounts.content.map((account) => (
-                    <tr key={account.id}>
-                      <td>{account.id}</td>
-                      <td>
-                        {account.userName} {account.lastName}
-                      </td>
-                      <td>{account.street}</td>
-                      <td>{account.numberIdent}</td>
-                      <td>{account.cpf}</td>
-                      <td>{account.cep}</td>
-                      <td>
-                        <button
-                          type="button"
-                          className={stylesBooks.btnEdit}
-                          onClick={() => {
-                            loadInfoUser(account);
-                          }}
-                        >
-                          Editar
-                        </button>
-                      </td>
-                      <td>
-                        {permissions.id !== account.id && (
-                          <button
-                            type="button"
-                            className={stylesBooks.btnActive}
-                            onClick={() => {
-                              setShowConfirmModal(true);
-                              verifyUserStatus(account);
-                              setLastUser(account);
-                            }}
-                            style={{ padding: '0.4rem 0.5rem' }}
-                          >
-                            Ativar/Inativar
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                {users &&
+                  users.map(
+                    (user) =>
+                      accounts &&
+                      accounts.content &&
+                      accounts.content.map(
+                        (account) =>
+                          user.typeAccount !== 2 &&
+                          user.accountId === account.id && (
+                            <tr key={account.id}>
+                              <td>{account.id}</td>
+                              <td>
+                                {account.userName} {account.lastName}
+                              </td>
+                              <td>{account.street}</td>
+                              <td>{account.numberIdent}</td>
+                              <td>{account.cpf}</td>
+                              <td>{account.cep}</td>
+                              <td>
+                                <button
+                                  type="button"
+                                  className={stylesBooks.btnEdit}
+                                  onClick={() => {
+                                    loadInfoUser(account);
+                                  }}
+                                >
+                                  Editar
+                                </button>
+                              </td>
+                              <td>
+                                {permissions.id !== account.id && (
+                                  <button
+                                    type="button"
+                                    className={stylesBooks.btnActive}
+                                    onClick={() => {
+                                      setShowConfirmModal(true);
+                                      verifyUserStatus(account);
+                                      setLastUser(account);
+                                    }}
+                                    style={{ padding: '0.4rem 0.5rem' }}
+                                  >
+                                    Ativar/Inativar
+                                  </button>
+                                )}
+                              </td>
+                            </tr>
+                          ),
+                      ),
+                  )}
               </tbody>
             </table>
           ) : (
