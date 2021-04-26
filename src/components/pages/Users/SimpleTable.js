@@ -17,15 +17,20 @@ const SimpleTable = ({ accounts }) => {
       <tbody>
         {accounts &&
           accounts.content &&
-          accounts.content.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.userName}</td>
-              {/* <td>{user.email}</td> */}
-              <td>{user.typeAccount === 0 ? 'Administrador' : 'Estoquista'}</td>
-              <td>{user.status === 1 ? 'Ativo' : 'Inativo'}</td>
-            </tr>
-          ))}
+          accounts.content.map(
+            (user) =>
+              user.typeAccount !== 2 && (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.userName}</td>
+                  {/* <td>{user.email}</td> */}
+                  <td>
+                    {user.typeAccount === 0 ? 'Administrador' : 'Estoquista'}
+                  </td>
+                  <td>{user.status === 1 ? 'Ativo' : 'Inativo'}</td>
+                </tr>
+              ),
+          )}
       </tbody>
     </table>
   );

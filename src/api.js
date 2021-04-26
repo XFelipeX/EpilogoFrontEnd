@@ -279,3 +279,28 @@ export const GET_USERS = (token, page, size) => {
     },
   };
 };
+
+export const POST_ADDRESS = (body) => {
+  return {
+    url: `${baseUrl}/address`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const GET_CEP = (cep) => {
+  return {
+    url: `https://viacep.com.br/ws/${cep}/json/`,
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+};
