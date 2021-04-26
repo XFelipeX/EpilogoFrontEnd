@@ -5,12 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logOff } from '../../redux';
 import { FiLogIn } from 'react-icons/fi';
 import { CgLogOff } from 'react-icons/cg';
+import { RiAccountPinBoxFill } from 'react-icons/ri';
 import { MdAssignmentInd } from 'react-icons/md';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Header = () => {
   const { permissions } = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  console.log(permissions);
   return (
     <header className={`${styles.header}`}>
       <nav className={`${styles.nav} container`}>
@@ -26,6 +28,18 @@ const Header = () => {
                 <MdAssignmentInd size={20} />
               </Link>
             </>
+          )}
+          {permissions.typeAccount === 2 && permissions.id != -1 && (
+            <Dropdown className={styles.dropdown}>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <RiAccountPinBoxFill size={50} />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Minha Conta</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Sair</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           )}
         </div>
         <div className={styles.mainNavigation}>

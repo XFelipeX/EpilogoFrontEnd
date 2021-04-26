@@ -17,7 +17,7 @@
   grid-template-columns: repeat(12, 1.33%);
   justify-content: space-between;
   gap: 2rem;
-  background-color: var(--brown-second);
+  background-color: rgba(176, 172, 97, 0.4);
   border-radius: 3px;
   box-shadow: 0px 0px 20px 0px #2b2b2b;
 }
@@ -25,7 +25,7 @@
 .pageCards {
   height: 5rem;
   width: 100%;
-  background-color: var(--brown-second);
+  /* background-color: var(--brown-second); */
   display: flex;
   justify-content: center;
   align-items: center;

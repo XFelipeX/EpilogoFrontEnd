@@ -35,7 +35,7 @@
 .leftContent {
   width: 25%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -69,6 +69,7 @@
   justify-content: space-between;
   height: 40px;
   width: 130px;
+  margin-left: 1rem;
 }
 
 .logoff {
@@ -82,4 +83,25 @@
   justify-content: space-around;
   height: 40px;
   width: 120px;
+}
+
+/* DropDown */
+
+.dropdown button {
+  padding: 0.3rem;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  border: none;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.dropdown div {
+  display: flex;
+  flex-direction: column;
+  transform: translate3d(86px, 42px, 0px);
 }

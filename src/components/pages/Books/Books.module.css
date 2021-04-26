@@ -107,10 +107,10 @@
 .pagination > .active > a {
   background-color: #47ccde;
   border-color: #47ccde;
-  color: #000;
+  color: #fff;
 }
 .pagination > li > a {
-  border: 1px solid var(--brown-fourth);
+  /* border: 1px solid var(--white); */
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
@@ -122,12 +122,13 @@
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   background-color: var(--brown-third);
-  border-color: var(--brown-fourth);
+  border-color: var(--white);
   outline: none;
 }
 .pagination > li > a,
 .pagination > li > span {
-  color: #000;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,
