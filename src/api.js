@@ -170,13 +170,12 @@ export const GET_ACCOUNTS = (token, page, size) => {
   };
 };
 
-export const POST_ACCOUNT = (token, body) => {
+export const POST_ACCOUNT = (body) => {
   return {
     url: `${baseUrl}/account`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'POST',
       body: JSON.stringify(body),
@@ -184,13 +183,12 @@ export const POST_ACCOUNT = (token, body) => {
   };
 };
 
-export const PUT_ACCOUNT = (token, body) => {
+export const PUT_ACCOUNT = (body) => {
   return {
     url: `${baseUrl}/account`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'PUT',
       body: JSON.stringify(body),
@@ -199,13 +197,12 @@ export const PUT_ACCOUNT = (token, body) => {
 };
 
 // User
-export const POST_USER = (token, body) => {
+export const POST_USER = (body) => {
   return {
     url: `${baseUrl}/user`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'POST',
       body: JSON.stringify(body),
@@ -213,13 +210,12 @@ export const POST_USER = (token, body) => {
   };
 };
 
-export const PUT_USER = (token, body) => {
+export const PUT_USER = (body) => {
   return {
     url: `${baseUrl}/user`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'PUT',
       body: JSON.stringify(body),
@@ -282,7 +278,7 @@ export const GET_USERS = (token, page, size) => {
 
 export const POST_ADDRESS = (body) => {
   return {
-    url: `${baseUrl}/address`,
+    url: `${baseUrl}/address?typeAccount=2`,
     options: {
       headers: {
         'Content-Type': 'application/json',
