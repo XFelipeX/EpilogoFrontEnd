@@ -53,6 +53,10 @@
   max-width: 30px;
 }
 
+.usersCardTable thead tr th {
+  width: calc(100% / 9);
+}
+
 .usersCardTable th,
 .usersCardTable td {
   border-bottom: 1px solid #fff;

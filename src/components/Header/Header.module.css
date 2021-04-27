@@ -28,7 +28,8 @@
 
 .mainNavigation a {
   font-size: 1.2rem;
-  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--black);
   letter-spacing: 1px;
 }
 
@@ -104,4 +105,16 @@
   display: flex;
   flex-direction: column;
   transform: translate3d(86px, 42px, 0px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+}
+
+.dropdown div a {
+  color: #fff;
+  padding: 0.3rem;
+}
+
+.dropdown div a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
