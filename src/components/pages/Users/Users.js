@@ -9,10 +9,11 @@ import {
   GET_USER_BY_ACCOUNT,
   PUT_STATUS_USER,
 } from '../../../api';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalInsertAccount from './ModalInsertAccount';
 import ConfirmModal from './ConfirmModal';
 import SimpleTable from './SimpleTable';
+import { updateState } from '../../../redux';
 
 const Users = () => {
   const [accounts, setAccounts] = React.useState({ totalPages: 0 });
@@ -24,6 +25,8 @@ const Users = () => {
   const [lastUser, setLastUser] = React.useState({ id: -1 });
   const [question, setQuestion] = React.useState('');
   const [users, setUsers] = React.useState([]);
+
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (permissions.typeAccount === 0) {
@@ -82,8 +85,9 @@ const Users = () => {
   React.useEffect(() => {
     console.log(accounts);
     if (accounts.content) {
+      setUsers([]);
       const copyArray = [...accounts.content];
-      copyArray.map((account) => {
+      copyArray.forEach((account) => {
         getInfoUser(account.id).then((response) => {
           if (response.id) {
             setUsers((oldArray) => [...oldArray, response]);
@@ -184,6 +188,7 @@ const Users = () => {
           question={question}
           confirm={() => {
             updateUserStatus(lastUser.id);
+            dispatch(updateState());
           }}
         />
       )}
@@ -226,6 +231,7 @@ const Users = () => {
                   <th>N°</th>
                   <th>CPF</th>
                   <th>Cep</th>
+                  <th>Status</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -249,6 +255,12 @@ const Users = () => {
                               <td>{account.numberIdent}</td>
                               <td>{account.cpf}</td>
                               <td>{account.cep}</td>
+                              {user.status === 1 ? (
+                                <td style={{ color: 'var(--green)' }}>Ativo</td>
+                              ) : (
+                                <td style={{ color: 'black' }}>Inativo</td>
+                              )}
+
                               <td>
                                 <button
                                   type="button"

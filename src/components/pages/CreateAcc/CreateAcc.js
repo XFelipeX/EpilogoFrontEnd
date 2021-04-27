@@ -68,6 +68,7 @@ const CreateAcc = () => {
             setPublicDelivery(json.logradouro);
             setUfDelivery(json.uf);
             break;
+          default:
         }
       } catch (error) {
         alert('Houve um erro ao puxar este cep');
@@ -79,12 +80,9 @@ const CreateAcc = () => {
     event.preventDefault();
     saveAccount().then((response) => {
       if (response && response.object) {
-        saveUser(response.object.id).then((response) => {
-          if (response && response.object) {
-            saveAddress(response.object.id, 'billing');
-            saveAddress(response.object.id, 'delivery');
-          }
-        });
+        saveUser(response.object.id);
+        saveAddress(response.object.id, 'billing');
+        saveAddress(response.object.id, 'delivery');
       }
     });
   }
@@ -215,6 +213,7 @@ const CreateAcc = () => {
           },
           2, //typeAccount
         );
+      default:
     }
   }
 

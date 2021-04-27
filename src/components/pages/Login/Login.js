@@ -15,21 +15,23 @@ const Login = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    login().then((response) => {
-      if (response) {
-        dispatch(logIn(response));
-        localStorage.setItem('token', response.session);
-        setEmail('');
-        setPassword('');
-        alert('Você efetuou login com sucesso!');
-        console.log(response);
-        if (response.object.accountId != 2) {
-          history.push('/produtos');
-        } else {
-          history.push('/principal');
+    login()
+      .then((response) => {
+        if (response) {
+          dispatch(logIn(response));
+          localStorage.setItem('token', response.session);
+          setEmail('');
+          setPassword('');
+          alert('Você efetuou login com sucesso!');
+          console.log(response);
+          if (response.object.accountId !== 2) {
+            history.push('/produtos');
+          } else {
+            history.push('/principal');
+          }
         }
-      }
-    });
+      })
+      .catch((error) => console.log(error));
   }
 
   async function login() {

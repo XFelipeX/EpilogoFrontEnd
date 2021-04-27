@@ -7,12 +7,26 @@ import Authenticated from './components/pages/Login/auth';
 import Users from './components/pages/Users/Users';
 import { useSelector } from 'react-redux';
 import CreateAcc from './components/pages/CreateAcc/CreateAcc';
+import MyAccount from './components/pages/MyAccount/MyAccount';
 
 const PrivateRoute = ({ component: Component, typeAccount, ...rest }) => (
   <Route
     {...rest}
     render={() =>
       Authenticated() && typeAccount !== 2 ? (
+        <Component />
+      ) : (
+        <Redirect to={{ pathname: '/principal' }} />
+      )
+    }
+  />
+);
+
+const PrivateRouteClient = ({ component: Component, typeAccount, ...rest }) => (
+  <Route
+    {...rest}
+    render={() =>
+      Authenticated() && typeAccount === 2 ? (
         <Component />
       ) : (
         <Redirect to={{ pathname: '/principal' }} />
@@ -38,6 +52,11 @@ const Routes = () => {
         <PrivateRoute
           path="/usuarios"
           component={Users}
+          typeAccount={permissions.typeAccount}
+        />
+        <PrivateRouteClient
+          path="/minhaconta"
+          component={MyAccount}
           typeAccount={permissions.typeAccount}
         />
       </Switch>

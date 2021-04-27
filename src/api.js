@@ -170,6 +170,20 @@ export const GET_ACCOUNTS = (token, page, size) => {
   };
 };
 
+export const GET_ACCOUNT_BY_ID = (token, id) => {
+  return {
+    url: `${baseUrl}/account/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        // mode: 'no-cors',
+      },
+      method: 'GET',
+    },
+  };
+};
+
 export const POST_ACCOUNT = (body) => {
   return {
     url: `${baseUrl}/account`,
@@ -285,6 +299,18 @@ export const POST_ADDRESS = (body) => {
       },
       method: 'POST',
       body: JSON.stringify(body),
+    },
+  };
+};
+
+export const GET_ACTIVE_ADDRESS = (accountId) => {
+  return {
+    url: `${baseUrl}/address/active/${accountId}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
     },
   };
 };
