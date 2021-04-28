@@ -156,13 +156,12 @@ export const LOGIN = (body) => {
 };
 
 // Account
-export const GET_ACCOUNTS = (token, page, size) => {
+export const GET_ACCOUNTS = (page, size) => {
   return {
     url: `${baseUrl}/account?size=${size}&page=${page}&sort=id,desc`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
         // mode: 'no-cors',
       },
       method: 'GET',
@@ -170,13 +169,12 @@ export const GET_ACCOUNTS = (token, page, size) => {
   };
 };
 
-export const GET_ACCOUNT_BY_ID = (token, id) => {
+export const GET_ACCOUNT_BY_ID = (id) => {
   return {
     url: `${baseUrl}/account/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
         // mode: 'no-cors',
       },
       method: 'GET',
@@ -237,53 +235,49 @@ export const PUT_USER = (body) => {
   };
 };
 
-export const PUT_STATUS_USER = (token, id) => {
+export const PUT_STATUS_USER = (id) => {
   return {
     url: `${baseUrl}/user/status/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'PUT',
     },
   };
 };
 
-export const GET_USER_BY_ACCOUNT = (token, id) => {
+export const GET_USER_BY_ACCOUNT = (id) => {
   return {
     url: `${baseUrl}/user/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'GET',
     },
   };
 };
 
-export const GET_USER_BY_EMAIL = (token, email) => {
+export const GET_USER_BY_EMAIL = (email) => {
   console.log(email);
   return {
     url: `${baseUrl}/user/email/${email}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'GET',
     },
   };
 };
 
-export const GET_USERS = (token, page, size) => {
+export const GET_USERS = (page, size) => {
   return {
     url: `${baseUrl}/user?size=${size}&page=${page}&sort=id,desc`,
     options: {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
       },
       method: 'GET',
     },

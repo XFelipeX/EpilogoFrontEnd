@@ -32,7 +32,7 @@ const Users = () => {
     if (permissions.typeAccount === 0) {
       async function takeAccounts() {
         try {
-          const { url, options } = GET_ACCOUNTS(permissions.token, page, 10);
+          const { url, options } = GET_ACCOUNTS(page, 10);
 
           const response = await fetch(url, options);
 
@@ -57,7 +57,7 @@ const Users = () => {
     } else {
       async function takeUsers() {
         try {
-          const { url, options } = GET_USERS(permissions.token, page, 10);
+          const { url, options } = GET_USERS(page, 10);
 
           const response = await fetch(url, options);
 
@@ -119,7 +119,7 @@ const Users = () => {
 
   async function getInfoUser(id) {
     try {
-      const { url, options } = GET_USER_BY_ACCOUNT(permissions.token, id);
+      const { url, options } = GET_USER_BY_ACCOUNT(id);
 
       const response = await fetch(url, options);
 
@@ -152,7 +152,7 @@ const Users = () => {
 
   async function updateUserStatus(id) {
     try {
-      const { url, options } = PUT_STATUS_USER(permissions.token, id);
+      const { url, options } = PUT_STATUS_USER(id);
 
       const response = await fetch(url, options);
 

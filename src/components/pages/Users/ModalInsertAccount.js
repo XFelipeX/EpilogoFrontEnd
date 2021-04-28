@@ -147,7 +147,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
 
   async function updateUser() {
     try {
-      const { url, options } = PUT_USER(permissions.token, {
+      const { url, options } = PUT_USER({
         id: lastUser.userId,
         email: lastUser.email,
         userName: userName,
@@ -184,7 +184,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
 
   async function saveUser(userAccount) {
     try {
-      const { url, options } = POST_USER(permissions.token, {
+      const { url, options } = POST_USER({
         email: email,
         userName: userName,
         userPassword: password,
@@ -226,7 +226,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
     }
 
     try {
-      const { url, options } = POST_ACCOUNT(permissions.token, {
+      const { url, options } = POST_ACCOUNT({
         userName: name,
         lastName: lastName,
         street: street,
@@ -265,7 +265,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
 
   async function updateAccount() {
     try {
-      const { url, options } = PUT_ACCOUNT(permissions.token, {
+      const { url, options } = PUT_ACCOUNT({
         id: lastUser.accountId,
         userName: name,
         lastName: lastName,
