@@ -6,12 +6,27 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { BiAddToQueue } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import { GET_ACCOUNT_BY_ID, GET_ACTIVE_ADDRESS } from '../../../api';
+import ModalEditPersonal from './ModalEditPersonal';
+import ModalEditUser from './ModalEditUser';
+import ModalAddAddress from './ModalAddAddress';
+import ModalEditAddress from './ModalEditAddress';
 
 const MyAccount = () => {
   const { permissions } = useSelector((state) => state);
+  const { stateUpdate } = useSelector((state) => state);
   const [account, setAccount] = React.useState({});
   const [addressBilling, setAddressBilling] = React.useState({});
   const [addressDelivery, setAddressDelivery] = React.useState({});
+
+  // Update address
+  const [upAddress, setUpAddress] = React.useState({});
+
+  // About modals views
+  const [showEditPersonal, setShowEditPersonal] = React.useState(false);
+  const [showEditUser, setShowEditUser] = React.useState(false);
+  const [showAddAddress, setShowAddAddress] = React.useState(false);
+  const [showModalEditAddress, setShowModalEditAddress] = React.useState(false);
+  const [typeAddress, setTypeAddress] = React.useState('C');
 
   React.useEffect(() => {
     async function getAccount() {
@@ -45,7 +60,7 @@ const MyAccount = () => {
     getAccount().then((response) => {
       if (response) setAccount(response);
     });
-  }, [permissions.token, permissions.user.accountId]);
+  }, [permissions.token, permissions.user.accountId, stateUpdate]);
 
   React.useEffect(() => {
     async function getAddressActive() {
@@ -84,18 +99,50 @@ const MyAccount = () => {
         setAddressDelivery({ ...delivery[0] });
       }
     });
-  }, [permissions.user.accountId]);
-
-  console.log(addressBilling);
+  }, [permissions.user.accountId, stateUpdate]);
 
   return (
     <div className={`${styles.container}`}>
       <Header />
+      {showEditPersonal && (
+        <ModalEditPersonal
+          setShowEditPersonal={setShowEditPersonal}
+          account={account}
+        />
+      )}
+      {showEditUser && (
+        <ModalEditUser
+          setShowEditUser={setShowEditUser}
+          user={permissions.user}
+        />
+      )}
+      {showAddAddress && (
+        <ModalAddAddress
+          setShowAddAddress={setShowAddAddress}
+          type={typeAddress}
+          title={typeAddress === 'C' ? 'Cobrança' : 'Entrega'}
+          upAddress={upAddress}
+          setUpAddress={setUpAddress}
+        />
+      )}
+      {showModalEditAddress && (
+        <ModalEditAddress
+          type={typeAddress}
+          setShowModalEditAddress={setShowModalEditAddress}
+          title={typeAddress === 'C' ? 'Cobrança' : 'Entrega'}
+          setShowAddAddress={setShowAddAddress}
+          setUpAddress={setUpAddress}
+        />
+      )}
       <div className={styles.content}>
         <div className={styles.card}>
           <article className={styles.account}>
             <span className={styles.btnArea}>
-              <button type="button" className={styles.btnEdit}>
+              <button
+                type="button"
+                className={styles.btnEdit}
+                onClick={() => setShowEditPersonal(true)}
+              >
                 <AiTwotoneEdit size={20} />
               </button>
             </span>
@@ -111,7 +158,11 @@ const MyAccount = () => {
           </article>
           <article className={styles.user}>
             <span className={styles.btnArea}>
-              <button type="button" className={styles.btnEdit}>
+              <button
+                type="button"
+                className={styles.btnEdit}
+                onClick={() => setShowEditUser(true)}
+              >
                 <AiTwotoneEdit size={20} />
               </button>
             </span>
@@ -153,6 +204,10 @@ const MyAccount = () => {
                     type="button"
                     className={styles.btnAdd}
                     style={{ marginRight: '2.2rem' }}
+                    onClick={() => {
+                      setShowAddAddress(true);
+                      setTypeAddress('C');
+                    }}
                   >
                     <BiAddToQueue size={20} />
                   </button>
@@ -160,6 +215,10 @@ const MyAccount = () => {
                     type="button"
                     className={styles.btnEdit}
                     style={{ marginRight: '2.2rem' }}
+                    onClick={() => {
+                      setShowModalEditAddress(true);
+                      setTypeAddress('C');
+                    }}
                   >
                     <AiTwotoneEdit size={20} />
                   </button>
@@ -201,10 +260,21 @@ const MyAccount = () => {
                     type="button"
                     className={styles.btnAdd}
                     style={{ marginRight: '2.2rem' }}
+                    onClick={() => {
+                      setShowAddAddress(true);
+                      setTypeAddress('F');
+                    }}
                   >
                     <BiAddToQueue size={20} />
                   </button>
-                  <button type="button" className={styles.btnEdit}>
+                  <button
+                    type="button"
+                    className={styles.btnEdit}
+                    onClick={() => {
+                      setShowModalEditAddress(true);
+                      setTypeAddress('F');
+                    }}
+                  >
                     <AiTwotoneEdit size={20} />
                   </button>
                 </span>
