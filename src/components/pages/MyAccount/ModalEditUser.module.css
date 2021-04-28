@@ -1,0 +1,78 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 2rem;
+  width: 30rem;
+  height: 25rem;
+  background-color: var(--white);
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.modal form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal form .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30%;
+}
+
+.modal form .inputs label {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  width: 70%;
+  justify-content: space-between;
+}
+
+.modal form .inputs label input {
+  margin: 0.5rem 0;
+  width: 100%;
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.modal form .inputs label input[readOnly] {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal form .btnArea {
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.btnSend,
+.btnCancel {
+  color: #fff;
+  padding: 0.7rem 2rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btnSend {
+  background-color: var(--green);
+}
+
+.btnCancel {
+  background-color: var(--red);
+}
