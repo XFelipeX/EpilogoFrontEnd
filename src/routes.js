@@ -29,7 +29,7 @@ const PrivateRouteClient = ({ component: Component, typeAccount, ...rest }) => (
       Authenticated() && typeAccount === 2 ? (
         <Component />
       ) : (
-        <Redirect to={{ pathname: '/principal' }} />
+        <Redirect to={{ pathname: '/produtos' }} />
       )
     }
   />
@@ -37,7 +37,7 @@ const PrivateRouteClient = ({ component: Component, typeAccount, ...rest }) => (
 
 const Routes = () => {
   const { permissions } = useSelector((state) => state);
-  console.log(permissions);
+
   return (
     <BrowserRouter>
       <Switch>

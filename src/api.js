@@ -303,9 +303,34 @@ export const POST_ADDRESS = (body) => {
   };
 };
 
+export const PUT_ADDRESS = (body) => {
+  return {
+    url: `${baseUrl}/address`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const GET_ACTIVE_ADDRESS = (accountId) => {
   return {
     url: `${baseUrl}/address/active/${accountId}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+};
+
+export const GET_ADDRESS_BY_ACCOUNT = (accountId, type) => {
+  return {
+    url: `${baseUrl}/address/account/${accountId}?type=${type}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
