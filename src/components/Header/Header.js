@@ -42,6 +42,7 @@ const Header = () => {
             <Dropdown className={styles.dropdown}>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
                 <RiAccountPinBoxFill size={50} />
+                <span>Olá, {permissions.user.userName}</span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
