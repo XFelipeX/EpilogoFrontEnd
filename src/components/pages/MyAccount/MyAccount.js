@@ -31,10 +31,7 @@ const MyAccount = () => {
   React.useEffect(() => {
     async function getAccount() {
       try {
-        const { url, options } = GET_ACCOUNT_BY_ID(
-          permissions.token,
-          permissions.user.accountId,
-        );
+        const { url, options } = GET_ACCOUNT_BY_ID(permissions.user.accountId);
         const response = await fetch(url, options);
         const json = await response.json();
 
@@ -60,7 +57,7 @@ const MyAccount = () => {
     getAccount().then((response) => {
       if (response) setAccount(response);
     });
-  }, [permissions.token, permissions.user.accountId, stateUpdate]);
+  }, [permissions.user.accountId, stateUpdate]);
 
   React.useEffect(() => {
     async function getAddressActive() {
