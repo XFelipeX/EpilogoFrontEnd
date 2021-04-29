@@ -6,6 +6,7 @@ import { GET_CEP, POST_ADDRESS, PUT_ADDRESS } from '../../../api';
 import { updateState } from '../../../redux';
 import { useSelector } from 'react-redux';
 import { BsMap } from 'react-icons/bs';
+import { validateCep } from '../../../utils/regexValidations';
 
 const ModalAddAddress = ({
   setShowAddAddress,
@@ -31,8 +32,19 @@ const ModalAddAddress = ({
     upAddress.id ? upAddress.complement : '',
   );
 
+  // Confirm new CEP
+  const [confirmCep, setConfirmCep] = React.useState(null);
+
   function handleSubmit(e) {
     e.preventDefault();
+    if (!validateCep(cep)) {
+      alert('Informe um CEP válido!');
+      return;
+    }
+    if (String(confirmCep) !== String(cep)) {
+      alert('Confirme o novo CEP inserido para continuar');
+      return;
+    }
     if (upAddress.id) {
       updateAddress()
         .then(() => dispatch(updateState()))
@@ -129,6 +141,10 @@ const ModalAddAddress = ({
         const response = await fetch(url, options);
         const json = await response.json();
 
+        if (json.erro) {
+          alert('CEP não encontrado!');
+          return;
+        }
         console.log(json);
         return json;
       } catch (error) {
@@ -138,6 +154,12 @@ const ModalAddAddress = ({
       }
     }
   }
+
+  React.useEffect(() => {
+    if (upAddress.id) {
+      setConfirmCep(upAddress.cep);
+    }
+  }, [upAddress.cep, upAddress.id]);
 
   return (
     <div className={styles.container}>
@@ -155,6 +177,7 @@ const ModalAddAddress = ({
             <label htmlFor="cep">
               CEP
               <input
+                maxLength="9"
                 type="text"
                 name="cep"
                 id="cep"
@@ -171,6 +194,7 @@ const ModalAddAddress = ({
                       setLocal(response.localidade);
                       setPublicArea(response.logradouro);
                       setUf(response.uf);
+                      setConfirmCep(response.cep);
                     }
                   });
                 }}

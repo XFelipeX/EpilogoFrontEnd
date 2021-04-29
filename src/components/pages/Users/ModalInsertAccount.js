@@ -10,7 +10,7 @@ import {
   PUT_ACCOUNT,
   PUT_USER,
 } from '../../../api';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateStateUsers } from '../../../redux';
 import {
   validateCep,
@@ -19,7 +19,7 @@ import {
 } from '../../../utils/regexValidations';
 
 const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
-  const { permissions } = useSelector((state) => state);
+  // const { permissions } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   // Account
@@ -114,7 +114,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
 
   async function verifyIfEmailExist() {
     try {
-      const { url, options } = GET_USER_BY_EMAIL(permissions.token, email);
+      const { url, options } = GET_USER_BY_EMAIL(email);
 
       const response = await fetch(url, options);
 

@@ -1,14 +1,24 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../../Header/Header';
 import styles from './CreateAcc.module.css';
 import { BsMap } from 'react-icons/bs';
 import { ReactComponent as BackIllustration } from '../../../assets/backAcc.svg';
-import { GET_CEP, POST_ACCOUNT, POST_ADDRESS, POST_USER } from '../../../api';
+import {
+  GET_CEP,
+  GET_USER_BY_EMAIL,
+  POST_ACCOUNT,
+  POST_ADDRESS,
+  POST_USER,
+} from '../../../api';
+import {
+  validateCep,
+  validateCpf,
+  validateEmail,
+  validateNameClient,
+} from '../../../utils/regexValidations';
 
 const CreateAcc = () => {
-  // const { permissions } = useSelector((state) => state);
   const history = useHistory();
   // Account and user info
   const [username, setUsername] = React.useState('');
@@ -50,13 +60,12 @@ const CreateAcc = () => {
   }
 
   async function findCep(value, type) {
+    if (!validateCep(value)) return alert('Digite um CEP válido');
     if (value !== '') {
       try {
         const { url, options } = GET_CEP(value);
         const response = await fetch(url, options);
         const json = await response.json();
-        // console.log(value);
-        // console.log(type);
         switch (type) {
           case 'billing':
             setLocalBilling(json.localidade);
@@ -78,26 +87,32 @@ const CreateAcc = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    saveAccount().then((response) => {
-      if (response && response.object) {
-        saveUser(response.object.id);
-        saveAddress(response.object.id, 'billing');
-        saveAddress(response.object.id, 'delivery');
-      }
-    });
+    if (verifyFields() === true) {
+      saveAccount().then((response) => {
+        if (response && response.object) {
+          saveUser(response.object.id);
+          saveAddress(response.object.id, 'billing');
+          saveAddress(response.object.id, 'delivery');
+        }
+      });
+    }
   }
 
   async function saveAccount() {
+    const existEmail = await verifyIfEmailExist();
+    if (existEmail) {
+      alert('Este email já possui cadastro!');
+      return null;
+    }
     try {
       const { url, options } = POST_ACCOUNT({ userName: username, cpf: cpf });
       const response = await fetch(url, options);
-      console.log(response);
       const json = await response.json();
 
       if (json.error) {
         console.log(json);
         if (json.message.includes('(email,cpf) is broken')) {
-          alert('(CPF/E-mail) não disponível, por favor tente outro');
+          alert('Este CPF já possui cadastro em nosso sistema');
           return;
         }
         alert('houve um erro verifique o console');
@@ -217,6 +232,65 @@ const CreateAcc = () => {
     }
   }
 
+  function verifyFields() {
+    if (!validateCpf(cpf)) {
+      alert('Digite um CPF válido');
+      return false;
+    }
+    if (!validateCep(cepBilling)) {
+      alert('Digite um CEP válido para o endereço de cobrança');
+      return false;
+    }
+    if (!validateCep(cepDelivery)) {
+      alert('Digite um CEP válido para o endereço de entrega');
+      return false;
+    }
+    if (!validateEmail(email)) {
+      alert('Insira um email válido!');
+      return false;
+    }
+    if (!validateNameClient(username)) {
+      alert(
+        'Insira um Nome válido! (Pelo menos duas palavras com 3 caracteres no mínimo)',
+      );
+      return false;
+    }
+    return true;
+  }
+
+  async function verifyIfEmailExist() {
+    try {
+      const { url, options } = GET_USER_BY_EMAIL(email);
+
+      const response = await fetch(url, options);
+
+      const json = await response.json();
+      if (json.error) {
+        console.log(json);
+
+        if (json.message.includes('Email not found')) {
+          return false;
+        }
+
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      if (json[0] && json[0].error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      console.log(json);
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
   return (
     <div className={`${styles.container}`}>
       <Header />
@@ -228,6 +302,7 @@ const CreateAcc = () => {
               <label htmlFor="username">
                 Nome
                 <input
+                  maxLength="30"
                   type="text"
                   name="username"
                   id="username"
@@ -239,11 +314,13 @@ const CreateAcc = () => {
               <label htmlFor="cpf">
                 CPF
                 <input
+                  maxLength="14"
                   type="text"
                   name="cpf"
                   id="cpf"
                   required
                   value={cpf}
+                  placeholder="XXX.XXX.XXX-XX"
                   onChange={({ target }) => setCpf(target.value)}
                 />
               </label>
@@ -253,6 +330,7 @@ const CreateAcc = () => {
                   <label htmlFor="cep-billing-address">
                     CEP
                     <input
+                      maxLength="9"
                       type="text"
                       name="cep-billing-address"
                       id="cep-billing-address"
@@ -421,6 +499,7 @@ const CreateAcc = () => {
               <label htmlFor="email">
                 E-mail
                 <input
+                  placeholder="Exemplo@dominio.com"
                   type="email"
                   name="email"
                   id="email"

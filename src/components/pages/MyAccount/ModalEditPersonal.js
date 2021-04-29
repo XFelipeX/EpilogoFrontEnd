@@ -4,13 +4,20 @@ import useClickOutside from '../../ClickOutside/ClickOutside';
 import { useDispatch } from 'react-redux';
 import { PUT_ACCOUNT } from '../../../api';
 import { updateState } from '../../../redux';
+import { validateNameClient } from '../../../utils/regexValidations';
 
 const ModalEditPersonal = ({ setShowEditPersonal, account }) => {
   const dispatch = useDispatch();
-  const [name, setName] = React.useState('');
+  const [name, setName] = React.useState(account.userName);
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!validateNameClient(name)) {
+      alert(
+        'Insira um Nome válido! (Pelo menos duas palavras com 3 caracteres no mínimo)',
+      );
+      return;
+    }
     updateAccount()
       .then(() => dispatch(updateState()))
       .then(() => setShowEditPersonal(false));

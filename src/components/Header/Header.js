@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logOff } from '../../redux';
 import { FiLogIn } from 'react-icons/fi';
 import { CgLogOff } from 'react-icons/cg';
+import { FaCartArrowDown } from 'react-icons/fa';
 import { RiAccountPinBoxFill } from 'react-icons/ri';
 import { MdAssignmentInd } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -87,6 +88,11 @@ const Header = () => {
             >
               Sair
               <CgLogOff size={20} />
+            </Link>
+          )}
+          {permissions.id !== -1 && permissions.typeAccount === 2 && (
+            <Link to="/carrinho" className={styles.cart}>
+              <FaCartArrowDown size={35} />
             </Link>
           )}
         </div>

@@ -14,3 +14,9 @@ export function validateCep(cep) {
 
   return re.test(cep);
 }
+
+export function validateNameClient(name) {
+  const re = /^([A-z]{3,10}[\s]?){3,}$/;
+
+  return re.test(name);
+}
