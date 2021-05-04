@@ -1,1 +1,4 @@
-export const GET_CART = 'GET_CART';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const REMOVE = 'REMOVE';
+export const CLEAR = 'CLEAR';

@@ -3,4 +3,7 @@ export { updateState } from './stateUpdate/stateUpdateActions';
 export { logIn } from './userAuth/userAuthActions';
 export { logOff } from './userAuth/userAuthActions';
 export { updateStateUsers } from './stateUsersUpdate/stateUsersUpdateActions';
-export { getCart } from './cart/cartActions';
+export { incrementItem } from './cart/cartActions';
+export { decrementItem } from './cart/cartActions';
+export { clearCart } from './cart/cartActions';
+export { removeItem } from './cart/cartActions';
