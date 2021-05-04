@@ -41,7 +41,7 @@ const ModalAddAddress = ({
       alert('Informe um CEP válido!');
       return;
     }
-    if (String(confirmCep) !== String(cep)) {
+    if (String(confirmCep).replace('-', '') !== String(cep).replace('-', '')) {
       alert('Confirme o novo CEP inserido para continuar');
       return;
     }
