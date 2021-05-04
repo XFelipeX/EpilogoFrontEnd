@@ -16,7 +16,7 @@ export function validateCep(cep) {
 }
 
 export function validateNameClient(name) {
-  const re = /^([A-z]{3,10}[\s]?){3,}$/;
-
+  const re = /^(([A-z]{3,})[" "]([A-z]{3,}))([" "]([A-z]{3,})){0,}/;
+  console.log(re.test(name));
   return re.test(name);
 }

@@ -40,7 +40,7 @@ const ModalEditPersonal = ({ setShowEditPersonal, account }) => {
       });
       const response = await fetch(url, options);
       const json = await response.json();
-
+      console.log(response);
       if (json.error) {
         console.log(json);
         alert('houve um erro verifique o console');
