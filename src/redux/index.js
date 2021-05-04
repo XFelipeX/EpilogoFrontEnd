@@ -3,3 +3,4 @@ export { updateState } from './stateUpdate/stateUpdateActions';
 export { logIn } from './userAuth/userAuthActions';
 export { logOff } from './userAuth/userAuthActions';
 export { updateStateUsers } from './stateUsersUpdate/stateUsersUpdateActions';
+export { getCart } from './cart/cartActions';
