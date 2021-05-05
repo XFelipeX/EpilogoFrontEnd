@@ -28,7 +28,7 @@ const cartReducer = (state = initialState, action) => {
           ...state,
           products: [...state.products, existItem[0]],
           amount: (state.amount += 1),
-          subtotal: (state.subtotal += existItem[0].price),
+          subtotal: +(state.subtotal += existItem[0].price).toFixed(2),
         };
       }
 
@@ -38,7 +38,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         products: [...state.products, action.item],
         amount: (state.amount += 1),
-        subtotal: (state.subtotal += action.item.price),
+        subtotal: +(state.subtotal += action.item.price).toFixed(2),
       };
     case DECREMENT:
       const item = state.products.filter(
@@ -55,7 +55,7 @@ const cartReducer = (state = initialState, action) => {
           ...state,
           products: [...state.products, item[0]],
           amount: (state.amount -= 1),
-          subtotal: (state.subtotal -= item[0].price),
+          subtotal: +(state.subtotal -= item[0].price).toFixed(2),
         };
       }
       return { ...state };
@@ -69,8 +69,8 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         amount: state.amount - itemRemove[0].quantity,
-        subtotal: (state.subtotal -=
-          itemRemove[0].price * itemRemove[0].quantity),
+        subtotal: +(state.subtotal -=
+          itemRemove[0].price * itemRemove[0].quantity).toFixed(2),
       };
     case CLEAR:
       state = initialState;

@@ -13,6 +13,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const Header = () => {
   const { permissions } = useSelector((state) => state);
+  const { stateCart } = useSelector((state) => state);
   const history = useHistory();
   const dispatch = useDispatch();
   console.log(permissions);
@@ -90,10 +91,14 @@ const Header = () => {
               <CgLogOff size={20} />
             </Link>
           )}
-          {permissions.id !== -1 && permissions.typeAccount === 2 && (
-            <Link to="/carrinho" className={styles.cart}>
-              <FaCartArrowDown size={35} />
-            </Link>
+
+          {permissions.typeAccount === 2 && (
+            <div className={styles.cartArea}>
+              <Link to="/carrinho" className={styles.cart}>
+                <FaCartArrowDown size={35} />
+              </Link>
+              <span className={styles.amount}>{stateCart.amount}</span>
+            </div>
           )}
         </div>
       </nav>
