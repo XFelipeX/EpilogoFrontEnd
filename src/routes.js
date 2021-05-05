@@ -8,6 +8,7 @@ import Users from './components/pages/Users/Users';
 import { useSelector } from 'react-redux';
 import CreateAcc from './components/pages/CreateAcc/CreateAcc';
 import MyAccount from './components/pages/MyAccount/MyAccount';
+import Cart from './components/pages/Cart/Cart';
 
 const PrivateRoute = ({ component: Component, typeAccount, ...rest }) => (
   <Route
@@ -44,6 +45,7 @@ const Routes = () => {
         <Route path="/" exact component={Login} />
         <Route path="/principal" component={Main} />
         <Route path="/cadastro" component={CreateAcc} />
+        <Route path="/carrinho" component={Cart} />
         <PrivateRoute
           path="/produtos"
           component={Books}

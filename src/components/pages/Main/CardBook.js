@@ -65,7 +65,8 @@ const CardBook = ({ book, setShowDetailsBook }) => {
     });
   }, [book]);
 
-  function addCart(item) {
+  function addCart(item, image) {
+    item.img = image;
     dispatch(incrementItem(item));
   }
 
@@ -100,7 +101,7 @@ const CardBook = ({ book, setShowDetailsBook }) => {
       <button
         type="button"
         className={styles.addCartBtn}
-        onClick={() => addCart(book)}
+        onClick={() => addCart(book, image)}
       >
         <span>Comprar</span>
         <IconContext.Provider
