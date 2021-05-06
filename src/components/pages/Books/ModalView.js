@@ -4,12 +4,16 @@ import { GET_IMAGES_BOOK } from '../../../api';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import Carousel from './Carousel';
 import styles from './ModalView.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { incrementItem } from '../../../redux';
 
 const ModalView = ({ setBookView, bookView }) => {
   const [images, setImages] = React.useState([]);
   const [stars, setStars] = React.useState([]);
   const { permissions } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const domNode = useClickOutside(() => {
     setBookView(null);
   });
@@ -65,7 +69,14 @@ const ModalView = ({ setBookView, bookView }) => {
 
         <section className={styles.modalRight}>
           <h2 style={{ color: 'blue' }}>$ {bookView.price}</h2>
-          <button type="button" className={styles.btnPurchase}>
+          <button
+            type="button"
+            className={styles.btnPurchase}
+            onClick={() => {
+              history.push('/carrinho');
+              dispatch(incrementItem(bookView));
+            }}
+          >
             Comprar
           </button>
         </section>
