@@ -2,6 +2,7 @@ import { INCREMENT } from './cartTypes';
 import { DECREMENT } from './cartTypes';
 import { REMOVE } from './cartTypes';
 import { CLEAR } from './cartTypes';
+import { SHIPPING } from './cartTypes';
 
 export const incrementItem = (item) => {
   return {
@@ -28,5 +29,12 @@ export const clearCart = (item) => {
   return {
     type: CLEAR,
     item: item,
+  };
+};
+
+export const insertShipping = (value) => {
+  return {
+    type: SHIPPING,
+    value,
   };
 };

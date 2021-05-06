@@ -2,12 +2,13 @@ import { INCREMENT } from './cartTypes';
 import { DECREMENT } from './cartTypes';
 import { REMOVE } from './cartTypes';
 import { CLEAR } from './cartTypes';
+import { SHIPPING } from './cartTypes';
 
 const initialState = {
   products: [],
   amount: 0,
   subtotal: 0,
-  frete: 0,
+  shipping: 0,
   total: 0,
 };
 
@@ -74,6 +75,12 @@ const cartReducer = (state = initialState, action) => {
       };
     case CLEAR:
       state = initialState;
+      return { ...state };
+    case SHIPPING:
+      state.subtotal -= state.shipping;
+      state.shipping = action.value;
+      let sub = +(state.subtotal + action.value).toFixed(2);
+      state.subtotal = sub;
       return { ...state };
     default:
       return state;
