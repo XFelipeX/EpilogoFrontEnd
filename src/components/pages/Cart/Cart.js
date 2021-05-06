@@ -4,16 +4,58 @@ import styles from './Cart.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementItem, incrementItem, removeItem } from '../../../redux';
 import { useHistory } from 'react-router-dom';
-// import { calcularPrecoPrazo } from 'correios-brasil';
+import { validateCep } from '../../../utils/regexValidations';
+import { insertShipping } from '../../../redux/cart/cartActions';
+import { GET_ADDRESS_DELIVERY_BY_ACCOUNT } from '../../../api';
 
 const Cart = () => {
   const { stateCart } = useSelector((state) => state);
+  const { permissions } = useSelector((state) => state);
   const [products, setProducts] = React.useState([...stateCart.products]);
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(stateCart);
-
   const [cep, setCep] = React.useState('');
+
+  // Shipping types
+  const [shipping1, setShipping1] = React.useState('');
+  const [shipping2, setShipping2] = React.useState('');
+  const [shipping3, setShipping3] = React.useState('');
+  const [prices, setPrices] = React.useState([]);
+
+  React.useEffect(() => {
+    async function getAddressDelivery() {
+      try {
+        const { url, options } = GET_ADDRESS_DELIVERY_BY_ACCOUNT(
+          permissions.user.accountId,
+        );
+        const response = await fetch(url, options);
+        const json = await response.json();
+
+        if (json.error) {
+          console.log(json);
+          alert('houve um erro verifique o console');
+          return;
+        }
+
+        if (json[0] && json[0].error) {
+          console.log(json);
+          alert('houve um erro verifique o console');
+          return;
+        }
+
+        return json;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (permissions.id !== -1) {
+      getAddressDelivery().then((response) => {
+        simulateCalcShipping(response.object.cep);
+        setCep(response.object.cep);
+        alert('Cálculo de frete baseado em seu endereço de entrega atual');
+      });
+    }
+  }, [permissions.id, permissions.user.accountId]);
 
   React.useEffect(() => {
     const copyArray = stateCart.products;
@@ -37,21 +79,49 @@ const Cart = () => {
     dispatch(removeItem(item));
   }
 
-  function calcShipping(from) {
-    let args = {
-      sCepOrigem: '81200100',
-      sCepDestino: '21770200',
-      nVlPeso: '1',
-      nCdFormato: '1',
-      nVlComprimento: '20',
-      nVlAltura: '20',
-      nVlLargura: '20',
-      nCdServico: ['04014', '04510'],
-      nVlDiametro: '0',
+  function simulateCalcShipping(from) {
+    // Clear
+    alterShippings('', '', '');
+    dispatch(insertShipping(0));
+    if (!validateCep(from)) {
+      alert('Digite um CEP válido');
+      return;
+    }
+
+    const existPrice = prices.filter((item) => item.cep === from);
+
+    if (existPrice.length) {
+      setShipping1(existPrice[0].type1);
+      setShipping2(existPrice[0].type2);
+      setShipping3(existPrice[0].type3);
+      return;
+    }
+
+    const type1 = (Math.random() * 30 + 10).toFixed(2);
+    const type2 = (Math.random() * 60 + 20).toFixed(2);
+    const type3 = (Math.random() * 100 + 30).toFixed(2);
+
+    const object = {
+      cep: from,
+      type1,
+      type2,
+      type3,
     };
-    // calcularPrecoPrazo(args).then((response) => {
-    //   console.log(response);
-    // });
+
+    setPrices((oldarray) => [...oldarray, object]);
+    alterShippings(type1, type2, type3);
+  }
+
+  function alterShippings(type1, type2, type3) {
+    const check = document.getElementById('shippingType1');
+    if (check) {
+      document.getElementById('shippingType1').checked = false;
+      document.getElementById('shippingType2').checked = false;
+      document.getElementById('shippingType3').checked = false;
+    }
+    setShipping1(type1);
+    setShipping2(type2);
+    setShipping3(type3);
   }
 
   return (
@@ -110,46 +180,61 @@ const Cart = () => {
                   <button
                     type="button"
                     className={styles.btnCalcShipping}
-                    onClick={() => calcShipping(cep)}
+                    onClick={() => simulateCalcShipping(cep)}
                   >
                     Calcular Frete
                   </button>
                 </label>
-                <span className={styles.shippingOptions}>
-                  <label htmlFor="shippingType1">
-                    <input
-                      type="radio"
-                      name="shippingType"
-                      id="shippingType1"
-                    />
-                    Econômico
-                  </label>
-                  <label htmlFor="shippingType2">
-                    <input
-                      type="radio"
-                      name="shippingType"
-                      id="shippingType2"
-                    />
-                    Sedex
-                  </label>
-                  <label htmlFor="shippingType3">
-                    <input
-                      type="radio"
-                      name="shippingType"
-                      id="shippingType3"
-                    />
-                    PAC
-                  </label>
-                </span>
+                {shipping1 !== '' && shipping2 !== '' && shipping3 !== '' && (
+                  <span className={styles.shippingOptions}>
+                    <label htmlFor="shippingType1">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType1"
+                          onClick={() => dispatch(insertShipping(+shipping1))}
+                        />
+                        Econômico
+                      </span>
+                      <span>R$ {shipping1}</span>
+                    </label>
+                    <label htmlFor="shippingType2">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType2"
+                          onClick={() => dispatch(insertShipping(+shipping2))}
+                        />
+                        Sedex
+                      </span>
+                      <span>R$ {shipping2}</span>
+                    </label>
+                    <label htmlFor="shippingType3">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType3"
+                          onClick={() => dispatch(insertShipping(+shipping3))}
+                        />
+                        PAC
+                      </span>
+                      <span>R$ {shipping3}</span>
+                    </label>
+                  </span>
+                )}
               </div>
+
               <div className={styles.actionsInfo}>
                 <ul>
                   <li>Quantidade de itens {stateCart.amount}</li>
                   <li>
-                    Subtotal <span>R$ {stateCart.subtotal}</span>
+                    Frete <span>R$ {stateCart.shipping}</span>
                   </li>
                   <li>
-                    Total <span>R$ {stateCart.total}</span>
+                    Subtotal <span>R$ {stateCart.subtotal}</span>
                   </li>
                 </ul>
               </div>
@@ -162,7 +247,16 @@ const Cart = () => {
               >
                 Continuar Comprando
               </button>
-              <button type="button" className={styles.btnDone}>
+              <button
+                type="button"
+                className={styles.btnDone}
+                onClick={() => {
+                  if (permissions.id === -1) {
+                    alert('Entre com sua conta para efetuar o pedido');
+                    history.push('/');
+                  }
+                }}
+              >
                 Finalizar o Pedido
               </button>
             </article>

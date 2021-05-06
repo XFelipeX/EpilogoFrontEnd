@@ -94,7 +94,10 @@
 }
 
 .shippingOptions label {
+  width: 13rem;
   padding-bottom: 0.3rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .shippingOptions label input {
