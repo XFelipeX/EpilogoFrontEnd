@@ -30,14 +30,16 @@
   border-top: 1px solid #000;
   border-left: 1px solid #000;
   border-right: 1px solid #000;
+  overflow: auto;
 }
 
 .items {
   width: 100%;
   height: 100%;
-  background-color: rgba(235, 233, 185, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid #000;
   padding: 1.5rem;
+  overflow: auto;
 }
 
 .actionsArea {
@@ -60,15 +62,16 @@
 
 .items li {
   display: flex;
-  /* padding: 1rem 0; */
-  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  height: 15rem;
+  background-color: rgba(0, 0, 0, 0.1);
   color: #fff;
 }
 
 .imgArea {
   display: flex;
   justify-content: flex-start;
-  width: 20%;
+  width: 15%;
 }
 
 .imgArea img {
@@ -84,7 +87,12 @@
 }
 
 .infoArea span {
+  display: inline-block;
+}
+
+.infoArea span:first-child {
   width: 70%;
+  padding-right: 2rem;
 }
 
 .infoArea span:last-child {
@@ -132,7 +140,7 @@
 }
 
 .btnArea {
-  width: 40%;
+  width: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,4 +152,5 @@
   border: none;
   color: #fff;
   font-size: 1.1rem;
+  cursor: pointer;
 }

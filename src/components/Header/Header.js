@@ -94,35 +94,37 @@ const Header = () => {
 
           {permissions.typeAccount === 2 && (
             <div className={styles.cartArea}>
-              <span className={styles.details}>
-                <ul>
-                  {stateCart.products.map((product) => (
-                    <li key={product.id}>
-                      <span className={styles.imgCart}>
-                        <img
-                          src={`data:image/jpg;base64,${product.img}`}
-                          alt=""
-                        />
-                      </span>
-                      <span className={styles.titleCart}>
-                        {product.nameBook}
-                      </span>
-                      <span className={styles.quantityCart}>
-                        Qtd {product.quantity}
-                      </span>
-                      <span className={styles.priceCart}>
-                        R$ {product.price}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <div className={styles.bottomArea}>
-                  <span className={styles.subtotal}>
-                    Subtotal: {stateCart.subtotal}
-                  </span>
-                  <button type="button">Ir - Carrinho</button>
-                </div>
-              </span>
+              {stateCart.subtotal > 0 && (
+                <span className={styles.details}>
+                  <ul>
+                    {stateCart.products.map((product) => (
+                      <li key={product.id}>
+                        <span className={styles.imgCart}>
+                          <img
+                            src={`data:image/jpg;base64,${product.img}`}
+                            alt=""
+                          />
+                        </span>
+                        <span className={styles.titleCart}>
+                          {product.nameBook}
+                        </span>
+                        <span className={styles.quantityCart}>
+                          Qtd {product.quantity}
+                        </span>
+                        <span className={styles.priceCart}>
+                          R$ {product.price}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={styles.bottomArea}>
+                    <span className={styles.subtotal}>
+                      Subtotal: R$ {stateCart.subtotal}
+                    </span>
+                    <button type="button">Ir - Carrinho</button>
+                  </div>
+                </span>
+              )}
               <Link to="/carrinho" className={styles.cart}>
                 <FaCartArrowDown size={35} />
               </Link>
