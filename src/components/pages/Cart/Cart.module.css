@@ -256,7 +256,11 @@
   width: 45%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.btnArea span {
+  font-size: 1.3rem;
 }
 
 .btnArea button {

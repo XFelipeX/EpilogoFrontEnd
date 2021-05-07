@@ -21,6 +21,8 @@ const cartReducer = (state = initialState, action) => {
 
       if (existItem.length) {
         existItem[0].quantity += 1;
+        const total = +(existItem[0].total + existItem[0].price).toFixed(2);
+        existItem[0].total = total;
         state.products = state.products.filter(
           (product) => product.id !== existItem[0].id,
         );
@@ -34,6 +36,7 @@ const cartReducer = (state = initialState, action) => {
       }
 
       action.item.quantity = 1;
+      action.item.total = action.item.price;
 
       return {
         ...state,
@@ -48,6 +51,8 @@ const cartReducer = (state = initialState, action) => {
 
       if (item.length && item[0].quantity > 1) {
         item[0].quantity -= 1;
+        const total = +(item[0].total - item[0].price).toFixed(2);
+        item[0].total = total;
         state.products = state.products.filter(
           (product) => product.id !== item[0].id,
         );

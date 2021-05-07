@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { validateCep } from '../../../utils/regexValidations';
 import { insertShipping } from '../../../redux/cart/cartActions';
 import { GET_ADDRESS_DELIVERY_BY_ACCOUNT } from '../../../api';
+import PaymentModal from './PaymentModal';
 
 const Cart = () => {
   const { stateCart } = useSelector((state) => state);
@@ -21,6 +22,9 @@ const Cart = () => {
   const [shipping2, setShipping2] = React.useState('');
   const [shipping3, setShipping3] = React.useState('');
   const [prices, setPrices] = React.useState([]);
+
+  // Modals
+  const [showPaymentModal, setShowPaymentModal] = React.useState(false);
 
   React.useEffect(() => {
     async function getAddressDelivery() {
@@ -55,7 +59,7 @@ const Cart = () => {
         alert('Cálculo de frete baseado em seu endereço de entrega atual');
       });
     }
-  }, [permissions.id, permissions.user.accountId]);
+  }, [permissions.id, permissions.user.accountId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   React.useEffect(() => {
     const copyArray = stateCart.products;
@@ -127,6 +131,9 @@ const Cart = () => {
   return (
     <div className={styles.container}>
       <Header />
+      {showPaymentModal && (
+        <PaymentModal setShowPaymentModal={setShowPaymentModal} />
+      )}
       <div className={styles.content}>
         <h1 className={styles.title}>Carrinho</h1>
         <article className={styles.itemsArea}>
@@ -156,6 +163,7 @@ const Cart = () => {
                   </span>
                 </span>
                 <span className={styles.btnArea}>
+                  <span> Total: R$ {product.total}</span>
                   <button type="button" onClick={() => remove(product)}>
                     Remover
                   </button>
@@ -254,6 +262,8 @@ const Cart = () => {
                   if (permissions.id === -1) {
                     alert('Entre com sua conta para efetuar o pedido');
                     history.push('/');
+                  } else {
+                    setShowPaymentModal(true);
                   }
                 }}
               >
