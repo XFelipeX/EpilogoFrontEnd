@@ -1,0 +1,175 @@
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  width: 75rem;
+  height: 44rem;
+  background-color: var(--white);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr 70px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.modalTop {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: 1;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+}
+
+.card {
+  border-radius: 5px 0 0 0;
+}
+
+.ticket {
+  border: 0 5px 0 0;
+}
+
+.typeTicket {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card,
+.ticket {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.typePayment,
+.total {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.modalMiddle {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.middleLeft {
+  grid-column: 1;
+}
+
+@keyframes opacityAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.middleRight {
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.illustration {
+  max-width: 100%;
+  max-height: 100%;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.inputGroup label {
+  padding: 0.5rem 0;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label input {
+  margin-top: 0.4rem;
+  padding: 0.4rem;
+}
+
+.paymentOptions {
+  margin-top: 2rem;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.paymentOptions select {
+  padding: 0.4rem;
+  width: 10rem;
+}
+
+.paymentOptions option {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalBottom {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnDone,
+.btnBack,
+.typeTicket button {
+  cursor: pointer;
+  width: 12rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+}
+
+.btnDone {
+  background-color: var(--green);
+}
+
+.btnBack {
+  background-color: var(--red);
+  margin-left: 2rem;
+}
+
+.typeTicket button {
+  background-color: var(--blue-second);
+  animation: opacityAnime 0.5s forwards;
+}
