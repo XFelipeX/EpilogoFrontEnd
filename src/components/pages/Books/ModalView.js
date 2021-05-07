@@ -49,6 +49,11 @@ const ModalView = ({ setBookView, bookView }) => {
     getImagesBook().then((response) => setImages(response));
   }, [bookView, permissions.token]);
 
+  function addCart(item, image) {
+    item.img = image;
+    dispatch(incrementItem(item));
+  }
+
   return (
     <div className={styles.modalArea}>
       <div ref={domNode} className={styles.modal}>
@@ -74,7 +79,7 @@ const ModalView = ({ setBookView, bookView }) => {
             className={styles.btnPurchase}
             onClick={() => {
               history.push('/carrinho');
-              dispatch(incrementItem(bookView));
+              addCart(bookView, images[0].img);
             }}
           >
             Comprar
