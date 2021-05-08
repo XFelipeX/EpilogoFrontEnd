@@ -30,7 +30,12 @@ const PaymentModal = ({ setShowPaymentModal }) => {
           },
         ]);
       } else {
-        const aux = i < 10 ? +('0.0' + String(i)) : +('0.' + String(i));
+        // fess crescent
+        const aux = i < 10 ? +('0.0' + String(i - 2)) : +('0.' + String(i));
+
+        //fees pattern
+        // const aux = 0.04;
+
         const fees = +(total * Number(aux)).toFixed(2);
         liquid = +(total / i + fees).toFixed(2);
         setPortions((oldArray) => [
@@ -126,7 +131,9 @@ const PaymentModal = ({ setShowPaymentModal }) => {
                       portions.map((option) => (
                         <option value={option.qtd} key={option.qtd}>
                           {option.qtd} X R$ {option.total} &nbsp; - &nbsp;
-                          {option.fees ? ` ${option.fees} Juros` : 'S/Juros'}
+                          {option.fees
+                            ? ` ${option.qtd - 2}% Juros`
+                            : 'S/Juros'}
                         </option>
                       ))}
                   </select>

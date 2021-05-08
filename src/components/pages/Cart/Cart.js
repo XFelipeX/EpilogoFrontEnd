@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../Header/Header';
 import styles from './Cart.module.css';
+import { HiEmojiSad } from 'react-icons/hi';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementItem, incrementItem, removeItem } from '../../../redux';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +27,7 @@ const Cart = () => {
   // Modals
   const [showPaymentModal, setShowPaymentModal] = React.useState(false);
 
+  console.log(stateCart);
   React.useEffect(() => {
     async function getAddressDelivery() {
       try {
@@ -54,9 +56,11 @@ const Cart = () => {
     }
     if (permissions.id !== -1) {
       getAddressDelivery().then((response) => {
-        simulateCalcShipping(response.object.cep);
-        setCep(response.object.cep);
-        alert('Cálculo de frete baseado em seu endereço de entrega atual');
+        if (response.object && stateCart.products.length) {
+          simulateCalcShipping(response.object.cep);
+          setCep(response.object.cep);
+          alert('Cálculo de frete baseado em seu endereço de entrega atual');
+        }
       });
     }
   }, [permissions.id, permissions.user.accountId]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,6 +85,11 @@ const Cart = () => {
   }
   function remove(item) {
     dispatch(removeItem(item));
+    if (!stateCart.products.length) {
+      alterShippings('', '', '');
+      setCep('');
+      dispatch(insertShipping(0));
+    }
   }
 
   function simulateCalcShipping(from) {
@@ -135,9 +144,15 @@ const Cart = () => {
         <PaymentModal setShowPaymentModal={setShowPaymentModal} />
       )}
       <div className={styles.content}>
-        <h1 className={styles.title}>Carrinho</h1>
+        <h1 className={styles.title}>Meu Carrinho</h1>
         <article className={styles.itemsArea}>
           <ul className={styles.items}>
+            {!stateCart.products.length && (
+              <h1 className={styles.emptyCart}>
+                Você não possui itens no carrinho{' '}
+                <HiEmojiSad size={30} style={{ marginLeft: '1rem' }} />
+              </h1>
+            )}
             {products.map((product) => (
               <li key={product.id}>
                 <span className={styles.imgArea}>
@@ -188,7 +203,9 @@ const Cart = () => {
                   <button
                     type="button"
                     className={styles.btnCalcShipping}
-                    onClick={() => simulateCalcShipping(cep)}
+                    onClick={() => {
+                      if (stateCart.products.length) simulateCalcShipping(cep);
+                    }}
                   >
                     Calcular Frete
                   </button>
@@ -259,12 +276,12 @@ const Cart = () => {
                 type="button"
                 className={styles.btnDone}
                 onClick={() => {
+                  if (!stateCart.products.length) return;
                   if (permissions.id === -1) {
                     alert('Entre com sua conta para efetuar o pedido');
                     history.push('/');
-                  } else {
-                    setShowPaymentModal(true);
                   }
+                  setShowPaymentModal(true);
                 }}
               >
                 Finalizar o Pedido

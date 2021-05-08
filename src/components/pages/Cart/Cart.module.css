@@ -20,6 +20,17 @@
   font-weight: bold;
   font-style: italic;
   letter-spacing: 2px;
+  color: var(--black);
+}
+
+.emptyCart {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
 .itemsArea {
@@ -36,8 +47,7 @@
 .items {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid #000;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 1.5rem;
   overflow: auto;
 }
@@ -51,7 +61,7 @@
 .actions {
   width: 100%;
   height: 80%;
-  background-color: rgba(235, 233, 185, 0.5);
+  background-color: #dfdfe5;
   border-radius: 0 0 5px 5px;
   border-bottom: 1px solid #000;
   border-left: 1px solid #000;
@@ -177,8 +187,8 @@
   display: flex;
   padding: 1rem;
   height: 15rem;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #000;
 }
 
 .imgArea {

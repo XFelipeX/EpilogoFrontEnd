@@ -158,8 +158,8 @@
   position: absolute;
   margin-left: -20rem;
   width: 20rem;
-  height: 14rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  height: 15rem;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 5px 0 5px 5px;
   border: 1px dotted var(--black);
   overflow: auto;
@@ -169,19 +169,21 @@
 .details ul {
   overflow: auto;
   height: 80%;
-  background-color: rgb(235, 233, 185);
-  padding: 1rem;
+
   color: #000;
 }
 
 .details ul li {
+  background-color: rgba(255, 255, 255, 0.7);
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-top: 1px solid #000;
+  /* border-top: 1px solid #000; */
+  /* border-bottom: 1px solid #000; */
   flex-wrap: wrap;
+  padding: 1rem;
 }
 
 /* Hidden scrollbar */
@@ -219,6 +221,7 @@
 .subtotal {
   text-decoration: wavy;
   font-weight: bold;
+  color: #fff;
 }
 
 .bottomArea button {

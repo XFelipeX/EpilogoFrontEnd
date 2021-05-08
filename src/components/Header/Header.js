@@ -97,8 +97,13 @@ const Header = () => {
               {stateCart.subtotal > 0 && (
                 <span className={styles.details}>
                   <ul>
-                    {stateCart.products.map((product) => (
-                      <li key={product.id}>
+                    {stateCart.products.map((product, index) => (
+                      <li
+                        key={product.id}
+                        style={
+                          index % 2 === 0 ? { backgroundColor: '#dfdfe5' } : {}
+                        }
+                      >
                         <span className={styles.imgCart}>
                           <img
                             src={`data:image/jpg;base64,${product.img}`}
@@ -121,7 +126,12 @@ const Header = () => {
                     <span className={styles.subtotal}>
                       Subtotal: R$ {stateCart.subtotal}
                     </span>
-                    <button type="button">Ir - Carrinho</button>
+                    <button
+                      type="button"
+                      onClick={() => history.push('/carrinho')}
+                    >
+                      Ir - Carrinho
+                    </button>
                   </div>
                 </span>
               )}
