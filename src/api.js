@@ -346,6 +346,18 @@ export const GET_ADDRESS_DELIVERY_BY_ACCOUNT = (accountId) => {
   };
 };
 
+export const GET_ALL_ADDRESS_DELIVERY_BY_ACCOUNT = (accountId) => {
+  return {
+    url: `${baseUrl}/address/account/delivery/all/${accountId}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+};
+
 export const GET_CEP = (cep) => {
   return {
     url: `https://viacep.com.br/ws/${cep}/json/`,
