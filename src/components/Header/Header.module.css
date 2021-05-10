@@ -164,6 +164,7 @@
   border: 1px dotted var(--black);
   overflow: auto;
   padding: 1rem;
+  animation: opacityAnime 0.7s forwards;
 }
 
 .details ul {
@@ -247,4 +248,13 @@
 
 .imgCart img {
   max-width: 100%;
+}
+
+@keyframes opacityAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

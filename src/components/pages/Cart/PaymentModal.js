@@ -7,7 +7,7 @@ import { ReactComponent as Illustration2 } from '../../../assets/backPayment2.sv
 import { useSelector } from 'react-redux';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 
-const PaymentModal = ({ setShowPaymentModal }) => {
+const PaymentModal = ({ setShowPaymentModal, setShowAddressModal }) => {
   const [active, setActive] = React.useState('card');
   const { stateCart } = useSelector((state) => state);
   const [portions, setPortions] = React.useState([]);
@@ -158,7 +158,10 @@ const PaymentModal = ({ setShowPaymentModal }) => {
           <button
             type="button"
             className={styles.btnBack}
-            onClick={() => setShowPaymentModal(false)}
+            onClick={() => {
+              setShowPaymentModal(false);
+              setShowAddressModal(true);
+            }}
           >
             Voltar
           </button>

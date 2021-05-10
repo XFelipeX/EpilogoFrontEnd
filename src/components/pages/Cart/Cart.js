@@ -9,6 +9,7 @@ import { validateCep } from '../../../utils/regexValidations';
 import { insertShipping } from '../../../redux/cart/cartActions';
 import { GET_ADDRESS_DELIVERY_BY_ACCOUNT } from '../../../api';
 import PaymentModal from './PaymentModal';
+import AddressModal from './AddressModal';
 
 const Cart = () => {
   const { stateCart } = useSelector((state) => state);
@@ -26,6 +27,7 @@ const Cart = () => {
 
   // Modals
   const [showPaymentModal, setShowPaymentModal] = React.useState(false);
+  const [showAddressModal, setShowAddressModal] = React.useState(false);
 
   console.log(stateCart);
   React.useEffect(() => {
@@ -141,7 +143,16 @@ const Cart = () => {
     <div className={styles.container}>
       <Header />
       {showPaymentModal && (
-        <PaymentModal setShowPaymentModal={setShowPaymentModal} />
+        <PaymentModal
+          setShowPaymentModal={setShowPaymentModal}
+          setShowAddressModal={setShowAddressModal}
+        />
+      )}
+      {showAddressModal && (
+        <AddressModal
+          setShowAddressModal={setShowAddressModal}
+          setShowPaymentModal={setShowPaymentModal}
+        />
       )}
       <div className={styles.content}>
         <h1 className={styles.title}>Meu Carrinho</h1>
@@ -281,7 +292,8 @@ const Cart = () => {
                     alert('Entre com sua conta para efetuar o pedido');
                     history.push('/');
                   }
-                  setShowPaymentModal(true);
+                  // setShowPaymentModal(true);
+                  setShowAddressModal(true);
                 }}
               >
                 Finalizar o Pedido
