@@ -3,16 +3,24 @@ import styles from './AddressModal.module.css';
 import { GrCheckboxSelected } from 'react-icons/gr';
 import { BiAddToQueue } from 'react-icons/bi';
 import { ReactComponent as Illustration } from '../../../assets/backAdd.svg';
-import { GET_ALL_ADDRESS_DELIVERY_BY_ACCOUNT, GET_CEP } from '../../../api';
+import {
+  GET_ALL_ADDRESS_DELIVERY_BY_ACCOUNT,
+  GET_CEP,
+  POST_ADDRESS,
+} from '../../../api';
 import { useSelector } from 'react-redux';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import { BsMap } from 'react-icons/bs';
+import { validateCep } from '../../../utils/regexValidations';
+import { getDelivery } from '../../../redux';
+import { useDispatch } from 'react-redux';
 
 const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
   const [active, setActive] = React.useState('select');
   const [selected, setSelected] = React.useState({ address: {}, id: -1 });
   const [allAddressDelivery, setAllAddressDelivery] = React.useState([]);
   const { permissions } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   // Delivery Address
   const [cepDelivery, setCepDelivery] = React.useState('');
@@ -23,6 +31,7 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
   const [complementDelivery, setComplementDelivery] = React.useState('');
 
   async function findCep(value) {
+    if (!validateCep(value)) return alert('Digite um CEP válido');
     if (value !== '') {
       try {
         const { url, options } = GET_CEP(value);
@@ -33,6 +42,10 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
           alert('CEP não encontrado!');
           return;
         }
+
+        setLocalDelivery(json.localidade);
+        setPublicDelivery(json.logradouro);
+        setUfDelivery(json.uf);
         console.log(json);
         return json;
       } catch (error) {
@@ -40,6 +53,45 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
         alert('Houve um erro ao puxar este cep');
         return null;
       }
+    }
+  }
+
+  async function saveAddress() {
+    try {
+      const { url, options } = POST_ADDRESS(
+        {
+          publicArea: publicDelivery,
+          cep: cepDelivery,
+          uf: ufDelivery,
+          number: +numberDelivery,
+          local: localDelivery,
+          complement: complementDelivery,
+          type: 'C',
+          status: 0,
+          accountId: permissions.user.accountId,
+        },
+        2, //typeAccount
+      );
+      const response = await fetch(url, options);
+      const json = await response.json();
+
+      if (json.error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      if (json[0] && json[0].error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      alert('Seu endereço de entrega foi criado com sucesso');
+      console.log(json);
+      return json;
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -73,13 +125,49 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
     getAllAddressDelivery().then((response) => {
       if (response.object) {
         setAllAddressDelivery([...response.object]);
+
+        // Address Active
+        response.object.forEach((address) => {
+          console.log(address);
+          if (address.status === 1) {
+            setSelected({ address: address, id: address.id });
+          }
+        });
       }
     });
-  }, [permissions.user.accountId]);
+  }, [permissions.user.accountId, active]);
 
   const domNode = useClickOutside(() => {
     setShowAddressModal(false);
   });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (validateFields()) {
+      saveAddress().then((response) => {
+        if (response.object) {
+          clear();
+          return;
+        }
+      });
+    }
+  }
+
+  function validateFields() {
+    if (publicDelivery === '' || ufDelivery === '' || localDelivery === '')
+      return alert('Busque seu CEP para cadastar o endereço');
+    return true;
+  }
+
+  function clear() {
+    setPublicDelivery('');
+    setUfDelivery('');
+    setCepDelivery('');
+    setLocalDelivery('');
+    setNumberDelivery('');
+    setComplementDelivery('');
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.modal} ref={domNode}>
@@ -139,95 +227,104 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
             </>
           ) : (
             <div className={styles.createAddressArea}>
-              <article className={styles.inputGroup}>
-                <span>
-                  <label htmlFor="cep-delivery-address">
-                    CEP
-                    <input
-                      type="text"
-                      name="cep-delivery-address"
-                      id="cep-delivery-address"
-                      required
-                      value={cepDelivery}
-                      onChange={({ target }) => setCepDelivery(target.value)}
-                    />
-                    <button
-                      type="button"
-                      className={styles.btnFindAddress}
-                      onClick={() => findCep(cepDelivery, 'delivery')}
-                    >
-                      Buscar <BsMap size={15} />
-                    </button>
-                  </label>
-                  <label htmlFor="public-delivery-address">
-                    Rua/Logradouro
-                    <input
-                      type="text"
-                      name="public-delivery-address"
-                      id="public-delivery-address"
-                      required
-                      readOnly
-                      value={publicDelivery}
-                      onChange={({ target }) => setPublicDelivery(target.value)}
-                    />
-                  </label>
-                </span>
-                <span>
-                  <label htmlFor="uf-delivery-address">
-                    UF
-                    <input
-                      type="text"
-                      name="uf-delivery-address"
-                      id="uf-delivery-address"
-                      required
-                      readOnly
-                      value={ufDelivery}
-                      onChange={({ target }) => setUfDelivery(target.value)}
-                    />
-                  </label>
-                  <label htmlFor="local-delivery-address">
-                    Localidade
-                    <input
-                      type="text"
-                      name="local-delivery-address"
-                      id="local-delivery-address"
-                      required
-                      readOnly
-                      value={localDelivery}
-                      onChange={({ target }) => setLocalDelivery(target.value)}
-                    />
-                  </label>
-                </span>
-                <span>
-                  <label htmlFor="number-delivery-address">
-                    Número
-                    <input
-                      min="0"
-                      type="number"
-                      name="number-delivery-address"
-                      id="number-delivery-address"
-                      required
-                      value={numberDelivery}
-                      onChange={({ target }) => setNumberDelivery(target.value)}
-                    />
-                  </label>
-                  <label htmlFor="complement-delivery-address">
-                    Complemento
-                    <input
-                      type="text"
-                      name="complement-delivery-address"
-                      id="complement-delivery-address"
-                      value={complementDelivery}
-                      onChange={({ target }) =>
-                        setComplementDelivery(target.value)
-                      }
-                    />
-                  </label>
-                </span>
-                <button type="button" className={styles.btnAdd}>
-                  Cadastrar
-                </button>
-              </article>
+              <form action="" method="POST" onSubmit={handleSubmit}>
+                <article className={styles.inputGroup}>
+                  <span>
+                    <label htmlFor="cep-delivery-address">
+                      CEP
+                      <input
+                        type="text"
+                        name="cep-delivery-address"
+                        id="cep-delivery-address"
+                        required
+                        value={cepDelivery}
+                        onChange={({ target }) => setCepDelivery(target.value)}
+                      />
+                      <button
+                        type="button"
+                        className={styles.btnFindAddress}
+                        onClick={() => findCep(cepDelivery)}
+                      >
+                        Buscar <BsMap size={15} />
+                      </button>
+                    </label>
+                    <label htmlFor="public-delivery-address">
+                      Rua/Logradouro
+                      <input
+                        type="text"
+                        name="public-delivery-address"
+                        id="public-delivery-address"
+                        required
+                        readOnly
+                        value={publicDelivery}
+                        onChange={({ target }) =>
+                          setPublicDelivery(target.value)
+                        }
+                      />
+                    </label>
+                  </span>
+                  <span>
+                    <label htmlFor="uf-delivery-address">
+                      UF
+                      <input
+                        type="text"
+                        name="uf-delivery-address"
+                        id="uf-delivery-address"
+                        required
+                        readOnly
+                        value={ufDelivery}
+                        onChange={({ target }) => setUfDelivery(target.value)}
+                      />
+                    </label>
+                    <label htmlFor="local-delivery-address">
+                      Localidade
+                      <input
+                        type="text"
+                        name="local-delivery-address"
+                        id="local-delivery-address"
+                        required
+                        readOnly
+                        value={localDelivery}
+                        onChange={({ target }) =>
+                          setLocalDelivery(target.value)
+                        }
+                      />
+                    </label>
+                  </span>
+                  <span>
+                    <label htmlFor="number-delivery-address">
+                      N°
+                      <input
+                        min="0"
+                        max="100000"
+                        type="number"
+                        name="number-delivery-address"
+                        id="number-delivery-address"
+                        required
+                        value={numberDelivery}
+                        onChange={({ target }) =>
+                          setNumberDelivery(target.value)
+                        }
+                      />
+                    </label>
+                    <label htmlFor="complement-delivery-address">
+                      Complemento
+                      <input
+                        type="text"
+                        name="complement-delivery-address"
+                        id="complement-delivery-address"
+                        value={complementDelivery}
+                        onChange={({ target }) =>
+                          setComplementDelivery(target.value)
+                        }
+                      />
+                    </label>
+                  </span>
+                  <button type="submit" className={styles.btnAdd}>
+                    Cadastrar
+                  </button>
+                </article>
+              </form>
             </div>
           )}
 
@@ -251,6 +348,7 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
                 return alert('Selecione um endereço para continuar');
               setShowAddressModal(false);
               setShowPaymentModal(true);
+              dispatch(getDelivery(selected));
             }}
           >
             Continuar

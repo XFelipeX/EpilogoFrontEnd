@@ -183,7 +183,45 @@
   color: #fff;
 }
 
+.typeTicket {
+  display: flex;
+  flex-direction: column;
+}
+
+.typeTicket p {
+  padding-top: 2rem;
+  font-size: 1.3rem;
+}
+
 .typeTicket button {
   background-color: var(--blue-second);
   animation: opacityAnime 0.5s forwards;
+}
+
+.shippingOptions {
+  width: 100%;
+  margin-top: 2rem;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.shippingOptions p {
+  padding-bottom: 1rem;
+}
+
+.shippingOptions span label {
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  /* flex-direction: column; */
+}
+
+.shippingOptions span label span {
+  display: flex;
+  align-items: center;
+}
+
+.shippingOptions span label span input {
+  margin-right: 0.5rem;
 }

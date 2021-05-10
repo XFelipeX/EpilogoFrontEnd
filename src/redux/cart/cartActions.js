@@ -1,8 +1,14 @@
-import { INCREMENT } from './cartTypes';
-import { DECREMENT } from './cartTypes';
-import { REMOVE } from './cartTypes';
-import { CLEAR } from './cartTypes';
-import { SHIPPING } from './cartTypes';
+import {
+  INCREMENT,
+  DECREMENT,
+  REMOVE,
+  CLEAR,
+  SHIPPING,
+  TOTAL,
+  DELIVERY,
+  PAYMENT,
+  ADDTOTAL,
+} from './cartTypes';
 
 export const incrementItem = (item) => {
   return {
@@ -36,5 +42,32 @@ export const insertShipping = (value) => {
   return {
     type: SHIPPING,
     value,
+  };
+};
+
+export const getTotal = () => {
+  return {
+    type: TOTAL,
+  };
+};
+
+export const insertTotal = (value) => {
+  return {
+    type: ADDTOTAL,
+    value,
+  };
+};
+
+export const getDelivery = (item) => {
+  return {
+    type: DELIVERY,
+    item: item,
+  };
+};
+
+export const getPayment = (item) => {
+  return {
+    type: PAYMENT,
+    item: item,
   };
 };

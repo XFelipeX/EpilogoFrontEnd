@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { decrementItem, incrementItem, removeItem } from '../../../redux';
 import { useHistory } from 'react-router-dom';
 import { validateCep } from '../../../utils/regexValidations';
-import { insertShipping } from '../../../redux/cart/cartActions';
+import { getTotal, insertShipping } from '../../../redux/';
 import { GET_ADDRESS_DELIVERY_BY_ACCOUNT } from '../../../api';
 import PaymentModal from './PaymentModal';
 import AddressModal from './AddressModal';
@@ -112,9 +112,9 @@ const Cart = () => {
       return;
     }
 
-    const type1 = (Math.random() * 30 + 10).toFixed(2);
-    const type2 = (Math.random() * 60 + 20).toFixed(2);
-    const type3 = (Math.random() * 100 + 30).toFixed(2);
+    const type1 = (Math.random() * 10 + 10).toFixed(2);
+    const type2 = (Math.random() * 30 + 10).toFixed(2);
+    const type3 = (Math.random() * 40 + 10).toFixed(2);
 
     const object = {
       cep: from,
@@ -139,6 +139,10 @@ const Cart = () => {
     setShipping3(type3);
   }
 
+  React.useEffect(() => {
+    dispatch(getTotal());
+  }, [dispatch, stateCart.subtotal]);
+
   return (
     <div className={styles.container}>
       <Header />
@@ -146,6 +150,10 @@ const Cart = () => {
         <PaymentModal
           setShowPaymentModal={setShowPaymentModal}
           setShowAddressModal={setShowAddressModal}
+          simulateCalcShipping={simulateCalcShipping}
+          shipping1={shipping1}
+          shipping2={shipping2}
+          shipping3={shipping3}
         />
       )}
       {showAddressModal && (
@@ -270,7 +278,7 @@ const Cart = () => {
                     Frete <span>R$ {stateCart.shipping}</span>
                   </li>
                   <li>
-                    Subtotal <span>R$ {stateCart.subtotal}</span>
+                    Subtotal <span>R$ {stateCart.total}</span>
                   </li>
                 </ul>
               </div>

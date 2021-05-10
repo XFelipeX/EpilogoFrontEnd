@@ -81,7 +81,7 @@
 
 .listAddress {
   padding: 1rem;
-  width: 100%;
+  width: 90%;
   max-height: 90%;
   display: flex;
   justify-content: space-between;
@@ -91,10 +91,14 @@
   transition: all 0.3s;
 }
 
+.listAddress li:first-child {
+  width: 33.32%;
+}
+
 .listAddress li {
-  width: 16.66%;
+  width: 13.33%;
   word-break: break-all;
-  padding-top: 1rem;
+  padding: 1rem 0;
   color: #fff;
 }
 

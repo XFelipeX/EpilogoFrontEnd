@@ -3,3 +3,7 @@ export const DECREMENT = 'DECREMENT';
 export const REMOVE = 'REMOVE';
 export const CLEAR = 'CLEAR';
 export const SHIPPING = 'SHIPPING';
+export const TOTAL = 'TOTAL';
+export const ADDTOTAL = 'ADDTOTAL';
+export const DELIVERY = 'DELIVERY';
+export const PAYMENT = 'PAYMENT';
