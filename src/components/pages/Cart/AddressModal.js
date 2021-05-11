@@ -123,16 +123,17 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
     }
 
     getAllAddressDelivery().then((response) => {
-      if (response.object) {
+      if (response && response.object) {
         setAllAddressDelivery([...response.object]);
-
-        // Address Active
-        response.object.forEach((address) => {
-          console.log(address);
-          if (address.status === 1) {
-            setSelected({ address: address, id: address.id });
-          }
-        });
+        if (active === 'select') {
+          // Address Active
+          response.object.forEach((address) => {
+            console.log(address);
+            if (address.status === 1) {
+              setSelected({ address: address, id: address.id });
+            }
+          });
+        }
       }
     });
   }, [permissions.user.accountId, active]);
@@ -167,6 +168,10 @@ const AddressModal = ({ setShowAddressModal, setShowPaymentModal }) => {
     setNumberDelivery('');
     setComplementDelivery('');
   }
+
+  React.useEffect(() => {
+    if (active === 'create') setSelected({ address: {}, id: -1 });
+  }, [active]);
 
   return (
     <div className={styles.container}>
