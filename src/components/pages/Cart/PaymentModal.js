@@ -104,18 +104,33 @@ const PaymentModal = ({
   }, [active, dispatch]);
 
   function handleSubmit() {
+    let payment;
     if (active === 'card' && verifyFields()) {
       const optionSelected = portions.filter(
         (portion) => portion.qtd === +options,
       );
-      console.log(optionSelected);
-      const payment = `Crédito ${optionSelected[0].qtd}X de R$ ${optionSelected[0].total}`;
+      payment = {
+        descripion: `Crédito ${optionSelected[0].qtd}X de R$ ${optionSelected[0].total}`,
+        shipping: stateCart.shipping,
+      };
       dispatch(insertTotal(subTotal));
       dispatch(getPayment(payment));
-
-      console.log(portions);
-      console.log(stateCart);
+      return;
     }
+
+    if (stateCart.shipping === 0) return alert('Selecione uma forma de frete');
+
+    const optionSelected = portions.filter(
+      (portion) => portion.qtd === +options,
+    );
+    payment = {
+      descripion: `À vista no boleto por R$ ${optionSelected[0].total}`,
+      shipping: stateCart.shipping,
+    };
+
+    dispatch(insertTotal(subTotal));
+    dispatch(getPayment(payment));
+    return;
   }
 
   function verifyFields() {
@@ -203,39 +218,6 @@ const PaymentModal = ({
                     </label>
                   </span>
                 </article>
-
-                <article className={styles.paymentOptions}>
-                  <select
-                    name="portion"
-                    id="portion"
-                    value={options}
-                    onChange={({ target }) => {
-                      const total = portions.filter(
-                        (option) => +option.qtd === +target.value,
-                      );
-                      setOptions(target.value);
-                      setSubTotal(total[0].liquid);
-                    }}
-                  >
-                    {portions &&
-                      portions.map((option) => (
-                        <option value={option.qtd} key={option.qtd}>
-                          {option.qtd} X R$ {option.total} &nbsp; - &nbsp;
-                          {option.fees ? ` 4% Juros` : 'S/Juros'}
-                        </option>
-                      ))}
-                  </select>
-                  <p className={styles.total}>
-                    Total R$ {total}{' '}
-                    {stateCart.shipping > 0 &&
-                      '+ ' +
-                        stateCart.shipping +
-                        ' Frete' +
-                        ' = R$ ' +
-                        stateCart.total}
-                  </p>
-                </article>
-
                 <article className={styles.shippingOptions}>
                   <p>Selecione o frete</p>
                   <span>
@@ -277,11 +259,91 @@ const PaymentModal = ({
                     </label>
                   </span>
                 </article>
+                <article className={styles.paymentOptions}>
+                  <select
+                    name="portion"
+                    id="portion"
+                    value={options}
+                    onChange={({ target }) => {
+                      const total = portions.filter(
+                        (option) => +option.qtd === +target.value,
+                      );
+                      setOptions(target.value);
+                      setSubTotal(total[0].liquid);
+                    }}
+                  >
+                    {portions &&
+                      portions.map((option) => (
+                        <option value={option.qtd} key={option.qtd}>
+                          {option.qtd} X R$ {option.total} &nbsp; - &nbsp;
+                          {option.fees ? ` 4% Juros` : 'S/Juros'}
+                        </option>
+                      ))}
+                  </select>
+                  <p className={styles.total}>
+                    Total R$ {total}{' '}
+                    {stateCart.shipping > 0 &&
+                      '+ (R$ ' +
+                        stateCart.shipping +
+                        ' Frete)' +
+                        ' = R$ ' +
+                        stateCart.total}
+                  </p>
+                </article>
               </>
             ) : (
               <article className={styles.typeTicket}>
                 <button type="button">Imprimir Boleto</button>
-                <p>Total R$ {stateCart.total}</p>
+                <article className={styles.shippingOptions}>
+                  <p>Selecione o frete</p>
+                  <span>
+                    <label htmlFor="shippingType1">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType1"
+                          onClick={() => dispatch(insertShipping(+shipping1))}
+                        />
+                        Econômico
+                      </span>
+                      <span>R$ {shipping1}</span>
+                    </label>
+                    <label htmlFor="shippingType2">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType2"
+                          onClick={() => dispatch(insertShipping(+shipping2))}
+                        />
+                        Sedex
+                      </span>
+                      <span>R$ {shipping2}</span>
+                    </label>
+                    <label htmlFor="shippingType3">
+                      <span>
+                        <input
+                          type="radio"
+                          name="shippingType"
+                          id="shippingType3"
+                          onClick={() => dispatch(insertShipping(+shipping3))}
+                        />
+                        PAC
+                      </span>
+                      <span>R$ {shipping3}</span>
+                    </label>
+                  </span>
+                </article>
+                <p>
+                  Total R$ {total}{' '}
+                  {stateCart.shipping > 0 &&
+                    '+ (R$ ' +
+                      stateCart.shipping +
+                      ' Frete)' +
+                      ' = R$ ' +
+                      stateCart.total}
+                </p>
               </article>
             )}
           </section>

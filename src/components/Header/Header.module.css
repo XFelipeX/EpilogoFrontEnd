@@ -188,7 +188,7 @@
 }
 
 /* Hidden scrollbar */
-::-webkit-scrollbar {
+.details ::-webkit-scrollbar {
   width: 0px;
 }
 

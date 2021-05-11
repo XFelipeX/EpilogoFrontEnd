@@ -58,7 +58,7 @@ const Cart = () => {
     }
     if (permissions.id !== -1) {
       getAddressDelivery().then((response) => {
-        if (response.object && stateCart.products.length) {
+        if (response && response.object && stateCart.products.length) {
           simulateCalcShipping(response.object.cep);
           setCep(response.object.cep);
           alert('Cálculo de frete baseado em seu endereço de entrega atual');

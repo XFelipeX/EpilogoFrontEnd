@@ -61,9 +61,13 @@
 
 .typePayment,
 .total {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
+}
+
+.total {
+  margin-top: 2.2rem;
 }
 
 .modalMiddle {
@@ -72,12 +76,16 @@
   background-color: rgba(0, 0, 0, 0.1);
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   grid-template-rows: 100%;
 }
 
 .middleLeft {
   grid-column: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 @keyframes opacityAnime {
@@ -102,6 +110,8 @@
 }
 
 .inputGroup {
+  margin-top: 1rem;
+  width: 50%;
   display: flex;
   flex-direction: column;
   animation: opacityAnime 0.5s forwards;
@@ -120,15 +130,16 @@
 }
 
 .paymentOptions {
-  margin-top: 2rem;
-  width: 80%;
+  width: 90%;
+  height: 40%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   animation: opacityAnime 0.5s forwards;
 }
 
 .paymentOptions select {
+  margin-top: 2rem;
   padding: 0.4rem;
   width: 10rem;
 }
@@ -191,6 +202,8 @@
 .typeTicket p {
   padding-top: 2rem;
   font-size: 1.3rem;
+  width: 100%;
+  text-align: left;
 }
 
 .typeTicket button {
@@ -199,8 +212,10 @@
 }
 
 .shippingOptions {
-  width: 100%;
-  margin-top: 2rem;
+  padding-top: 0.4rem;
+  margin-top: 1rem;
+  width: 50%;
+  height: 50%;
   animation: opacityAnime 0.5s forwards;
 }
 
