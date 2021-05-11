@@ -369,3 +369,34 @@ export const GET_CEP = (cep) => {
     },
   };
 };
+
+// Demand
+export const POST_DEMAND = (token, body) => {
+  return {
+    url: `${baseUrl}/demand`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+// Demand Itens
+
+export const POST_ITEM = (token, body) => {
+  return {
+    url: `${baseUrl}/item`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
