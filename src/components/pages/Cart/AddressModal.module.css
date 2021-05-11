@@ -241,3 +241,20 @@
   margin-right: 4.5rem;
   cursor: pointer;
 }
+
+/* ScrollBar */
+
+.modalMiddle .selectAddress::-webkit-scrollbar {
+  background: #c8c8ce;
+  width: 18px;
+}
+
+.modalMiddle .selectAddress::-webkit-scrollbar-thumb {
+  background: #c8c8ce;
+  border-left: 4px solid rgba(0, 0, 0, 0.1);
+  border-right: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.modalMiddle .selectAddress::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}

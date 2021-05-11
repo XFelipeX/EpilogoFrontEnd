@@ -12,6 +12,7 @@ import { getPayment, insertShipping, insertTotal } from '../../../redux';
 const PaymentModal = ({
   setShowPaymentModal,
   setShowAddressModal,
+  setShowConfirmDemand,
   shipping1,
   shipping2,
   shipping3,
@@ -22,7 +23,7 @@ const PaymentModal = ({
   const [portions, setPortions] = React.useState([]);
   const [options, setOptions] = React.useState('1');
   const dispatch = useDispatch();
-  const [subTotal, setSubTotal] = React.useState('');
+  // const [subTotal, setSubTotal] = React.useState('');
   const [total, setTotal] = React.useState(stateCart.subtotal);
 
   // Form
@@ -34,7 +35,7 @@ const PaymentModal = ({
   React.useEffect(() => {
     const total = stateCart.subtotal;
     setPortions([]);
-    setSubTotal(total);
+
     for (let i = 1; i <= 12; i++) {
       let liquid = 0;
       if (i < 6) {
@@ -48,14 +49,11 @@ const PaymentModal = ({
           },
         ]);
       } else {
-        // fess crescent
-        // const aux = i < 10 ? +('0.0' + String(i - 3)) : +('0.' + String(i));
-
         //fees pattern
         const aux = 0.04;
 
         const fees = +(total * Number(aux)).toFixed(2);
-        liquid = +(+(total / i).toFixed(2) + fees).toFixed(2);
+        liquid = +(+(total / i) + fees).toFixed(2);
         setPortions((oldArray) => [
           ...oldArray,
           {
@@ -109,28 +107,41 @@ const PaymentModal = ({
       const optionSelected = portions.filter(
         (portion) => portion.qtd === +options,
       );
+      const firstPay =
+        optionSelected[0].qtd > 5
+          ? (optionSelected[0].total + stateCart.shipping).toFixed(2)
+          : null;
       payment = {
-        descripion: `Crédito ${optionSelected[0].qtd}X de R$ ${optionSelected[0].total}`,
+        description: `Crédito ${optionSelected[0].qtd}x de R$ ${optionSelected[0].total}`,
         shipping: stateCart.shipping,
+        firstPay,
       };
-      dispatch(insertTotal(subTotal));
       dispatch(getPayment(payment));
+      setShowPaymentModal(false);
+      setShowConfirmDemand(true);
       return;
     }
 
-    if (stateCart.shipping === 0) return alert('Selecione uma forma de frete');
+    if (active === 'ticket') {
+      if (stateCart.shipping === 0)
+        return alert('Selecione uma forma de frete');
 
-    const optionSelected = portions.filter(
-      (portion) => portion.qtd === +options,
-    );
-    payment = {
-      descripion: `À vista no boleto por R$ ${optionSelected[0].total}`,
-      shipping: stateCart.shipping,
-    };
+      const optionSelected = portions.filter(
+        (portion) => portion.qtd === +options,
+      );
+      const total = (optionSelected[0].total + stateCart.shipping).toFixed(2);
+      const firstPay = null;
+      payment = {
+        description: `À vista no boleto por R$ ${total}`,
+        shipping: stateCart.shipping,
+        firstPay,
+      };
 
-    dispatch(insertTotal(subTotal));
-    dispatch(getPayment(payment));
-    return;
+      dispatch(getPayment(payment));
+      setShowPaymentModal(false);
+      setShowConfirmDemand(true);
+      return;
+    }
   }
 
   function verifyFields() {
@@ -265,11 +276,7 @@ const PaymentModal = ({
                     id="portion"
                     value={options}
                     onChange={({ target }) => {
-                      const total = portions.filter(
-                        (option) => +option.qtd === +target.value,
-                      );
                       setOptions(target.value);
-                      setSubTotal(total[0].liquid);
                     }}
                   >
                     {portions &&

@@ -10,6 +10,7 @@ import { getTotal, insertShipping } from '../../../redux/';
 import { GET_ADDRESS_DELIVERY_BY_ACCOUNT } from '../../../api';
 import PaymentModal from './PaymentModal';
 import AddressModal from './AddressModal';
+import ConfirmDemandModal from './ConfirmDemandModal';
 
 const Cart = () => {
   const { stateCart } = useSelector((state) => state);
@@ -28,8 +29,8 @@ const Cart = () => {
   // Modals
   const [showPaymentModal, setShowPaymentModal] = React.useState(false);
   const [showAddressModal, setShowAddressModal] = React.useState(false);
+  const [showConfirmDemand, setShowConfirmDemand] = React.useState(false);
 
-  console.log(stateCart);
   React.useEffect(() => {
     async function getAddressDelivery() {
       try {
@@ -150,6 +151,7 @@ const Cart = () => {
         <PaymentModal
           setShowPaymentModal={setShowPaymentModal}
           setShowAddressModal={setShowAddressModal}
+          setShowConfirmDemand={setShowConfirmDemand}
           simulateCalcShipping={simulateCalcShipping}
           shipping1={shipping1}
           shipping2={shipping2}
@@ -159,6 +161,12 @@ const Cart = () => {
       {showAddressModal && (
         <AddressModal
           setShowAddressModal={setShowAddressModal}
+          setShowPaymentModal={setShowPaymentModal}
+        />
+      )}
+      {showConfirmDemand && (
+        <ConfirmDemandModal
+          setShowConfirmDemand={setShowConfirmDemand}
           setShowPaymentModal={setShowPaymentModal}
         />
       )}
@@ -182,8 +190,8 @@ const Cart = () => {
                   <span>R$ {product.price}</span>
                 </span>
                 <span className={styles.quantity}>
-                  <span className={styles.more} onClick={() => more(product)}>
-                    +
+                  <span className={styles.less} onClick={() => less(product)}>
+                    -
                   </span>
                   <input
                     type="number"
@@ -192,8 +200,8 @@ const Cart = () => {
                     value={product.quantity}
                     readOnly
                   />
-                  <span className={styles.less} onClick={() => less(product)}>
-                    -
+                  <span className={styles.more} onClick={() => more(product)}>
+                    +
                   </span>
                 </span>
                 <span className={styles.btnArea}>
