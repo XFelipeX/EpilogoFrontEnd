@@ -12,3 +12,4 @@ export { getDelivery } from './cart/cartActions';
 export { getPayment } from './cart/cartActions';
 export { getTotal } from './cart/cartActions';
 export { insertTotal } from './cart/cartActions';
+export { getLastDemand } from './cart/cartActions';

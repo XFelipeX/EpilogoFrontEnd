@@ -8,6 +8,7 @@ import {
   DELIVERY,
   PAYMENT,
   ADDTOTAL,
+  LASTDEMAND,
 } from './cartTypes';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   total: 0,
   delivery: {},
   payment: '',
+  lastDemand: {},
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -106,6 +108,9 @@ const cartReducer = (state = initialState, action) => {
       return { ...state };
     case PAYMENT:
       state.payment = action.item;
+      return { ...state };
+    case LASTDEMAND:
+      state.lastDemand = action.item;
       return { ...state };
     default:
       return state;

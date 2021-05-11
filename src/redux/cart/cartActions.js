@@ -8,6 +8,7 @@ import {
   DELIVERY,
   PAYMENT,
   ADDTOTAL,
+  LASTDEMAND,
 } from './cartTypes';
 
 export const incrementItem = (item) => {
@@ -68,6 +69,13 @@ export const getDelivery = (item) => {
 export const getPayment = (item) => {
   return {
     type: PAYMENT,
+    item: item,
+  };
+};
+
+export const getLastDemand = (item) => {
+  return {
+    type: LASTDEMAND,
     item: item,
   };
 };

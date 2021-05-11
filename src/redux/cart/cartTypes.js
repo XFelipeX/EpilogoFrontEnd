@@ -7,3 +7,4 @@ export const TOTAL = 'TOTAL';
 export const ADDTOTAL = 'ADDTOTAL';
 export const DELIVERY = 'DELIVERY';
 export const PAYMENT = 'PAYMENT';
+export const LASTDEMAND = 'LASTDEMAND';
