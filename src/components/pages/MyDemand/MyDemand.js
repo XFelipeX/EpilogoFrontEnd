@@ -3,6 +3,7 @@ import styles from './MyDemand.module.css';
 import { useSelector } from 'react-redux';
 import Header from '../../Header/Header';
 import { GET_ALL_DEMAND_BY_ACCOUNT_ID } from '../../../api';
+import { formatDate } from '../../../utils/date';
 
 const MyDemand = () => {
   const { permissions } = useSelector((state) => state);
@@ -68,7 +69,7 @@ const MyDemand = () => {
                 demands.map((demand) => (
                   <tr key={demand.id}>
                     <td>{demand.id}</td>
-                    <td>{demand.date}</td>
+                    <td>{formatDate(demand.date)}</td>
                     <td>{demand.status}</td>
                     <td>R$ {demand.total}</td>
                     <td>
