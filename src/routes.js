@@ -36,6 +36,23 @@ const PrivateRouteClient = ({ component: Component, typeAccount, ...rest }) => (
   />
 );
 
+const PrivateRouteClientCart = ({
+  component: Component,
+  typeAccount,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={() =>
+      typeAccount === 2 ? (
+        <Component />
+      ) : (
+        <Redirect to={{ pathname: '/produtos' }} />
+      )
+    }
+  />
+);
+
 const Routes = () => {
   const { permissions } = useSelector((state) => state);
 
@@ -45,7 +62,6 @@ const Routes = () => {
         <Route path="/" exact component={Login} />
         <Route path="/principal" component={Main} />
         <Route path="/cadastro" component={CreateAcc} />
-        <Route path="/carrinho" component={Cart} />
         <PrivateRoute
           path="/produtos"
           component={Books}
@@ -59,6 +75,11 @@ const Routes = () => {
         <PrivateRouteClient
           path="/minhaconta"
           component={MyAccount}
+          typeAccount={permissions.typeAccount}
+        />
+        <PrivateRouteClientCart
+          path="/carrinho"
+          component={Cart}
           typeAccount={permissions.typeAccount}
         />
       </Switch>

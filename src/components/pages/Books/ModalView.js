@@ -78,6 +78,7 @@ const ModalView = ({ setBookView, bookView }) => {
             type="button"
             className={styles.btnPurchase}
             onClick={() => {
+              if (permissions.typeAccount !== 2) return;
               history.push('/carrinho');
               addCart(bookView, images[0].img);
             }}
