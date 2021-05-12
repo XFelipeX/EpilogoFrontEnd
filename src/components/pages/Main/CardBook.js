@@ -72,19 +72,21 @@ const CardBook = ({ book, setShowDetailsBook }) => {
 
   return (
     <article className={` ${styles.card} `}>
-      {image === '' ? (
-        <ImgEmpty
-          onClick={() => setShowDetailsBook(book)}
-          className={` ${styles.image} `}
-        />
-      ) : (
-        <img
-          className={` ${styles.image} `}
-          src={`data:image/jpg;base64,${image}`}
-          alt=""
-          onClick={() => setShowDetailsBook(book)}
-        />
-      )}
+      <article className={styles.imageArea}>
+        {image === '' ? (
+          <ImgEmpty
+            onClick={() => setShowDetailsBook(book)}
+            className={` ${styles.image} `}
+          />
+        ) : (
+          <img
+            className={` ${styles.image} `}
+            src={`data:image/jpg;base64,${image}`}
+            alt=""
+            onClick={() => setShowDetailsBook(book)}
+          />
+        )}
+      </article>
 
       <article className={` ${styles.descriptionCard} `}>
         <h1
@@ -98,18 +100,20 @@ const CardBook = ({ book, setShowDetailsBook }) => {
           <b>R$ {book.price}</b>
         </h3>
       </article>
-      <button
-        type="button"
-        className={styles.addCartBtn}
-        onClick={() => addCart(book, image)}
-      >
-        <span>Comprar</span>
-        <IconContext.Provider
-          value={{ color: '#fff', size: '15px', width: '15%' }}
+      <article className={styles.btnArea}>
+        <button
+          type="button"
+          className={styles.addCartBtn}
+          onClick={() => addCart(book, image)}
         >
-          <FaCartArrowDown />
-        </IconContext.Provider>
-      </button>
+          <span>Comprar</span>
+          <IconContext.Provider
+            value={{ color: '#fff', size: '15px', width: '15%' }}
+          >
+            <FaCartArrowDown />
+          </IconContext.Provider>
+        </button>
+      </article>
     </article>
   );
 };

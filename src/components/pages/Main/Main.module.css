@@ -9,17 +9,32 @@
 
 .generalCards {
   margin: 2rem 0;
-  padding: 2rem;
-  height: 45rem;
+  padding: 0 2rem;
+  height: 90%;
   overflow: auto;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1.33%);
   justify-content: space-between;
   gap: 2rem;
-  background-color: rgba(176, 172, 97, 0.4);
+  background-color: transparent;
   border-radius: 3px;
-  box-shadow: 0px 0px 20px 0px #2b2b2b;
+  /* box-shadow: 0px 0px 20px 0px #2b2b2b; */
+}
+
+.generalCards::-webkit-scrollbar {
+  background: #7f7a68;
+  width: 14px;
+}
+
+.generalCards::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #7f7a68;
+  border-right: 4px solid #7f7a68;
+}
+
+.generalCards::-webkit-scrollbar-track {
+  background: #7f7a68;
 }
 
 .pageCards {
