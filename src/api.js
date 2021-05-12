@@ -385,6 +385,19 @@ export const POST_DEMAND = (token, body) => {
   };
 };
 
+export const GET_ALL_DEMAND_BY_ACCOUNT_ID = (token, accountId) => {
+  return {
+    url: `${baseUrl}/demand/account/${accountId}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
 // Demand Itens
 
 export const POST_ITEM = (token, body) => {

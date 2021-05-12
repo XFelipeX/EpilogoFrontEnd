@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import CreateAcc from './components/pages/CreateAcc/CreateAcc';
 import MyAccount from './components/pages/MyAccount/MyAccount';
 import Cart from './components/pages/Cart/Cart';
+import MyDemand from './components/pages/MyDemand/MyDemand';
 
 const PrivateRoute = ({ component: Component, typeAccount, ...rest }) => (
   <Route
@@ -75,6 +76,11 @@ const Routes = () => {
         <PrivateRouteClient
           path="/minhaconta"
           component={MyAccount}
+          typeAccount={permissions.typeAccount}
+        />
+        <PrivateRouteClient
+          path="/pedidos"
+          component={MyDemand}
           typeAccount={permissions.typeAccount}
         />
         <PrivateRouteClientCart
