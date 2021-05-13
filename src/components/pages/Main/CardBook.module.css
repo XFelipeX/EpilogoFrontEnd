@@ -1,5 +1,6 @@
 .card {
   border: 1px solid #9a9a9a;
+  /* width: 270px; */
   border-radius: 3px;
   grid-column: span 4;
   height: 400px;
@@ -7,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ebe9b9;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 1rem;
 }
 
@@ -16,12 +17,22 @@
 }
 
 .descriptionCard {
-  height: 40%;
+  height: 30%;
+  width: 100%;
+  word-break: break-all;
   text-align: center;
   padding-top: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.btnArea {
+  display: flex;
+  align-items: flex-end;
+  height: 10%;
+  width: 100%;
 }
 
 .addCartBtn {
@@ -31,8 +42,6 @@
   border: 1px solid transparent;
   border-radius: 5px;
   cursor: pointer;
-  position: relative;
-  bottom: 0.5rem;
   color: #fff;
   font-weight: bold;
   background-color: var(--blue-first);
@@ -53,10 +62,20 @@
   text-decoration: cadetblue;
 }
 
+.imageArea {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .image {
   margin-top: 0.5rem;
-  max-height: 50%;
-  width: 80%;
+  max-height: 100%;
+  max-width: 100%;
   text-align: center;
   cursor: pointer;
 }
@@ -69,7 +88,7 @@
 
 .titleBook {
   font-size: 1.2rem;
-  color: #000;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -80,6 +99,7 @@
 .authorBook {
   font-size: 1rem;
   font-style: italic;
+  color: #fff;
 }
 
 .buttonPurchase {

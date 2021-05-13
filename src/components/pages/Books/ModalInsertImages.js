@@ -1,13 +1,14 @@
-import React from "react";
-import styles from "./ModalInsertImages.module.css";
-import useClickOutside from "../../ClickOutside/ClickOutside";
-import { MdAttachment } from "react-icons/md";
-import { convertBase64 } from "../../../utils/base64";
+import React from 'react';
+import styles from './ModalInsertImages.module.css';
+import useClickOutside from '../../ClickOutside/ClickOutside';
+import { MdAttachment } from 'react-icons/md';
+import { convertBase64 } from '../../../utils/base64';
 import {
   GET_IMAGES_BOOK,
   POST_BOOK_IMAGE,
   DELETE_IMAGE_BOOK,
-} from "../../../api";
+} from '../../../api';
+import { useSelector } from 'react-redux';
 
 const ModalInsertImages = ({
   setShowInsertImages,
@@ -23,6 +24,7 @@ const ModalInsertImages = ({
     image: { id: -1 },
   });
   const [mainImage, setMainImage] = React.useState(0);
+  const { permissions } = useSelector((state) => state);
 
   const domNode = useClickOutside(() => {
     setShowInsertImages(false);
@@ -33,14 +35,17 @@ const ModalInsertImages = ({
     if (editBook.id) {
       async function getImagesBook() {
         try {
-          const { options, url } = GET_IMAGES_BOOK(editBook.id);
+          const { options, url } = GET_IMAGES_BOOK(
+            editBook.id,
+            permissions.token,
+          );
 
           const response = await fetch(url, options);
 
           const json = await response.json();
 
           if (json.error) {
-            alert("houve um erro verifique o console");
+            alert('houve um erro verifique o console');
             console.log(json);
             return [];
           }
@@ -54,7 +59,7 @@ const ModalInsertImages = ({
 
       getImagesBook().then((response) => setLoadImages(response));
     }
-  }, [editBook.id]);
+  }, [editBook.id, permissions.token]);
 
   function loadImageAttachment() {
     if (files.length > 0) {
@@ -68,19 +73,19 @@ const ModalInsertImages = ({
                 base: response,
                 main: mainImage,
                 bookId: lastBook.id,
-              })
+              }),
           )
           .then(() => setImages((oldarray) => [...oldarray, file]))
-          .then(() => setMainImage(0))
+          .then(() => setMainImage(0)),
       );
     }
     setFiles([]);
-    document.getElementById("attachment").value = "";
+    document.getElementById('attachment').value = '';
   }
 
   function handleSubmit() {
     if (images.length + loadImages.length < 2) {
-      alert("insira pelo menos 2 imagens");
+      alert('insira pelo menos 2 imagens');
       return;
     }
 
@@ -90,27 +95,30 @@ const ModalInsertImages = ({
     if (filter.length === 0 && filterLoad.length === 0) {
       console.log(images);
 
-      alert("Pelo menos uma imagem precisa ser principal");
+      alert('Pelo menos uma imagem precisa ser principal');
       return;
     }
 
     images.map((image) => sendImageBook(image));
 
-    alert("As imagens foram inseridas");
+    alert('As imagens foram inseridas');
 
     setShowInsertImages(false);
   }
 
   async function sendImageBook(image) {
     try {
-      let onlyBase = image.base.split(",");
+      let onlyBase = image.base.split(',');
 
-      const { url, options } = POST_BOOK_IMAGE({
-        base: onlyBase[1],
-        main: image.main,
-        bookId: image.bookId,
-        img: "",
-      });
+      const { url, options } = POST_BOOK_IMAGE(
+        {
+          base: onlyBase[1],
+          main: image.main,
+          bookId: image.bookId,
+          img: '',
+        },
+        permissions.token,
+      );
 
       const data = await fetch(url, options);
 
@@ -118,13 +126,13 @@ const ModalInsertImages = ({
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -136,11 +144,11 @@ const ModalInsertImages = ({
 
   function removeIndex(item) {
     const filterItem = loadImages.filter(
-      (image) => +image.id === +item.image.id
+      (image) => +image.id === +item.image.id,
     );
 
     if (editBook.id && filterItem.length > 0) {
-      alert("deletando do banco");
+      alert('deletando do banco');
       deleteImage(item.image.id).then(() => {
         let newArray = [...loadImages];
 
@@ -171,7 +179,7 @@ const ModalInsertImages = ({
 
   async function deleteImage(id) {
     try {
-      const { url, options } = DELETE_IMAGE_BOOK(id);
+      const { url, options } = DELETE_IMAGE_BOOK(id, permissions.token);
 
       const response = await fetch(url, options);
 
@@ -179,13 +187,13 @@ const ModalInsertImages = ({
 
       if (json.error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
       if (json[0] && json[0].error) {
         console.log(json);
-        alert("houve um erro verifique o console");
+        alert('houve um erro verifique o console');
         return;
       }
 
@@ -211,7 +219,7 @@ const ModalInsertImages = ({
     });
 
     if (haveMainImage) {
-      alert("Já existe imagem principal, remova-a para inserir uma nova");
+      alert('Já existe imagem principal, remova-a para inserir uma nova');
     }
 
     return haveMainImage;
@@ -284,7 +292,7 @@ const ModalInsertImages = ({
                       className={styles.modalImg}
                       style={
                         image.main === 1
-                          ? { border: "3px solid var(--blue-first)" }
+                          ? { border: '3px solid var(--blue-first)' }
                           : {}
                       }
                     />
@@ -298,12 +306,12 @@ const ModalInsertImages = ({
                       type="checkbox"
                       checked={
                         index === removeItem.index &&
-                        removeItem.image.base !== ""
+                        removeItem.image.base !== ''
                       }
                       onChange={() => {
                         if (
                           index === removeItem.index &&
-                          removeItem.image.base !== ""
+                          removeItem.image.base !== ''
                         ) {
                           setRemoveItem({ index: -1, image: { id: -1 } });
                         } else {
@@ -317,7 +325,7 @@ const ModalInsertImages = ({
                       className={styles.modalImg}
                       style={
                         image.main === 1
-                          ? { border: "3px solid var(--blue-first)" }
+                          ? { border: '3px solid var(--blue-first)' }
                           : {}
                       }
                     />
@@ -328,7 +336,7 @@ const ModalInsertImages = ({
               <button
                 type="button"
                 className={styles.btnRemove}
-                style={removeItem.index !== -1 ? { display: "block" } : {}}
+                style={removeItem.index !== -1 ? { display: 'block' } : {}}
                 onClick={() => removeIndex(removeItem)}
               >
                 Remover Selecionado

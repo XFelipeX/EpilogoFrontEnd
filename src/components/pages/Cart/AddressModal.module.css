@@ -1,0 +1,260 @@
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  width: 90%;
+  height: 85%;
+  background-color: var(--white);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 75% 15%;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.modalTop {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+}
+
+.modalTop .selectAddress {
+  grid-column: 1;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px 0 0 0;
+}
+
+.modalTop .createAddress {
+  grid-column: 2;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0 5px 0 0;
+}
+
+.typeActive {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  height: 10%;
+}
+
+.modalMiddle {
+  background-color: #dfdfe5;
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 2fr 1fr;
+}
+
+.selectAddress {
+  grid-column: 1;
+  overflow: auto;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.listAddress {
+  padding: 1rem;
+  width: 90%;
+  max-height: 90%;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s;
+}
+
+.listAddress li:first-child {
+  width: 33.32%;
+}
+
+.listAddress li {
+  width: 13.33%;
+  word-break: break-all;
+  padding: 1rem 0;
+  color: #fff;
+}
+
+.listAddress:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.illustrationArea {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.illustration {
+  max-width: 80%;
+  max-height: 80%;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.modalBottom {
+  background-color: #dfdfe5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Buttons */
+.btnDone,
+.btnBack {
+  cursor: pointer;
+  width: 12rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+}
+
+.btnDone {
+  background-color: var(--green);
+  transition: all 0.4s;
+}
+
+.btnDone:hover {
+  background-color: #37ad53;
+}
+
+.btnBack {
+  background-color: var(--white);
+  border: 2px solid var(--red);
+  margin-left: 2rem;
+  font-weight: 100;
+  color: var(--black);
+  transition: all 0.4s;
+}
+
+.btnBack:hover {
+  background-color: var(--red);
+  color: #fff;
+}
+
+@keyframes opacityAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* create Address area */
+.createAddressArea {
+  height: 100%;
+  width: 100%;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.inputGroup label input[readOnly] {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+}
+
+.inputGroup {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup > span:first-child {
+  padding-bottom: 2rem;
+}
+
+.inputGroup > span {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inputGroup > span label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height: 3.5rem;
+}
+
+.inputGroup > span label input {
+  margin-top: 0.4rem;
+  padding: 0.4rem;
+  width: 80%;
+}
+
+.inputGroup > span label button {
+  margin-top: 0.5rem;
+  width: 7rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 1rem;
+  background-color: var(--brown-third);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btnAdd {
+  border: none;
+  width: 10rem;
+  padding: 0.5rem 2rem;
+  background-color: var(--blue-first);
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 1rem;
+  align-self: flex-start;
+  margin-right: 4.5rem;
+  cursor: pointer;
+}
+
+/* ScrollBar */
+
+.modalMiddle .selectAddress::-webkit-scrollbar {
+  background: #c8c8ce;
+  width: 18px;
+}
+
+.modalMiddle .selectAddress::-webkit-scrollbar-thumb {
+  background: #c8c8ce;
+  border-left: 4px solid rgba(0, 0, 0, 0.1);
+  border-right: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.modalMiddle .selectAddress::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,72 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 2rem;
+  width: 55rem;
+  height: 32rem;
+  background-color: var(--white);
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.modal table {
+  border-spacing: 0;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: 0 0 10px 1px #000;
+  text-align: center;
+}
+
+.modal table th,
+.modal table td {
+  width: calc(100% / 8);
+  padding: 10px;
+}
+
+.modal table thead {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal table tbody tr {
+  background-color: #ebe9b9;
+}
+
+.modal table tbody tr td {
+  border-bottom: 1px solid #000;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  height: 10%;
+}
+
+/* Buttons */
+.btnActive,
+.btnEdit {
+  color: #fff;
+  padding: 0.4rem 2rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btnActive {
+  background-color: var(--green);
+}
+
+.btnEdit {
+  background-color: var(--blue-first);
+}

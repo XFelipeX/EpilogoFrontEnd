@@ -7,6 +7,7 @@ import { getBooks } from '../../../redux';
 import { GET_BOOKS } from '../../../api';
 import ModalView from '../Books/ModalView';
 import ReactPaginate from 'react-paginate';
+import Header from '../../Header/Header';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Main = () => {
 
   return (
     <div className={` container ${styles.homeArea}`}>
+      <Header />
       {showDetailsBook && (
         <ModalView
           bookView={showDetailsBook}

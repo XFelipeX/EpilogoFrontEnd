@@ -1,0 +1,155 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  max-width: 75rem;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  /* padding: 2rem; */
+  height: 90%;
+  overflow: hidden;
+  width: 100%;
+  background-color: transparent;
+  /* background-color: #ebe9b9; */
+  border-radius: 3px;
+  box-shadow: 0px 0px 20px 0px #2b2b2b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 45% 55%;
+  justify-content: space-between;
+  grid-gap: 5px;
+  font-size: 1.2rem;
+}
+
+.account,
+.user,
+.address {
+  border-radius: 5px;
+  color: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px 1px #000;
+}
+
+.account {
+  grid-column: 1/2;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.user {
+  grid-column: 2/4;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.address {
+  grid-column: 1/4;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.addressBilling,
+.addressDelivery {
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+.addressBilling span p,
+.addressDelivery span p {
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.3rem 0;
+}
+
+.left,
+.right {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 50%;
+  height: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left span,
+.right span {
+  width: 100%;
+}
+
+.left span p,
+.right span p {
+  word-break: break-all;
+  padding-right: 2rem;
+}
+
+.typeAddress,
+.typeInfo {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.typeInfo {
+  margin-bottom: 1rem;
+}
+
+/* style cards */
+
+.name,
+.cpf,
+.username,
+.email {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  font-weight: 600;
+}
+
+.name p,
+.cpf p,
+.username p,
+.email p {
+  margin-left: 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.btnArea {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnEdit {
+  color: #fff;
+  width: 50px;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--blue-first);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btnAdd {
+  color: #fff;
+  width: 50px;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--green);
+  display: flex;
+  justify-content: space-evenly;
+}

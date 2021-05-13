@@ -1,2 +1,16 @@
-export {getBooks} from './books/booksActions'; 
-export {updateState} from './stateUpdate/stateUpdateActions';
+export { getBooks } from './books/booksActions';
+export { updateState } from './stateUpdate/stateUpdateActions';
+export { logIn } from './userAuth/userAuthActions';
+export { logOff } from './userAuth/userAuthActions';
+export { updateStateUsers } from './stateUsersUpdate/stateUsersUpdateActions';
+export { incrementItem } from './cart/cartActions';
+export { decrementItem } from './cart/cartActions';
+export { clearCart } from './cart/cartActions';
+export { removeItem } from './cart/cartActions';
+export { insertShipping } from './cart/cartActions';
+export { getDelivery } from './cart/cartActions';
+export { getPayment } from './cart/cartActions';
+export { getTotal } from './cart/cartActions';
+export { insertTotal } from './cart/cartActions';
+export { getLastDemand } from './cart/cartActions';
+export { setPassword } from './userAuth/userAuthActions';

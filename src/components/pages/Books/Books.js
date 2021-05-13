@@ -8,10 +8,12 @@ import ModalInsertImages from './ModalInsertImages';
 import ModalView from './ModalView';
 import BookControl from './BookControl';
 import ReactPaginate from 'react-paginate';
+import Header from '../../Header/Header';
 
 const Books = () => {
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state);
+  const { permissions } = useSelector((state) => state);
   const { stateUpdate } = useSelector((state) => state);
   const [showInsertModal, setShowModalInsert] = React.useState(false);
   const [showInsertImages, setShowInsertImages] = React.useState(false);
@@ -52,20 +54,23 @@ const Books = () => {
     const available = book.available === 1 ? 0 : 1;
 
     try {
-      const { url, options } = PUT_BOOK({
-        id: book.id,
-        nameBook: book.nameBook,
-        description: book.description,
-        isbn: book.isbn,
-        stars: book.stars,
-        publishDate: book.publishDate,
-        category: book.category,
-        price: book.price,
-        amount: book.amount,
-        available: available,
-        publishCompanyId: book.publishCompanyId,
-        authorId: book.authorId,
-      });
+      const { url, options } = PUT_BOOK(
+        {
+          id: book.id,
+          nameBook: book.nameBook,
+          description: book.description,
+          isbn: book.isbn,
+          stars: book.stars,
+          publishDate: book.publishDate,
+          category: book.category,
+          price: book.price,
+          amount: book.amount,
+          available: available,
+          publishCompanyId: book.publishCompanyId,
+          authorId: book.authorId,
+        },
+        permissions.token,
+      );
 
       const data = await fetch(url, options);
 
@@ -95,6 +100,7 @@ const Books = () => {
 
   return (
     <div className={`container ${styles.booksArea}`}>
+      <Header />
       {showInsertModal && (
         <ModalInsert
           setLastBook={setLastBook}

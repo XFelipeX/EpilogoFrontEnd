@@ -3,16 +3,16 @@
   position: fixed;
   width: 100%;
   z-index: 100;
-  background: var(--brown-second);
+  background: #ebe9b9;
   top: 0;
 }
 
 .nav {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: 4rem;
-  width: 15rem;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -20,3 +20,241 @@
   font-size: 1.2rem;
 }
 
+.mainNavigation {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.mainNavigation a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--black);
+  letter-spacing: 1px;
+}
+
+.leftContent {
+  width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.rightContent {
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login {
+  background-color: var(--blue-first);
+  color: #fff;
+  padding: 0.4rem;
+  font-weight: bold;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
+  width: 90px;
+}
+
+.create {
+  background-color: var(--brown-third);
+  color: #fff;
+  padding: 0.4rem;
+  font-weight: bold;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 130px;
+  margin-left: 1rem;
+}
+
+.logoff {
+  background-color: var(--red);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
+  width: 120px;
+}
+
+/* DropDown */
+
+.dropdown button {
+  padding: 0.3rem;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  border: none;
+  border-radius: 5%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.dropdown button span {
+  margin-left: 0.5rem;
+}
+
+.dropdown button:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.dropdown div {
+  display: flex;
+  flex-direction: column;
+  transform: translate3d(86px, 42px, 0px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+}
+
+.dropdown div a {
+  color: #fff;
+  padding: 0.3rem;
+}
+
+.dropdown div a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Cart */
+
+.cart {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.amount {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--red);
+}
+
+.cartArea {
+  display: flex;
+  /* position: absolute; */
+}
+
+.details {
+  display: none;
+  position: absolute;
+  margin-left: -20rem;
+  width: 20rem;
+  height: 15rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px 0 5px 5px;
+  border: 1px dotted var(--black);
+  overflow: auto;
+  padding: 1rem;
+  animation: opacityAnime 0.7s forwards;
+}
+
+.details ul {
+  overflow: auto;
+  height: 80%;
+
+  color: #000;
+}
+
+.details ul li {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  /* border-top: 1px solid #000; */
+  /* border-bottom: 1px solid #000; */
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+/* Hidden scrollbar */
+.details ::-webkit-scrollbar {
+  width: 0px;
+}
+
+.details ul li span:not(.imgCart) {
+  width: 25%;
+  text-align: center;
+}
+
+.details ul li span:nth-child(2) {
+  width: 45%;
+  padding-left: 0.3rem;
+  text-align: center;
+}
+
+.priceCart {
+  width: 100% !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.details .bottomArea {
+  height: 20%;
+}
+
+.bottomArea {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.subtotal {
+  text-decoration: wavy;
+  font-weight: bold;
+  color: #fff;
+}
+
+.bottomArea button {
+  width: 8rem;
+  padding: 0.3rem;
+  font-size: 1rem;
+  background-color: var(--blue-first);
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* view cart on hover */
+.cartArea:hover .details {
+  display: inline-block;
+}
+
+.imgCart {
+  display: inline-block;
+  width: 30%;
+}
+
+.imgCart img {
+  max-width: 100%;
+}
+
+@keyframes opacityAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

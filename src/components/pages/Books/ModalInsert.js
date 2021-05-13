@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import { POST_BOOK, PUT_BOOK } from '../../../api';
 import styles from './ModalInsert.module.css';
@@ -40,18 +40,19 @@ const ModalInsert = ({
   const [publishDate, setPublishDate] = React.useState(
     editBook.id ? editBook.publishDate : '',
   );
+  const { permissions } = useSelector((state) => state);
 
   function clear() {
     setAmount('');
-    setAuthor('');
+    setAuthor('1');
     setCategory('');
     setName('');
     setPublishDate('');
-    setStars('');
-    setPublishCompany('');
+    setStars('1');
+    setPublishCompany('1');
     setPrice('');
     setIsbn('');
-    setAvailable('');
+    setAvailable('2');
     setCategory('');
     setDescription('');
   }
@@ -118,20 +119,23 @@ const ModalInsert = ({
 
     if (editBook.id) {
       try {
-        const { url, options } = PUT_BOOK({
-          id: editBook.id,
-          nameBook: name,
-          description: description,
-          isbn: isbn,
-          stars: stars,
-          publishDate: publishDate,
-          category: category,
-          price: price,
-          amount: amount,
-          available: available,
-          publishCompanyId: publishCompany,
-          authorId: author,
-        });
+        const { url, options } = PUT_BOOK(
+          {
+            id: editBook.id,
+            nameBook: name,
+            description: description,
+            isbn: isbn,
+            stars: stars,
+            publishDate: publishDate,
+            category: category,
+            price: price,
+            amount: amount,
+            available: available,
+            publishCompanyId: publishCompany,
+            authorId: author,
+          },
+          permissions.token,
+        );
 
         const data = await fetch(url, options);
 
@@ -161,19 +165,22 @@ const ModalInsert = ({
       }
     } else {
       try {
-        const { url, options } = POST_BOOK({
-          nameBook: name,
-          description: description,
-          isbn: isbn,
-          stars: stars,
-          publishDate: publishDate,
-          category: category,
-          price: price,
-          amount: amount,
-          available: available,
-          publishCompanyId: publishCompany,
-          authorId: author,
-        });
+        const { url, options } = POST_BOOK(
+          {
+            nameBook: name,
+            description: description,
+            isbn: isbn,
+            stars: stars,
+            publishDate: publishDate,
+            category: category,
+            price: price,
+            amount: amount,
+            available: available,
+            publishCompanyId: publishCompany,
+            authorId: author,
+          },
+          permissions.token,
+        );
 
         const data = await fetch(url, options);
 

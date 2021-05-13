@@ -1,0 +1,214 @@
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  width: 90%;
+  height: 85%;
+  background-color: var(--white);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60% 25% 15%;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.modalItens {
+  grid-row: 1;
+}
+
+.modalItens li {
+  animation: opacityAnime 0.5s forwards;
+}
+
+.modalInfo {
+  grid-row: 2;
+}
+
+.modalItens li:first-child {
+  height: 45px;
+}
+
+.modalItens li:first-child span {
+  font-size: 1.5rem;
+}
+
+.modalInfo {
+  background-color: #dfdfe5;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalInfo .modalInfoArea {
+  height: 75%;
+  width: 100%;
+  display: flex;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.modalInfo .modalInfoArea .modalInfoLeft {
+  padding: 1.5rem 2rem;
+  width: 50%;
+}
+
+.modalInfo .modalInfoArea .modalInfoLeft > span {
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.modalInfo .modalInfoArea .modalInfoLeft p {
+  font-size: 1.1rem;
+}
+
+.modalInfo .modalInfoArea .modalInfoLeft > span:last-child {
+  display: flex;
+  justify-content: space-between;
+  width: 10rem;
+}
+
+.modalInfo .modalInfoArea .modalInfoRight {
+  padding: 1.5rem 2rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.modalInfo .modalInfoArea .modalInfoRight > span,
+.modalInfo .modalInfoArea .modalInfoRight p {
+  padding-bottom: 0.8rem;
+  width: 15rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.modalInfoAction {
+  background-color: #dfdfe5;
+  grid-row: 3;
+  height: 120.938px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnMain {
+  cursor: pointer;
+  width: 12rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  background-color: var(--brown-third);
+}
+
+@keyframes opacityAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* View demand */
+
+.viewDemand {
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  animation: opacityAnime 0.5s forwards;
+}
+
+.viewDemand p {
+  font-size: 1.8rem;
+  width: 100%;
+  text-align: center;
+}
+
+.congratulations {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+}
+
+.congratulations span {
+  padding: 0.5rem 0;
+}
+
+/* Step */
+
+.step {
+  width: 50%;
+  height: 10rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.stepArea,
+.stepAreaOthers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+}
+
+.stepArea span,
+.stepAreaOthers span {
+  height: 50%;
+}
+
+.stepArea span:last-child {
+  margin-top: 0.5rem;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: var(--blue-first);
+  border-radius: 50%;
+  z-index: 100;
+}
+
+.step::after {
+  content: '';
+  display: flex;
+  position: relative;
+  bottom: 35%;
+  margin: auto;
+  transform: translateY(-50%);
+  width: 75%;
+  height: 2px;
+  background-color: #ccc;
+  z-index: -1;
+}
+
+.stepAreaOthers span:last-child {
+  margin-top: 0.5rem;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 50%;
+}
