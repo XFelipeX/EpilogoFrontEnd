@@ -13,3 +13,4 @@ export { getPayment } from './cart/cartActions';
 export { getTotal } from './cart/cartActions';
 export { insertTotal } from './cart/cartActions';
 export { getLastDemand } from './cart/cartActions';
+export { setPassword } from './userAuth/userAuthActions';

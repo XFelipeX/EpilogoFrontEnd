@@ -1,4 +1,4 @@
-import { LOGIN, LOGOFF } from './userAuthTypes';
+import { LOGIN, LOGOFF, SETPASSWORD } from './userAuthTypes';
 
 const initialState = {
   id: -1,
@@ -23,6 +23,11 @@ const userAuthReducer = (state = initialState, action) => {
         typeAccount: 2,
         user: '',
         token: null,
+      };
+    case SETPASSWORD:
+      state.user.userPassword = action.value;
+      return {
+        ...state,
       };
     default:
       return state;

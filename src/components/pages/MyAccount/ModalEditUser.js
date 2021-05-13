@@ -5,33 +5,44 @@ import { useDispatch } from 'react-redux';
 import { PUT_USER } from '../../../api';
 import { logIn, updateState } from '../../../redux';
 import { useSelector } from 'react-redux';
+import bcrypt from 'bcryptjs';
 
 const ModalEditUser = ({ setShowEditUser, user }) => {
   const { permissions } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState(user.email);
   const [userName, setUserName] = React.useState(user.userName);
-  const [password, setPassword] = React.useState('');
+  const [newPassword, setNewPassword] = React.useState('');
+  const [oldPassword, setOldPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+
+  console.log(permissions);
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!bcrypt.compareSync(oldPassword, permissions.user.userPassword))
+      return alert('Senha atual incorreta');
+    if (newPassword !== confirmPassword)
+      return alert('A senha nova e a confirmação não coincidem');
     updateUser()
-      .then(() => dispatch(updateState()))
-      .then(() => {
-        const newInfo = {
-          session: permissions.token,
-          object: {
-            email: user.email,
-            userName: userName,
-            userPassword: password,
-            typeAccount: 2,
-            status: 1,
-            accountId: user.accountId,
-            id: user.id,
-          },
-        };
+      .then((response) => {
+        if (response) {
+          dispatch(updateState());
+          const newInfo = {
+            session: permissions.token,
+            object: {
+              email: user.email,
+              userName: userName,
+              userPassword: response.userPassword,
+              typeAccount: 2,
+              status: 1,
+              accountId: user.accountId,
+              id: user.id,
+            },
+          };
 
-        dispatch(logIn(newInfo));
+          dispatch(logIn(newInfo));
+        }
       })
       .then(() => setShowEditUser(false));
   }
@@ -45,7 +56,7 @@ const ModalEditUser = ({ setShowEditUser, user }) => {
       const { url, options } = PUT_USER({
         email: user.email,
         userName: userName,
-        userPassword: password,
+        userPassword: newPassword,
         typeAccount: 2,
         status: 1,
         accountId: user.accountId,
@@ -102,15 +113,38 @@ const ModalEditUser = ({ setShowEditUser, user }) => {
                 onChange={({ target }) => setUserName(target.value)}
               />
             </label>
+
             <label htmlFor="password">
-              Senha
+              Senha atual
               <input
                 type="password"
                 id="password"
                 name="password"
                 required
-                value={password}
-                onChange={({ target }) => setPassword(target.value)}
+                value={oldPassword}
+                onChange={({ target }) => setOldPassword(target.value)}
+              />
+            </label>
+            <label htmlFor="password">
+              Nova senha
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                value={newPassword}
+                onChange={({ target }) => setNewPassword(target.value)}
+              />
+            </label>
+            <label htmlFor="password">
+              Confirme a nova senha
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                value={confirmPassword}
+                onChange={({ target }) => setConfirmPassword(target.value)}
               />
             </label>
           </article>

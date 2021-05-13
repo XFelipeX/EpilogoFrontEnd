@@ -1,4 +1,4 @@
-import { LOGIN, LOGOFF } from './userAuthTypes';
+import { LOGIN, LOGOFF, SETPASSWORD } from './userAuthTypes';
 
 export const logIn = (info) => {
   return {
@@ -10,5 +10,12 @@ export const logIn = (info) => {
 export const logOff = () => {
   return {
     type: LOGOFF,
+  };
+};
+
+export const setPassword = (value) => {
+  return {
+    type: SETPASSWORD,
+    value: value,
   };
 };
