@@ -52,6 +52,15 @@
   font-weight: bold;
 }
 
+.table tr td select {
+  width: 150px;
+  padding: 0.5rem;
+}
+
+.table tr td select > option {
+  font-size: 1rem;
+}
+
 .table thead {
   font-size: 1.3rem;
   font-weight: normal;
@@ -98,4 +107,10 @@
   font-size: 1rem;
   background-color: var(--brown-third);
   cursor: pointer;
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

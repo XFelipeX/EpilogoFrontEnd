@@ -74,6 +74,14 @@
   display: flex;
 }
 
+.formCenter input:read-only,
+textarea:read-only,
+select:disabled {
+  border: 2px solid transparent;
+  background-color: #dfdfe5;
+  color: #000;
+}
+
 .formCenter {
   height: 90%;
   width: 100%;
