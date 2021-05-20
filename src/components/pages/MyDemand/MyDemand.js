@@ -1,13 +1,22 @@
 import React from 'react';
 import styles from './MyDemand.module.css';
+import styleBooks from '../Books/Books.module.css';
 import { useSelector } from 'react-redux';
 import Header from '../../Header/Header';
-import { GET_ALL_DEMAND_BY_ACCOUNT_ID } from '../../../api';
+import { GET_ALL_DEMAND_BY_ACCOUNT_ID, GET_ALL_DEMAND } from '../../../api';
 import { formatDate } from '../../../utils/date';
+import ModalDetals from './ModalDetails';
+import ReactPaginate from 'react-paginate';
 
 const MyDemand = () => {
   const { permissions } = useSelector((state) => state);
   const [demands, setDemands] = React.useState([]);
+  const [allDemands, setAlldemands] = React.useState([]);
+  const [showDetails, setShowDetails] = React.useState({
+    show: false,
+    demand: {},
+  });
+  const [page, setPage] = React.useState(0);
 
   React.useEffect(() => {
     async function getDemands() {
@@ -38,19 +47,79 @@ const MyDemand = () => {
         console.log(error);
       }
     }
+    if (permissions.typeAccount === 2) {
+      getDemands().then((response) => {
+        if (response && response.object && response.object.length) {
+          setDemands([...response.object]);
+        }
+      });
+    }
+  }, [permissions.token, permissions.user.accountId, permissions.typeAccount]);
 
-    getDemands().then((response) => {
-      if (response && response.object && response.object.length) {
-        setDemands([...response.object]);
+  React.useEffect(() => {
+    async function getAllDemands() {
+      try {
+        const { url, options } = GET_ALL_DEMAND(permissions.token, page);
+        const response = await fetch(url, options);
+        const json = await response.json();
+
+        if (json.error) {
+          console.log(json);
+          alert('houve um erro verifique o console');
+          return;
+        }
+
+        if (json[0] && json[0].error) {
+          console.log(json);
+          alert('houve um erro verifique o console');
+          return;
+        }
+
+        console.log(json);
+
+        return json;
+      } catch (error) {
+        console.log(error);
       }
-    });
-  }, [permissions.token, permissions.user.accountId]);
+    }
 
-  console.log(demands);
+    if (permissions.typeAccount !== 2) {
+      getAllDemands().then((response) => setAlldemands(response));
+    }
+  }, [
+    permissions.token,
+    permissions.user.accountId,
+    page,
+    permissions.typeAccount,
+  ]);
+
+  function handlePageClick(e) {
+    setPage(e.selected);
+  }
+
+  function getOption(current) {
+    switch (current) {
+      case 'Aguardando confirmação de pagamento':
+        return <option value="Sendo separado">Sendo separado</option>;
+      case 'Sendo separado':
+        return <option value="Sendo transportado">Sendo transportado</option>;
+      case 'Sendo transportado':
+        return <option value="Produto entregue">Produto entregue</option>;
+      default:
+        return;
+    }
+  }
+
+  function changeStatus(current, demand) {
+    alert('change');
+  }
 
   return (
     <div className={styles.container}>
       <Header />
+      {showDetails.show && (
+        <ModalDetals demand={showDetails} setShowDetails={setShowDetails} />
+      )}
       <div className={styles.content}>
         <h1 className={styles.title}>Meus Pedidos</h1>
         <article className={styles.tableArea}>
@@ -65,7 +134,7 @@ const MyDemand = () => {
               </tr>
             </thead>
             <tbody>
-              {demands.length &&
+              {demands.length ? (
                 demands.map((demand) => (
                   <tr key={demand.id}>
                     <td>{demand.id}</td>
@@ -73,14 +142,63 @@ const MyDemand = () => {
                     <td>{demand.status}</td>
                     <td>R$ {demand.total}</td>
                     <td>
-                      <button className={styles.btnDetails} type="button">
+                      <button
+                        className={styles.btnDetails}
+                        type="button"
+                        onClick={() =>
+                          setShowDetails({ show: true, demand: demand })
+                        }
+                      >
                         Detalhe
                       </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr></tr>
+              )}
+              {allDemands.content &&
+                allDemands.content.length &&
+                allDemands.content.map((demand) => (
+                  <tr key={demand.id}>
+                    <td>{demand.id}</td>
+                    <td>{formatDate(demand.date)}</td>
+                    <td>{demand.status}</td>
+                    <td>R$ {demand.total}</td>
+                    <td>
+                      <select
+                        name="status"
+                        id={demand.id}
+                        value={demand.status}
+                        onChange={({ target }) =>
+                          changeStatus(target.value, demand)
+                        }
+                      >
+                        <option value={demand.status}>{demand.status}</option>
+                        {getOption(demand.status)}
+                      </select>
                     </td>
                   </tr>
                 ))}
             </tbody>
           </table>
+        </article>
+        <article className={`${styles.bottom}`}>
+          {permissions.typeAccount !== 2 && (
+            <ReactPaginate
+              previousLabel={'Anterior'}
+              nextLabel={'Próximo'}
+              breakLabel={'...'}
+              breakClassName={'break-me'}
+              pageCount={allDemands.totalPages}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={styleBooks.pagination}
+              subContainerClassName={'pages pagination'}
+              activeClassName={styleBooks.active}
+            />
+          )}
         </article>
       </div>
     </div>

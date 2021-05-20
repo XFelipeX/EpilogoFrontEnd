@@ -70,6 +70,7 @@ const ModalInsert = ({
       }
 
       // The result can be accessed through the `m`-variable.
+      // eslint-disable-next-line
       m.forEach((match, groupIndex) => {
         // console.log(`Found match, group ${groupIndex}: ${match}`);
         captured = match;
@@ -153,7 +154,15 @@ const ModalInsert = ({
           return;
         }
 
+        //pull new information of database
         dispatch(updateState());
+
+        if (permissions.typeAccount !== 0) {
+          alert('Atualiação do livro efetuada com sucesso!');
+          setShowModalInsert(false);
+          return;
+        }
+
         setShowInsertImages(true);
         setLastBook(json.object);
 

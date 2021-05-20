@@ -78,11 +78,7 @@ const Routes = () => {
           component={MyAccount}
           typeAccount={permissions.typeAccount}
         />
-        <PrivateRouteClient
-          path="/pedidos"
-          component={MyDemand}
-          typeAccount={permissions.typeAccount}
-        />
+        <Route path="/pedidos" component={MyDemand} />
         <PrivateRouteClientCart
           path="/carrinho"
           component={Cart}

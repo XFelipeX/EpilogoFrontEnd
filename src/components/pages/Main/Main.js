@@ -4,7 +4,7 @@ import styles from './Main.module.css';
 import stylesPagination from '../Books/Books.module.css';
 import CardBook from './CardBook';
 import { getBooks } from '../../../redux';
-import { GET_BOOKS } from '../../../api';
+import { GET_BOOKS_CLIENT } from '../../../api';
 import ModalView from '../Books/ModalView';
 import ReactPaginate from 'react-paginate';
 import Header from '../../Header/Header';
@@ -18,7 +18,7 @@ const Main = () => {
   React.useEffect(() => {
     async function takeBooks() {
       try {
-        const { options, url } = GET_BOOKS(page, 10);
+        const { options, url } = GET_BOOKS_CLIENT(page, 10);
 
         const response = await fetch(url, options);
 

@@ -140,13 +140,15 @@ const Books = () => {
           </article>
 
           <article>
-            <button
-              type="button"
-              className={styles.btnInsert}
-              onClick={() => setShowModalInsert(true)}
-            >
-              Adicionar
-            </button>
+            {permissions.typeAccount === 0 && (
+              <button
+                type="button"
+                className={styles.btnInsert}
+                onClick={() => setShowModalInsert(true)}
+              >
+                Adicionar
+              </button>
+            )}
           </article>
         </section>
 
@@ -184,16 +186,18 @@ const Books = () => {
                       </button>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        className={styles.btnActive}
-                        onClick={() => {
-                          setShowBookControl(true);
-                          setEditBook(book);
-                        }}
-                      >
-                        Ativar/Inativar
-                      </button>
+                      {permissions.typeAccount === 0 && (
+                        <button
+                          type="button"
+                          className={styles.btnActive}
+                          onClick={() => {
+                            setShowBookControl(true);
+                            setEditBook(book);
+                          }}
+                        >
+                          Ativar/Inativar
+                        </button>
+                      )}
                     </td>
                     <td>
                       <button

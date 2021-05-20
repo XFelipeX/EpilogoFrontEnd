@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { GET_AUTHORS, GET_PUBLISH_COMPANIES } from '../../../api';
 
 const FormModalInsert = ({
@@ -32,6 +33,7 @@ const FormModalInsert = ({
 }) => {
   const [authors, setAuthors] = React.useState([]);
   const [publishCompanies, setPublishCompanies] = React.useState([]);
+  const { permissions } = useSelector((state) => state);
 
   React.useEffect(() => {
     async function getAuthors() {
@@ -114,6 +116,7 @@ const FormModalInsert = ({
               id="name"
               name="name"
               value={name}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setName(target.value)}
             ></input>
           </label>
@@ -126,6 +129,7 @@ const FormModalInsert = ({
               id="isbn"
               name="isbn"
               value={isbn}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setIsbn(target.value)}
             ></input>
           </label>
@@ -136,6 +140,7 @@ const FormModalInsert = ({
               id="stars"
               name="stars"
               value={stars}
+              disabled={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setStars(target.value)}
             >
               <option value="1">1</option>
@@ -154,6 +159,7 @@ const FormModalInsert = ({
               id="publishDate"
               name="publishDate"
               value={publishDate}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setPublishDate(target.value)}
             ></input>
           </label>
@@ -165,6 +171,7 @@ const FormModalInsert = ({
               id="description"
               name="description"
               value={description}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setDescription(target.value)}
               className={styles.descriptionInput}
             ></textarea>
@@ -179,6 +186,7 @@ const FormModalInsert = ({
               id="category"
               name="category"
               value={category}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setCategory(target.value)}
             ></input>
           </label>
@@ -189,6 +197,7 @@ const FormModalInsert = ({
               id="price"
               name="price"
               value={price}
+              readOnly={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setPrice(target.value)}
             ></input>
           </label>
@@ -224,6 +233,7 @@ const FormModalInsert = ({
             <select
               id="publishCompany"
               name="publishCompany"
+              disabled={permissions.typeAccount === 0 ? false : true}
               value={publishCompany}
               onChange={({ target }) => setPublishCompany(target.value)}
             >
@@ -242,6 +252,7 @@ const FormModalInsert = ({
               id="author"
               name="author"
               value={author}
+              disabled={permissions.typeAccount === 0 ? false : true}
               onChange={({ target }) => setAuthor(target.value)}
             >
               {authors &&
@@ -267,7 +278,11 @@ const FormModalInsert = ({
           Cancelar
         </button>
         <button type="submit" className={styles.sendBtn}>
-          {editBook.id ? 'Salvar' : 'Cadastrar'} - Ir Imagens
+          {permissions.typeAccount !== 0
+            ? 'Salvar'
+            : editBook.id
+            ? 'Salvar - Ir Imagens'
+            : 'Cadastrar - Ir Imagens'}
         </button>
       </article>
     </form>

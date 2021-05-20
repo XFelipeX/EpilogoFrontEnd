@@ -57,6 +57,7 @@ const Header = () => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(logOff());
+                    history.push('/');
                     localStorage.removeItem('token');
                   }}
                 >
