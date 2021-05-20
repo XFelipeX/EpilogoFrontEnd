@@ -12,6 +12,31 @@ export const GET_BOOKS = (page, size) => {
   };
 };
 
+export const GET_BOOK_BY_ID = (token, id) => {
+  return {
+    url: `${baseUrl}/book/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
+export const GET_BOOKS_CLIENT = (page, size) => {
+  return {
+    url: `${baseUrl}/book/view/client?size=${size}&page=${page}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    },
+  };
+};
+
 export const POST_BOOK = (body, token) => {
   return {
     url: `${baseUrl}/book`,
@@ -297,6 +322,19 @@ export const POST_ADDRESS = (body) => {
   };
 };
 
+export const GET_ADDRESS_BY_ID = (token, id) => {
+  return {
+    url: `${baseUrl}/address/${id}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
 export const PUT_ADDRESS = (body) => {
   return {
     url: `${baseUrl}/address`,
@@ -385,6 +423,19 @@ export const POST_DEMAND = (token, body) => {
   };
 };
 
+export const GET_ALL_DEMAND = (token, page) => {
+  return {
+    url: `${baseUrl}/demand?size=10&page=${page}&sort=id,desc`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
+    },
+  };
+};
+
 export const GET_ALL_DEMAND_BY_ACCOUNT_ID = (token, accountId) => {
   return {
     url: `${baseUrl}/demand/account/${accountId}`,
@@ -410,6 +461,19 @@ export const POST_ITEM = (token, body) => {
       },
       method: 'POST',
       body: JSON.stringify(body),
+    },
+  };
+};
+
+export const GET_ITENS_BY_DEMAND = (token, demandId) => {
+  return {
+    url: `${baseUrl}/item/all/${demandId}`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'GET',
     },
   };
 };
