@@ -160,8 +160,6 @@ const ModalDetals = ({ setShowDetails, demand }) => {
     }
   }, [permissions.token, books, images, itens]);
 
-  console.log(products);
-
   React.useEffect(() => {
     async function getAddressById(id) {
       try {

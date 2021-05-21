@@ -240,7 +240,7 @@ const ModalInsertAccount = ({ setShowInsertModal, setLastUser, lastUser }) => {
       const json = await response.json();
       if (json.error) {
         console.log(json);
-        if (json.localMessage.includes("'cpf'")) {
+        if (json.message.includes('cpf')) {
           alert('Este CPF já possui cadastro!');
           return;
         }

@@ -423,6 +423,20 @@ export const POST_DEMAND = (token, body) => {
   };
 };
 
+export const PUT_DEMAND = (token, body) => {
+  return {
+    url: `${baseUrl}/demand`,
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'PUT',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const GET_ALL_DEMAND = (token, page) => {
   return {
     url: `${baseUrl}/demand?size=10&page=${page}&sort=id,desc`,

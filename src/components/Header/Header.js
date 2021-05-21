@@ -75,6 +75,7 @@ const Header = () => {
             <>
               <Link to="/produtos">Produtos</Link>
               <Link to="/usuarios">Usuários</Link>
+              <Link to="/pedidos">Pedidos</Link>
             </>
           )}
         </div>

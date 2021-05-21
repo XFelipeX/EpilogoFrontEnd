@@ -1,15 +1,22 @@
 import React from 'react';
 import styles from './MyDemand.module.css';
 import styleBooks from '../Books/Books.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Header/Header';
-import { GET_ALL_DEMAND_BY_ACCOUNT_ID, GET_ALL_DEMAND } from '../../../api';
+import {
+  GET_ALL_DEMAND_BY_ACCOUNT_ID,
+  GET_ALL_DEMAND,
+  PUT_DEMAND,
+} from '../../../api';
 import { formatDate } from '../../../utils/date';
 import ModalDetals from './ModalDetails';
 import ReactPaginate from 'react-paginate';
+import { updateState } from '../../../redux';
 
 const MyDemand = () => {
   const { permissions } = useSelector((state) => state);
+  const { stateUpdate } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [demands, setDemands] = React.useState([]);
   const [allDemands, setAlldemands] = React.useState([]);
   const [showDetails, setShowDetails] = React.useState({
@@ -91,6 +98,7 @@ const MyDemand = () => {
     permissions.user.accountId,
     page,
     permissions.typeAccount,
+    stateUpdate,
   ]);
 
   function handlePageClick(e) {
@@ -110,8 +118,38 @@ const MyDemand = () => {
     }
   }
 
-  function changeStatus(current, demand) {
-    alert('change');
+  function changeStatus(value, demand) {
+    console.log(value);
+    demand.status = value;
+    console.log(demand);
+    updateDemand(demand).then((response) => console.log(response));
+    dispatch(updateState());
+  }
+
+  async function updateDemand(demand) {
+    try {
+      const { url, options } = PUT_DEMAND(permissions.token, demand);
+      const response = await fetch(url, options);
+      const json = await response.json();
+
+      if (json.error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      if (json[0] && json[0].error) {
+        console.log(json);
+        alert('houve um erro verifique o console');
+        return;
+      }
+
+      console.log(json);
+
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
