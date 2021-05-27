@@ -61,6 +61,7 @@ const ConfirmDemandModal = ({ setShowConfirmDemand, setShowPaymentModal }) => {
         amount: item.quantity,
         bookId: item.id,
         demandId: demandId,
+        price: item.price,
       });
 
       const response = await fetch(url, options);
@@ -103,6 +104,8 @@ const ConfirmDemandModal = ({ setShowConfirmDemand, setShowPaymentModal }) => {
       }
     });
   }
+
+  console.log(stateCart);
 
   return (
     <div className={styles.container}>

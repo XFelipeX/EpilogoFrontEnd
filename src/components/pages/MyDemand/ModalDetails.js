@@ -144,8 +144,8 @@ const ModalDetals = ({ setShowDetails, demand }) => {
           const item = itemObj[0];
           object = { ...book };
           object.quantity = item.amount;
-          object.total = (book.price * item.amount).toFixed(2);
-          // object.price = item.price;
+          object.total = (object.price * item.amount).toFixed(2);
+          object.price = item.price;
           object.img = img;
           console.log(object);
           list.push(object);
@@ -190,6 +190,8 @@ const ModalDetals = ({ setShowDetails, demand }) => {
       setAddress(str);
     });
   }, [demand.demand.addressId, permissions.token]);
+
+  console.log(products);
 
   return (
     <div className={stylesConfirmDemand.container}>
