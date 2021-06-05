@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from './ModalDetails.module.css';
 import stylesConfirmDemand from '../Cart/ConfirmDemandModal.module.css';
 import stylesItens from '../Cart/Cart.module.css';
 import { useSelector } from 'react-redux';
@@ -147,7 +146,6 @@ const ModalDetals = ({ setShowDetails, demand }) => {
           object.total = (object.price * item.amount).toFixed(2);
           object.price = item.price;
           object.img = img;
-          console.log(object);
           list.push(object);
           object = {};
         }
@@ -190,8 +188,6 @@ const ModalDetals = ({ setShowDetails, demand }) => {
       setAddress(str);
     });
   }, [demand.demand.addressId, permissions.token]);
-
-  console.log(products);
 
   return (
     <div className={stylesConfirmDemand.container}>

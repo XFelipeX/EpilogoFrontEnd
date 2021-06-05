@@ -308,7 +308,6 @@ const Cart = () => {
                     alert('Entre com sua conta para efetuar o pedido');
                     history.push('/');
                   }
-                  // setShowPaymentModal(true);
                   setShowAddressModal(true);
                 }}
               >

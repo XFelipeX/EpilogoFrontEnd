@@ -105,8 +105,6 @@ const ConfirmDemandModal = ({ setShowConfirmDemand, setShowPaymentModal }) => {
     });
   }
 
-  console.log(stateCart);
-
   return (
     <div className={styles.container}>
       <div className={styles.modal} ref={domNode}>

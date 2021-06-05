@@ -12,6 +12,7 @@ import { formatDate } from '../../../utils/date';
 import ModalDetals from './ModalDetails';
 import ReactPaginate from 'react-paginate';
 import { updateState } from '../../../redux';
+import ConfirmModal from './ConfirmModal';
 
 const MyDemand = () => {
   const { permissions } = useSelector((state) => state);
@@ -22,6 +23,9 @@ const MyDemand = () => {
   const [showDetails, setShowDetails] = React.useState({
     show: false,
     demand: {},
+  });
+  const [showConfirmModal, setShowConfirmModal] = React.useState({
+    show: false,
   });
   const [page, setPage] = React.useState(0);
 
@@ -108,7 +112,12 @@ const MyDemand = () => {
   function getOption(current) {
     switch (current) {
       case 'Aguardando confirmação de pagamento':
-        return <option value="Sendo separado">Sendo separado</option>;
+        return (
+          <>
+            <option value="Pagamento recusado">Pagamento recusado</option>
+            <option value="Sendo separado">Sendo separado</option>
+          </>
+        );
       case 'Sendo separado':
         return <option value="Sendo transportado">Sendo transportado</option>;
       case 'Sendo transportado':
@@ -119,11 +128,11 @@ const MyDemand = () => {
   }
 
   function changeStatus(value, demand) {
-    console.log(value);
     demand.status = value;
-    console.log(demand);
     updateDemand(demand).then((response) => console.log(response));
     dispatch(updateState());
+    setShowConfirmModal({ show: false });
+    alert(`O status do Pedido ${demand.id} foi alterado com sucesso`);
   }
 
   async function updateDemand(demand) {
@@ -144,8 +153,6 @@ const MyDemand = () => {
         return;
       }
 
-      console.log(json);
-
       return json;
     } catch (error) {
       console.log(error);
@@ -158,8 +165,20 @@ const MyDemand = () => {
       {showDetails.show && (
         <ModalDetals demand={showDetails} setShowDetails={setShowDetails} />
       )}
+      {showConfirmModal.show && (
+        <ConfirmModal
+          close={() => setShowConfirmModal({ show: false })}
+          question={`Tem certeza que quer mudar o status do pedido ${showConfirmModal.demand.id} para "${showConfirmModal.status}" ?`}
+          showConfirmModal={showConfirmModal}
+          confirm={() =>
+            changeStatus(showConfirmModal.status, showConfirmModal.demand)
+          }
+        />
+      )}
       <div className={styles.content}>
-        <h1 className={styles.title}>Meus Pedidos</h1>
+        <h1 className={styles.title}>
+          {permissions.typeAccount === 2 ? 'Meus Pedidos' : 'Pedidos'}
+        </h1>
         <article className={styles.tableArea}>
           <table className={styles.table}>
             <thead>
@@ -209,7 +228,11 @@ const MyDemand = () => {
                         id={demand.id}
                         value={demand.status}
                         onChange={({ target }) =>
-                          changeStatus(target.value, demand)
+                          setShowConfirmModal({
+                            show: true,
+                            status: target.value,
+                            demand: demand,
+                          })
                         }
                       >
                         <option value={demand.status}>{demand.status}</option>

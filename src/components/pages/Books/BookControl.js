@@ -4,6 +4,7 @@ import { updateState } from '../../../redux';
 import useClickOutside from '../../ClickOutside/ClickOutside';
 import styles from './BookControl.module.css';
 
+//  modal for update book
 const BookControl = ({
   setShowBookControl,
   editBook,

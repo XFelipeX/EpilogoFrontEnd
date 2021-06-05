@@ -1,5 +1,6 @@
 const baseUrl = 'http://localhost:8080';
 
+// Books/Products
 export const GET_BOOKS = (page, size) => {
   return {
     url: `${baseUrl}/book?size=${size}&page=${page}`,
@@ -79,6 +80,7 @@ export const DELETE_BOOK = (body, token) => {
   };
 };
 
+// Image Product
 export const POST_BOOK_IMAGE = (body, token) => {
   return {
     url: `${baseUrl}/imageBook`,
@@ -130,6 +132,7 @@ export const DELETE_IMAGE_BOOK = (id, token) => {
   };
 };
 
+// Authors
 export const GET_AUTHORS = () => {
   return {
     url: `${baseUrl}/author`,
@@ -142,9 +145,9 @@ export const GET_AUTHORS = () => {
   };
 };
 
-export const GET_PUBLISH_COMPANIES = () => {
+export const GET_AUTHOR_BOOK = (id) => {
   return {
-    url: `${baseUrl}/publishCompany `,
+    url: `${baseUrl}/author/${id}`,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -154,9 +157,10 @@ export const GET_PUBLISH_COMPANIES = () => {
   };
 };
 
-export const GET_AUTHOR_BOOK = (id) => {
+// Publish Companies
+export const GET_PUBLISH_COMPANIES = () => {
   return {
-    url: `${baseUrl}/author/${id}`,
+    url: `${baseUrl}/publishCompany `,
     options: {
       headers: {
         'Content-Type': 'application/json',
@@ -309,6 +313,7 @@ export const GET_USERS = (page, size) => {
   };
 };
 
+// Address
 export const POST_ADDRESS = (body) => {
   return {
     url: `${baseUrl}/address?typeAccount=2`,
@@ -464,7 +469,6 @@ export const GET_ALL_DEMAND_BY_ACCOUNT_ID = (token, accountId) => {
 };
 
 // Demand Itens
-
 export const POST_ITEM = (token, body) => {
   return {
     url: `${baseUrl}/item`,

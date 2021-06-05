@@ -16,7 +16,6 @@ const Header = () => {
   const { stateCart } = useSelector((state) => state);
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(permissions);
 
   function handleClick(event) {
     event.preventDefault();

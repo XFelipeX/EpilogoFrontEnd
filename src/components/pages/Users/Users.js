@@ -25,7 +25,6 @@ const Users = () => {
   const [lastUser, setLastUser] = React.useState({ id: -1 });
   const [question, setQuestion] = React.useState('');
   const [users, setUsers] = React.useState([]);
-
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -43,8 +42,6 @@ const Users = () => {
             console.log(json);
             return [];
           }
-
-          // console.log(json);
 
           return json;
         } catch (error) {
@@ -69,8 +66,6 @@ const Users = () => {
             return [];
           }
 
-          console.log(json);
-
           return json;
         } catch (error) {
           console.log(error);
@@ -83,7 +78,6 @@ const Users = () => {
   }, [page, permissions.token, permissions.typeAccount, stateUpdateUsers]);
 
   React.useEffect(() => {
-    console.log(accounts);
     if (accounts.content) {
       setUsers([]);
       const copyArray = [...accounts.content];
@@ -126,12 +120,9 @@ const Users = () => {
       const json = await response.json();
 
       if (json.error) {
-        // alert('houve um erro verifique o console');
         console.log(json);
         return {};
       }
-
-      console.log(json);
 
       return json.object;
     } catch (error) {
@@ -164,8 +155,6 @@ const Users = () => {
         return [];
       }
 
-      console.log(json);
-
       alert('O status foi atualizado com sucesso!');
       setShowConfirmModal(false);
       setLastUser({});
@@ -175,8 +164,6 @@ const Users = () => {
       return [];
     }
   }
-
-  console.log(users);
 
   return (
     <section className={`container ${styles.usersArea}`}>

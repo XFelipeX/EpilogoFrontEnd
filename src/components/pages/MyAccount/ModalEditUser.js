@@ -16,8 +16,6 @@ const ModalEditUser = ({ setShowEditUser, user }) => {
   const [oldPassword, setOldPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
 
-  console.log(permissions);
-
   function handleSubmit(e) {
     e.preventDefault();
     if (!bcrypt.compareSync(oldPassword, permissions.user.userPassword))

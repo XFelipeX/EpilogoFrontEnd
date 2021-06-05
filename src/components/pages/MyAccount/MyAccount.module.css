@@ -12,12 +12,10 @@
 }
 
 .card {
-  /* padding: 2rem; */
   height: 90%;
   overflow: hidden;
   width: 100%;
   background-color: transparent;
-  /* background-color: #ebe9b9; */
   border-radius: 3px;
   box-shadow: 0px 0px 20px 0px #2b2b2b;
   display: grid;

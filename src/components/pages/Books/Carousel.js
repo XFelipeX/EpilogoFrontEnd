@@ -26,10 +26,10 @@ const Carousel = ({ images }) => {
       infinite={true}
       isPlaying={true}
       naturalSlideWidth={100}
-      naturalSlideHeight={125}
+      naturalSlideHeight={115}
       totalSlides={images.length}
     >
-      <Slider style={{ height: '300px' }}>
+      <Slider style={{ height: '300px', backgroundColor: 'rgba(0,0,0,0.2)' }}>
         {mainImage.length > 0 && (
           <Slide index={0}>
             <img

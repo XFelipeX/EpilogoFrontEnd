@@ -23,7 +23,6 @@ const PaymentModal = ({
   const [portions, setPortions] = React.useState([]);
   const [options, setOptions] = React.useState('1');
   const dispatch = useDispatch();
-  // const [subTotal, setSubTotal] = React.useState('');
   const [total, setTotal] = React.useState(stateCart.subtotal);
 
   // Form

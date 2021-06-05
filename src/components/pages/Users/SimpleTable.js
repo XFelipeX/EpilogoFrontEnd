@@ -2,14 +2,12 @@ import React from 'react';
 import styles from './Users.module.css';
 
 const SimpleTable = ({ accounts }) => {
-  console.log(accounts);
   return (
     <table className={`${styles.usersCardTable}`}>
       <thead>
         <tr>
           <th>ID</th>
           <th>Usuário</th>
-          {/* <th>E-mail</th> */}
           <th>Tipo</th>
           <th>Status</th>
         </tr>
